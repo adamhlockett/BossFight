@@ -3053,7 +3053,7 @@ TextureImporter:
       name: NW_idle_4
       rect:
         serializedVersion: 2
-        x: 287
+        x: 288
         y: 480
         width: 96
         height: 96
@@ -3116,7 +3116,7 @@ TextureImporter:
       name: NW_walk_1
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 384
         width: 96
         height: 96
