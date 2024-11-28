@@ -44,11 +44,11 @@ TagManager:
   - name: Floor
     uniqueID: 3994175017
     locked: 0
-  - name: Player & Objects
+  - name: Player & Enemy
     uniqueID: 21239619
     locked: 0
-  - name: Enemy
-    uniqueID: 362803519
+  - name: Objects
+    uniqueID: 1233274373
     locked: 0
   - name: Colliders
     uniqueID: 3270121641
