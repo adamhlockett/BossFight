@@ -14,6 +14,9 @@ public class Movement : MonoBehaviour
     private bool canDash = true, isDashing;
     public float dashPower = 24f, dashTime = 0.2f, dashCooldown = 1f;
 
+    /* attacking */
+    private bool canAtk = true, isAtk;
+    public float atkPower = 5f, atkTime = 0.5f, atkCooldown = 0.5f, atkDamage = 20f;
 
     void Start()
     {
@@ -38,7 +41,7 @@ public class Movement : MonoBehaviour
 
     void ManageInputs()
     {
-        if (isDashing)
+        if (isDashing || isAtk)
         {
             return;
         }
@@ -56,6 +59,10 @@ public class Movement : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
+        if (Input.GetButtonUp("Attack") && canAtk)
+        {
+            StartCoroutine(Attack());
+        }
     }
 
     void ManageAnims()
@@ -65,6 +72,12 @@ public class Movement : MonoBehaviour
         anim.SetFloat("MoveMagnitude", moves.magnitude);
         anim.SetFloat("LastMoveX", lastMoveDirection.x);
         anim.SetFloat("LastMoveY", lastMoveDirection.y);
+
+        if(Input.GetButton("Attack") && canAtk)
+        {
+            anim.SetBool("IsAttacking", true);
+            Debug.Log("holding attack");
+        }
     }
 
     private IEnumerator Dash()
@@ -73,7 +86,7 @@ public class Movement : MonoBehaviour
         canDash = false;
         isDashing = true;
 
-        speed = dashPower;
+        speed = dashPower; // during attack
 
         yield return new WaitForSeconds(dashTime);
         isDashing = false;
@@ -81,5 +94,30 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
         ////////////////////////end dash
+    }
+
+    private IEnumerator Attack()
+    {
+        //continuously trigger animation while holding X (X input)
+        //dash player forward while attacking (release of X)
+        canAtk = false;
+        isAtk = true;
+
+        StartCoroutine(Dash()); // during attack
+
+        yield return new WaitForSeconds(atkTime);
+        //anim.SetTrigger("Attack");
+        Debug.Log("has attacked");
+        anim.SetBool("IsAttacking", false);
+        isAtk = false;
+        //speed = startSpeed;
+        yield return new WaitForSeconds(atkCooldown);
+        canAtk = true;
+    }
+
+    public void EndAttackAnim() // called in animation event
+    {
+        Debug.Log("end attack anim");
+        //anim.SetBool("IsAttacking", false);
     }
 }
