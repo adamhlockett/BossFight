@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float speed = 0.5f;
+    public float startSpeed = 0.5f, speed;
     private Rigidbody2D rb;
-    private Vector2 input;
+    private Vector2 input, lastMoveDirection;
     Animator anim;
-    private Vector2 lastMoveDirection;
     Vector2 moves;
 
     /* dashing */
-    private bool canDash = true;
-    private bool isDashing;
-    public float dashPower = 24f;
-    public float dashTime = 0.2f;
-    public float dashCooldown = 1f;
+    private bool canDash = true, isDashing;
+    public float dashPower = 24f, dashTime = 0.2f, dashCooldown = 1f;
 
 
     void Start()
     {
+        speed = startSpeed;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -72,13 +69,17 @@ public class Movement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        Debug.Log("dash");
+        /////////////////start dash
         canDash = false;
         isDashing = true;
-        rb.velocity = new Vector2(transform.localScale.x * dashPower, transform.localScale.y * dashPower);
+
+        speed = dashPower;
+
+        yield return new WaitForSeconds(dashTime);
         isDashing = false;
+        speed = startSpeed;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
-        Debug.Log("end dash");
+        ////////////////////////end dash
     }
 }
