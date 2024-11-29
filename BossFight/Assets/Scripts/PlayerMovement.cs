@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     public float dashPower = 24f, dashTime = 0.2f, dashCooldown = 1f;
 
     /* attacking */
-    private bool canAtk = true, isAtk;
+    private bool canAtk = true;
     public float atkPower = 5f, atkTime = 0.5f, atkCooldown = 0.5f, atkDamage = 20f;
 
     void Start()
@@ -32,6 +32,9 @@ public class Movement : MonoBehaviour
 
         //Inputs
         ManageInputs();
+
+        //Attack
+        ManageAttack();
     }
 
     private void FixedUpdate()
@@ -41,7 +44,7 @@ public class Movement : MonoBehaviour
 
     void ManageInputs()
     {
-        if (isDashing || isAtk)
+        if (isDashing)
         {
             return;
         }
@@ -59,10 +62,6 @@ public class Movement : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
-        if (Input.GetButtonUp("Attack") && canAtk)
-        {
-            StartCoroutine(Attack());
-        }
     }
 
     void ManageAnims()
@@ -72,11 +71,22 @@ public class Movement : MonoBehaviour
         anim.SetFloat("MoveMagnitude", moves.magnitude);
         anim.SetFloat("LastMoveX", lastMoveDirection.x);
         anim.SetFloat("LastMoveY", lastMoveDirection.y);
+    }
 
-        if(Input.GetButton("Attack") && canAtk)
+    void ManageAttack()
+    {
+        if (Input.GetButtonUp("Attack") && canAtk) //release attack input
         {
-            anim.SetBool("IsAttacking", true);
+            //anim.ResetTrigger("ChargingAttack");
+            speed = startSpeed;
+            anim.SetTrigger("Attack");
+            StartCoroutine(Attack());
+        }
+        if (Input.GetButton("Attack") && canAtk) //hold attack input
+        {
             Debug.Log("holding attack");
+            anim.SetTrigger("ChargingAttack");
+            speed = 0f;
         }
     }
 
@@ -86,7 +96,7 @@ public class Movement : MonoBehaviour
         canDash = false;
         isDashing = true;
 
-        speed = dashPower; // during attack
+        speed = dashPower; // during dash
 
         yield return new WaitForSeconds(dashTime);
         isDashing = false;
@@ -101,23 +111,15 @@ public class Movement : MonoBehaviour
         //continuously trigger animation while holding X (X input)
         //dash player forward while attacking (release of X)
         canAtk = false;
-        isAtk = true;
 
         StartCoroutine(Dash()); // during attack
 
         yield return new WaitForSeconds(atkTime);
-        //anim.SetTrigger("Attack");
+        anim.SetTrigger("HasAttacked");
         Debug.Log("has attacked");
-        anim.SetBool("IsAttacking", false);
-        isAtk = false;
+
         //speed = startSpeed;
         yield return new WaitForSeconds(atkCooldown);
         canAtk = true;
-    }
-
-    public void EndAttackAnim() // called in animation event
-    {
-        Debug.Log("end attack anim");
-        //anim.SetBool("IsAttacking", false);
     }
 }
