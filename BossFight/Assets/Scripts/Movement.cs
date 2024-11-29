@@ -11,6 +11,14 @@ public class Movement : MonoBehaviour
     private Vector2 lastMoveDirection;
     Vector2 moves;
 
+    /* dashing */
+    private bool canDash = true;
+    private bool isDashing;
+    public float dashPower = 24f;
+    public float dashTime = 0.2f;
+    public float dashCooldown = 1f;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,6 +41,11 @@ public class Movement : MonoBehaviour
 
     void ManageInputs()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
         moves = new Vector2(moveX, moveY);
@@ -41,6 +54,11 @@ public class Movement : MonoBehaviour
 
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
+
+        if(Input.GetButtonDown("Dash") && canDash)
+        {
+            StartCoroutine(Dash());
+        }
     }
 
     void ManageAnims()
@@ -50,5 +68,17 @@ public class Movement : MonoBehaviour
         anim.SetFloat("MoveMagnitude", moves.magnitude);
         anim.SetFloat("LastMoveX", lastMoveDirection.x);
         anim.SetFloat("LastMoveY", lastMoveDirection.y);
+    }
+
+    private IEnumerator Dash()
+    {
+        Debug.Log("dash");
+        canDash = false;
+        isDashing = true;
+        rb.velocity = new Vector2(transform.localScale.x * dashPower, transform.localScale.y * dashPower);
+        isDashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+        Debug.Log("end dash");
     }
 }
