@@ -1421,7 +1421,7 @@ MonoBehaviour:
   dashCooldown: 0.5
   atkPower: 5
   atkTime: 0.2
-  atkCooldown: 0.5
+  atkCooldown: 0.2
   atkDamage: 20
 --- !u!95 &1527314111
 Animator:

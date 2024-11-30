@@ -103,7 +103,7 @@ public class Movement : MonoBehaviour
         speed = startSpeed;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
-        ////////////////////////end dash
+        /////////////////end dash
     }
 
     private IEnumerator Attack()
