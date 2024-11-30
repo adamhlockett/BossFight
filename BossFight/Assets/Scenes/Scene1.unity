@@ -1416,13 +1416,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startSpeed: 1.5
   speed: 1.5
-  dashPower: 5
+  dashDistance: 5
   dashTime: 0.2
   dashCooldown: 0.5
-  atkTime: 0.2
-  atkCooldown: 0.2
-  atkDamage: 20
-  atkPowerMax: 6
+  atkDamage: 2
+  atkDistanceMax: 10
+  cam: {fileID: 519420031}
 --- !u!95 &1527314111
 Animator:
   serializedVersion: 5
