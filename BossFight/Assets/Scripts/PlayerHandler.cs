@@ -22,7 +22,7 @@ public class PlayerHandler : MonoBehaviour
 
     /* visual feedback */
     [SerializeField] Camera cam;
-    private float shake = 0f, shakeBy = 0.7f, decrementBy = 1f;
+    private float shakeFor = 0f, shakeBy = 0.05f, decrementBy = 4f, maxShakeFor = 0.5f;
 
 
 
@@ -47,7 +47,7 @@ public class PlayerHandler : MonoBehaviour
         ManageAttack();
 
         //Visual Feedback
-        //ManageVisualFeedback();
+        ManageVisualFeedback();
     }
 
     private void FixedUpdate()
@@ -102,11 +102,16 @@ public class PlayerHandler : MonoBehaviour
         {                                                                                                           //hold attack
             anim.SetTrigger("ChargingAttack"); //should ideally be a boolean to be more efficient                   //hold attack
             speed = 0f; //cant move while charging attack                                                           //hold attack
+                                                                                                                    //hold attack
             if (atkDistance <= atkDistanceMax)                                                                      //hold attack
             {                                                                                                       //hold attack
                 atkDistance += Time.deltaTime * atkTimerMultiplier; //increases atkPower by 2 every second          //hold attack
             }                                                                                                       //hold attack
-            else atkDistance = atkDistanceMax;                                                                      //hold attack
+            else                                                                                                    //hold attack
+            {                                                                                                       //hold attack
+                atkDistance = atkDistanceMax;                                                                       //hold attack
+                shakeFor = maxShakeFor;                                                                                   //hold attack
+            }                                                                                                       //hold attack
         }                                                                                                           //hold attack
     }
 
@@ -144,11 +149,11 @@ public class PlayerHandler : MonoBehaviour
 
     private void ManageVisualFeedback()
     {
-        if (shake > 0)
+        if (shakeFor > 0)
         {
-            cam.transform.localPosition = Random.insideUnitSphere * shakeBy;
-            shake -= Time.deltaTime * decrementBy;
+            cam.transform.localPosition = new Vector3 ( Random.insideUnitSphere.x * shakeBy, Random.insideUnitSphere.y * shakeBy, cam.transform.localPosition.z );
+            shakeFor -= Time.deltaTime * decrementBy;
         }
-        else shake = 0f;
+        else shakeFor = 0f;
     }
 }
