@@ -7,17 +7,17 @@ public class PlayerHandler : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 input, lastMoveDirection, moves;
     Animator anim;
-    public float startSpeed; // set in engine inspector
+    [SerializeField] float startSpeed; // set in engine inspector
     private float speed;
 
     /* dashing */
     private bool canDash = true, isDashing;
-    public float dashDistance; // set in engine inspector
+    [SerializeField] float dashDistance; // set in engine inspector
     private float dashTime = 0.2f, dashCooldown = 0.5f;
 
     /* attacking */
     private bool canAtk = true;
-    public float atkDamage, atkDistanceMax; // set in engine inspector
+    [SerializeField] float atkDamage, atkDistanceMax; // set in engine inspector
     private float atkTime = 0.2f, atkCooldown = 0.2f, startAtkDistance = 1f, atkDistance, atkTimerMultiplier;
 
     /* visual feedback */
