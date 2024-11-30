@@ -6,21 +6,25 @@ public class Movement : MonoBehaviour
 {
     public float startSpeed = 0.5f, speed;
     private Rigidbody2D rb;
-    private Vector2 input, lastMoveDirection;
+    private Vector2 input, lastMoveDirection, moves;
     Animator anim;
-    Vector2 moves;
 
     /* dashing */
     private bool canDash = true, isDashing;
-    public float dashPower = 24f, dashTime = 0.2f, dashCooldown = 1f;
+    public float dashPower, dashTime, dashCooldown; // set in engine inspector
 
     /* attacking */
     private bool canAtk = true;
-    public float atkPower = 5f, atkTime = 0.5f, atkCooldown = 0.5f, atkDamage = 20f;
+    public float atkTime, atkCooldown, atkDamage, atkPowerMax; // set in engine inspector
+    private float startAtkPower = 1f, atkPower, atkTimerMultiplier = 4f;
+
+
+
 
     void Start()
     {
         speed = startSpeed;
+        atkPower = startAtkPower;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -42,6 +46,9 @@ public class Movement : MonoBehaviour
         rb.velocity = input * speed;
     }
 
+
+
+
     void ManageInputs()
     {
         if (isDashing)
@@ -60,7 +67,7 @@ public class Movement : MonoBehaviour
 
         if(Input.GetButtonDown("Dash") && canDash)
         {
-            StartCoroutine(Dash());
+            StartCoroutine(Dash(dashPower));
         }
     }
 
@@ -77,49 +84,51 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetButtonUp("Attack") && canAtk) //release attack input
         {
-            //anim.ResetTrigger("ChargingAttack");
-            speed = startSpeed;
+            speed = startSpeed; //can move again once releasing attack
             anim.SetTrigger("Attack");
             StartCoroutine(Attack());
         }
         if (Input.GetButton("Attack") && canAtk) //hold attack input
         {
-            Debug.Log("holding attack");
-            anim.SetTrigger("ChargingAttack");
-            speed = 0f;
+            anim.SetTrigger("ChargingAttack"); //should ideally be a boolean to be more efficient
+            speed = 0f; //cant move while charging attack
+            if (atkPower <= atkPowerMax)
+            {
+                atkPower += Time.deltaTime * atkTimerMultiplier; //increases atkPower by 2 every second
+            }
+            else atkPower = atkPowerMax;
+            Debug.Log(atkPower);
         }
     }
 
-    private IEnumerator Dash()
+
+
+
+    private IEnumerator Dash(float power)
     {
-        /////////////////start dash
         canDash = false;
         isDashing = true;
 
-        speed = dashPower; // during dash
+        speed = power; // during dash
 
         yield return new WaitForSeconds(dashTime);
         isDashing = false;
         speed = startSpeed;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
-        /////////////////end dash
     }
 
     private IEnumerator Attack()
     {
-        //continuously trigger animation while holding X (X input)
-        //dash player forward while attacking (release of X)
         canAtk = false;
 
-        StartCoroutine(Dash()); // during attack
+        StartCoroutine(Dash(atkPower)); // during attack
 
         yield return new WaitForSeconds(atkTime);
         anim.SetTrigger("HasAttacked");
-        Debug.Log("has attacked");
 
-        //speed = startSpeed;
         yield return new WaitForSeconds(atkCooldown);
+        atkPower = startAtkPower;
         canAtk = true;
     }
 }

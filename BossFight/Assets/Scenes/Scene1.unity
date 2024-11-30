@@ -1419,10 +1419,10 @@ MonoBehaviour:
   dashPower: 5
   dashTime: 0.2
   dashCooldown: 0.5
-  atkPower: 5
   atkTime: 0.2
   atkCooldown: 0.2
   atkDamage: 20
+  atkPowerMax: 6
 --- !u!95 &1527314111
 Animator:
   serializedVersion: 5
