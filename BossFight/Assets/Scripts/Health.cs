@@ -17,7 +17,7 @@ public class Health : MonoBehaviour
         overlayBarRange = overlayBarEndWidth - overlayBarStartWidth; //get range between start and end width
     }
 
-    private void UpdateHealthBar() //only needs to happen when taking damage
+    private void Update/*HealthBar*/() //only needs to happen when taking damage
     {
         healthPercentage = (maxHealth / health) * 100f; //calculate percentage of health
         inverseHealthPercentage = 100f - healthPercentage; //get this as a REVERSE percentage
@@ -26,7 +26,7 @@ public class Health : MonoBehaviour
     }
 
     /* setters */
-    public void DamageFor(float damage) { if(canBeDamaged) health -= damage; UpdateHealthBar(); }
+    public void DamageFor(float damage) { if(canBeDamaged) health -= damage; Update/*HealthBar*/(); }
 
     public void HealFor(float healing) { health += healing; }
 
