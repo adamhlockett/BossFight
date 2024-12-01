@@ -19,6 +19,7 @@ public class PlayerHandler : MonoBehaviour
     private bool canAtk = true;
     [SerializeField] float atkDamage, atkDistanceMax; // set in engine inspector
     private float atkTime = 0.2f, atkCooldown = 0.2f, startAtkDistance = 1f, atkDistance, atkTimerMultiplier;
+    [SerializeField] Transform attackZone;
 
     /* visual feedback */
     [SerializeField] Camera cam;
@@ -60,14 +61,14 @@ public class PlayerHandler : MonoBehaviour
 
     void ManageInputs()
     {
-        if (isDashing)
-        {
-            return;
-        }
+        if (isDashing) return;
 
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
         moves = new Vector2(moveX, moveY);
+
+        float angle = Mathf.Atan2(moveX, moveY) * Mathf.Rad2Deg;
+        attackZone.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));
 
         if ((moveX == 0 && moveY == 0) && (input.x != 0 || input.y != 0)) lastMoveDirection = input;
 
@@ -110,7 +111,7 @@ public class PlayerHandler : MonoBehaviour
             else                                                                                                    //hold attack
             {                                                                                                       //hold attack
                 atkDistance = atkDistanceMax;                                                                       //hold attack
-                shakeFor = maxShakeFor;                                                                                   //hold attack
+                shakeFor = maxShakeFor;                                                                             //hold attack
             }                                                                                                       //hold attack
         }                                                                                                           //hold attack
     }
