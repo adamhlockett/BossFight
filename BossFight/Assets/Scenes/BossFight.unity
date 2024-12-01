@@ -602,7 +602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f1db1a29fb0754cb0fbd300f0501f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 300
+  hp: 300
   canBeDamaged: 1
   overlayBarRenderer: {fileID: 1623332287}
   overlayBarStartWidth: 0.08
@@ -811,7 +811,7 @@ GameObject:
   - component: {fileID: 696739212}
   m_Layer: 0
   m_Name: Hitbox
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -919,6 +919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1102147875}
   - component: {fileID: 1102147876}
+  - component: {fileID: 1102147877}
   m_Layer: 0
   m_Name: Attack Zone
   m_TagString: Untagged
@@ -976,6 +977,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.000000038146972, y: 0.18377979}
   m_Size: {x: 0.29947963, y: 0.38706505}
   m_Direction: 0
+--- !u!114 &1102147877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102147874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 690dd84aaf9c7ce4ea06c205ce3ba186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  containsEnemy: 0
+  enemyHealth: {fileID: 0}
 --- !u!1 &1149227293
 GameObject:
   m_ObjectHideFlags: 0
@@ -58860,7 +58875,7 @@ Transform:
   m_GameObject: {fileID: 1372493452}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -484, y: 411.4, z: 0}
+  m_LocalPosition: {x: -492, y: 412, z: 0}
   m_LocalScale: {x: 260, y: 260, z: 295.3485}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -58907,7 +58922,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1063001723
   m_SortingLayer: 6
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9c96dd7619b97524f94bc62ee4e9320f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -59123,7 +59138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f1db1a29fb0754cb0fbd300f0501f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
+  hp: 0
   canBeDamaged: 1
   overlayBarRenderer: {fileID: 1149227295}
   overlayBarStartWidth: 0.49

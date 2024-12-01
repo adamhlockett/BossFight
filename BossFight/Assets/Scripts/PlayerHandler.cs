@@ -16,7 +16,7 @@ public class PlayerHandler : MonoBehaviour
     private float dashTime = 0.2f, dashCooldown = 0.5f;
 
     /* attacking */
-    private bool canAtk = true;
+    private bool canAtk = true, isAttacking = false;
     [SerializeField] float atkDamage, atkDistanceMax; // set in engine inspector
     private float atkTime = 0.2f, atkCooldown = 0.2f, startAtkDistance = 1f, atkDistance, atkTimerMultiplier;
     [SerializeField] Transform attackZone;
@@ -49,13 +49,13 @@ public class PlayerHandler : MonoBehaviour
 
         //Visual Feedback
         ManageVisualFeedback();
+
     }
 
     private void FixedUpdate()
     {
         rb.velocity = input * speed;
     }
-
 
 
 
@@ -67,8 +67,8 @@ public class PlayerHandler : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
         moves = new Vector2(moveX, moveY);
 
-        float angle = Mathf.Atan2(moveX, moveY) * Mathf.Rad2Deg;
-        attackZone.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));
+        float angle = Mathf.Atan2(moveX, moveY) * Mathf.Rad2Deg;                       //rotate attack zone with joystick input
+        attackZone.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));             //rotate attack zone with joystick input
 
         if ((moveX == 0 && moveY == 0) && (input.x != 0 || input.y != 0)) lastMoveDirection = input;
 
@@ -114,9 +114,14 @@ public class PlayerHandler : MonoBehaviour
                 shakeFor = maxShakeFor;                                                                             //hold attack
             }                                                                                                       //hold attack
         }                                                                                                           //hold attack
+
+        //if(isAttacking && attackZone.gameObject.GetComponent<CheckContainsEnemy>().containsEnemy) //do once
+        //{
+        //    Debug.Log("hitting enemy");
+        //    isAttacking = false;
+        //    attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyHealth.DamageFor(atkDamage);
+        //}
     }
-
-
 
 
     private IEnumerator Dash(float power)
@@ -136,11 +141,18 @@ public class PlayerHandler : MonoBehaviour
     private IEnumerator Attack(float damage)
     {
         canAtk = false;
+        //isAttacking = true;
 
         StartCoroutine(Dash(atkDistance)); // during attack
-        Debug.Log(damage);
 
         yield return new WaitForSeconds(atkTime);
+
+        if (attackZone.gameObject.GetComponent<CheckContainsEnemy>().containsEnemy)
+        {
+            Debug.Log("hitting enemy");
+            attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyHealth.DamageFor(damage);
+        }
+        //if (isAttacking) isAttacking = false;
         anim.SetTrigger("HasAttacked");
 
         yield return new WaitForSeconds(atkCooldown);

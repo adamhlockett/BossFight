@@ -146,8 +146,16 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 6249a8115e676bc43b8a11791b8ea957, type: 2}
+    m_Motion: {fileID: 7400000, guid: a49c2b35e6c3f014e86d758fad78ec9c, type: 2}
     m_Threshold: 0
+    m_Position: {x: 0, y: 1}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Blend
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 6249a8115e676bc43b8a11791b8ea957, type: 2}
+    m_Threshold: 0.14285715
     m_Position: {x: -1, y: -1}
     m_TimeScale: 0.01
     m_CycleOffset: 0
@@ -155,7 +163,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 0c83567d039c9c3428f55b09ff7262aa, type: 2}
-    m_Threshold: 0.14285715
+    m_Threshold: 0.2857143
     m_Position: {x: 0, y: -1}
     m_TimeScale: 0.01
     m_CycleOffset: 0
@@ -163,7 +171,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: a99f41a00a88bf747846b546d79c1abf, type: 2}
-    m_Threshold: 0.2857143
+    m_Threshold: 0.42857143
     m_Position: {x: 1, y: -1}
     m_TimeScale: 0.01
     m_CycleOffset: 0
@@ -171,7 +179,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: fe0cc367fc8a41d49a5bdd9450a493d2, type: 2}
-    m_Threshold: 0.42857143
+    m_Threshold: 0.5714286
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -179,16 +187,8 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: c378d228e105182418418dde0f2afc71, type: 2}
-    m_Threshold: 0.5714286
-    m_Position: {x: 1, y: 1}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: Blend
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: a49c2b35e6c3f014e86d758fad78ec9c, type: 2}
     m_Threshold: 0.71428573
-    m_Position: {x: 0, y: 1}
+    m_Position: {x: 1, y: 1}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
@@ -405,8 +405,16 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: d89b8f3500be4814fb9061cd916a35fc, type: 2}
+    m_Motion: {fileID: 7400000, guid: 9fe273ed99191504f8ef72f63f745596, type: 2}
     m_Threshold: 0
+    m_Position: {x: 0, y: 1}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Blend
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: d89b8f3500be4814fb9061cd916a35fc, type: 2}
+    m_Threshold: 0.14285715
     m_Position: {x: -1, y: -1}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -414,7 +422,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 02812d4b32dd7b84388d821089d0263b, type: 2}
-    m_Threshold: 0.14285715
+    m_Threshold: 0.2857143
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -422,7 +430,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 5778c34fcfa2add459e5900425dc3c2b, type: 2}
-    m_Threshold: 0.2857143
+    m_Threshold: 0.42857143
     m_Position: {x: 1, y: -1}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -430,7 +438,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: f03f30cbae66aca43b38caae92aeb679, type: 2}
-    m_Threshold: 0.42857143
+    m_Threshold: 0.5714286
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -438,16 +446,8 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 3072cf26950261f4e83c5376d2a0a469, type: 2}
-    m_Threshold: 0.5714286
-    m_Position: {x: 1, y: 1}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: Blend
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 9fe273ed99191504f8ef72f63f745596, type: 2}
     m_Threshold: 0.71428573
-    m_Position: {x: 0, y: 1}
+    m_Position: {x: 1, y: 1}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
