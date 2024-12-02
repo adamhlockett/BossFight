@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerHandler : MonoBehaviour
@@ -7,23 +9,25 @@ public class PlayerHandler : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 input, lastMoveDirection, moves;
     Animator anim;
-    [SerializeField] float startSpeed; // set in engine inspector
+    [SerializeField] float startSpeed; //set in engine inspector
     private float speed;
 
     /* dashing */
     private bool canDash = true, isDashing;
-    [SerializeField] float dashDistance; // set in engine inspector
+    [SerializeField] float dashDistance; //set in engine inspector
     private float dashTime = 0.2f, dashCooldown = 0.5f;
 
     /* attacking */
     private bool canAtk = true, isAttacking = false;
-    [SerializeField] float atkDamage, atkDistanceMax; // set in engine inspector
+    [SerializeField] float atkDamage, atkDistanceMax; //set in engine inspector
     private float atkTime = 0.2f, atkCooldown = 0.2f, startAtkDistance = 1f, atkDistance, atkTimerMultiplier;
     [SerializeField] Transform attackZone;
 
     /* visual feedback */
     [SerializeField] Camera cam;
     private float shakeFor = 0f, shakeBy = 0.05f, decrementBy = 4f, maxShakeFor = 0.5f;
+    [SerializeField] GameObject damagePopupPrefab;
+    [SerializeField] Transform enemyPos;
 
 
 
@@ -54,7 +58,7 @@ public class PlayerHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = input * speed;
+        rb.velocity = input * speed; //move player
     }
 
 
@@ -129,7 +133,7 @@ public class PlayerHandler : MonoBehaviour
         canDash = false;
         isDashing = true;
 
-        speed = power; // during dash
+        speed = power; //during dash
 
         yield return new WaitForSeconds(dashTime);
         isDashing = false;
@@ -143,14 +147,17 @@ public class PlayerHandler : MonoBehaviour
         canAtk = false;
         //isAttacking = true;
 
-        StartCoroutine(Dash(atkDistance)); // during attack
+        StartCoroutine(Dash(atkDistance)); //during attack
 
         yield return new WaitForSeconds(atkTime);
 
         if (attackZone.gameObject.GetComponent<CheckContainsEnemy>().containsEnemy)
         {
-            Debug.Log("hitting enemy");
             attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyHealth.DamageFor(damage);
+            enemyPos = attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyPos;
+            GameObject currentDamagePopup = Instantiate(damagePopupPrefab, enemyPos.position, Quaternion.identity) as GameObject;
+            currentDamagePopup.transform.parent = GameObject.FindGameObjectWithTag("Canvas").transform;//spawn prefab
+            currentDamagePopup.GetComponent<TMPro.TextMeshProUGUI>().text = (Convert.ToInt32(damage)).ToString();
         }
         //if (isAttacking) isAttacking = false;
         anim.SetTrigger("HasAttacked");
@@ -164,7 +171,7 @@ public class PlayerHandler : MonoBehaviour
     {
         if (shakeFor > 0)
         {
-            cam.transform.localPosition = new Vector3 ( Random.insideUnitSphere.x * shakeBy, Random.insideUnitSphere.y * shakeBy, cam.transform.localPosition.z );
+            cam.transform.localPosition = new Vector3 ( UnityEngine.Random.insideUnitSphere.x * shakeBy, UnityEngine.Random.insideUnitSphere.y * shakeBy, cam.transform.localPosition.z );
             shakeFor -= Time.deltaTime * decrementBy;
         }
         else shakeFor = 0f;
