@@ -18,16 +18,18 @@ public class PlayerHandler : MonoBehaviour
     private float dashTime = 0.2f, dashCooldown = 0.5f;
 
     /* attacking */
-    private bool canAtk = true, isAttacking = false;
+    private bool canAtk = true /*,isAttacking = false*/;
     [SerializeField] float atkDamage, atkDistanceMax; //set in engine inspector
-    private float atkTime = 0.2f, atkCooldown = 0.2f, startAtkDistance = 1f, atkDistance, atkTimerMultiplier;
+    private float atkTime = 0.2f, atkCooldown = 0.2f, startAtkDistance = 1f, atkDistance, atkTimerMultiplier, atkAnimRunoff = 0.15f;
     [SerializeField] Transform attackZone;
 
     /* visual feedback */
     [SerializeField] Camera cam;
-    private float shakeFor = 0f, shakeBy = 0.05f, decrementBy = 4f, maxShakeFor = 0.5f;
     [SerializeField] GameObject damagePopupPrefab;
-    [SerializeField] Transform enemyPos;
+    [SerializeField] GameObject attackLinePrefab;
+    Transform enemyPos;
+    private float shakeFor = 0f, shakeBy = 0.05f, decrementBy = 4f, maxShakeFor = 0.5f;
+    public float hitStopDuration = 0.1f;
 
 
 
@@ -139,7 +141,7 @@ public class PlayerHandler : MonoBehaviour
         isDashing = false;
         speed = startSpeed;
         yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
+        if(!canDash) canDash = true;
     }
 
     private IEnumerator Attack(float damage)
@@ -153,14 +155,31 @@ public class PlayerHandler : MonoBehaviour
 
         if (attackZone.gameObject.GetComponent<CheckContainsEnemy>().containsEnemy)
         {
-            attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyHealth.DamageFor(damage);
-            enemyPos = attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyPos;
-            GameObject currentDamagePopup = Instantiate(damagePopupPrefab, enemyPos.position, Quaternion.identity) as GameObject;
-            currentDamagePopup.transform.parent = GameObject.FindGameObjectWithTag("Canvas").transform;//spawn prefab
+            attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyHealth.DamageFor(damage);                                 //damage enemy
+
+            enemyPos = attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyPos;                                           //spawn damage number
+            GameObject currentDamagePopup = Instantiate(damagePopupPrefab, enemyPos.position, Quaternion.identity) as GameObject;   
+            currentDamagePopup.transform.parent = GameObject.FindGameObjectWithTag("Canvas").transform;
             currentDamagePopup.GetComponent<TMPro.TextMeshProUGUI>().text = (Convert.ToInt32(damage)).ToString();
+
+            //GameObject currentAttackLine = Instantiate(attackLinePrefab, enemyPos.position, Quaternion.identity) as GameObject;
+            //currentAttackLine.transform.parent = GameObject.FindGameObjectWithTag("Canvas").transform;
+
+            //var points = new Vector3[2];
+            //Vector3 midpoint = new Vector3(this.transform.position.x + (enemyPos.position.x - this.transform.position.x) * 0.5f,
+            //                               this.transform.position.y + (enemyPos.position.y - this.transform.position.y) * 0.5f, 0);
+            //
+            //points[0] = midpoint//currentAttackLine.transform.position;
+            //points[1] = //new Vector3(currentAttackLine.transform.position.x, currentAttackLine.transform.position.y - 1, currentAttackLine.transform.position.z + 1);
+            //points[2] = midpoint + new Vector3()
+            //    currentAttackLine.GetComponent<LineRenderer>().SetPositions(points);
+
+            FindObjectOfType<HitStop>().StopFor(hitStopDuration);                                                                   //hitstop
         }
         //if (isAttacking) isAttacking = false;
+        //yield return new WaitForSeconds(atkAnimRunoff);
         anim.SetTrigger("HasAttacked");
+        canDash = true;
 
         yield return new WaitForSeconds(atkCooldown);
         atkDistance = startAtkDistance;
