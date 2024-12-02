@@ -28,7 +28,7 @@ public class PlayerHandler : MonoBehaviour
     [SerializeField] GameObject damagePopupPrefab;
     [SerializeField] GameObject attackLinePrefab;
     Transform enemyPos;
-    private float shakeFor = 0f, shakeBy = 0.05f, decrementBy = 4f, maxShakeFor = 0.5f;
+    private float shakeFor = 0f, shakeBy = 0.02f, startShakeBy, decrementBy = 4f, maxShakeFor = 0.5f;
     public float hitStopDuration = 0.1f;
 
 
@@ -38,6 +38,7 @@ public class PlayerHandler : MonoBehaviour
         speed = startSpeed;
         atkDistance = startAtkDistance;
         atkTimerMultiplier = atkDistanceMax * 0.7f;
+        startShakeBy = shakeBy;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -175,6 +176,8 @@ public class PlayerHandler : MonoBehaviour
             //    currentAttackLine.GetComponent<LineRenderer>().SetPositions(points);
 
             FindObjectOfType<HitStop>().StopFor(hitStopDuration);                                                                   //hitstop
+            shakeBy *= 0.2f;
+            shakeFor = maxShakeFor * 0.1f;
         }
         //if (isAttacking) isAttacking = false;
         //yield return new WaitForSeconds(atkAnimRunoff);
@@ -184,6 +187,7 @@ public class PlayerHandler : MonoBehaviour
         yield return new WaitForSeconds(atkCooldown);
         atkDistance = startAtkDistance;
         canAtk = true;
+        shakeBy = startShakeBy;
     }
 
     private void ManageVisualFeedback()
