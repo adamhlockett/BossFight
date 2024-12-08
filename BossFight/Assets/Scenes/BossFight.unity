@@ -149,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 52470948}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -409.1, y: 319.9, z: 0}
+  m_LocalPosition: {x: -408.3, y: 294.78, z: 0}
   m_LocalScale: {x: 211.80423, y: 211.80423, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -59422,7 +59422,7 @@ Transform:
   m_GameObject: {fileID: 1372493452}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -212, y: 315.6, z: 0}
+  m_LocalPosition: {x: -212, y: 305, z: 0}
   m_LocalScale: {x: 213.17853, y: 213.17853, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -59615,12 +59615,12 @@ MonoBehaviour:
   startSpeed: 1.5
   dashDistance: 5
   atkDamage: 2
-  atkDistanceMax: 8
+  atkDistanceMax: 10
   attackZone: {fileID: 1102147875}
   cam: {fileID: 519420031}
   damagePopupPrefab: {fileID: 3310271094668602674, guid: 10661e825947cf14ba22ac85c5652ebf, type: 3}
   attackLinePrefab: {fileID: 6080632661918101860, guid: 26dbb4ab564244d4fb2d404342ce9e0a, type: 3}
-  hitStopDuration: 0.15
+  hitStopDuration: 0.2
 --- !u!95 &1527314111
 Animator:
   serializedVersion: 5
