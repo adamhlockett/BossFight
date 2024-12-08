@@ -12,18 +12,18 @@ public class PlayerHandler : MonoBehaviour
     [SerializeField] float startSpeed; //set in engine inspector
     private float speed;
 
-    /* dashing */
+    [Header("Dashing")]
     private bool canDash = true, isDashing;
     [SerializeField] float dashDistance; //set in engine inspector
     private float dashTime = 0.2f, dashCooldown = 0.5f;
 
-    /* attacking */
+    [Header("Attacking")]
     private bool canAtk = true /*,isAttacking = false*/;
     [SerializeField] float atkDamage, atkDistanceMax; //set in engine inspector
     private float atkTime = 0.2f, atkCooldown = 0.2f, startAtkDistance = 1f, atkDistance, atkTimerMultiplier, atkAnimRunoff = 0.15f;
     [SerializeField] Transform attackZone;
 
-    /* visual feedback */
+    [Header("Visual Feedback")]
     [SerializeField] Camera cam;
     [SerializeField] GameObject damagePopupPrefab;
     [SerializeField] GameObject attackLinePrefab;
