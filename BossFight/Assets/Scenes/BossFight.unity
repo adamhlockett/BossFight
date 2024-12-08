@@ -59615,7 +59615,7 @@ MonoBehaviour:
   startSpeed: 1.5
   dashDistance: 5
   atkDamage: 2
-  atkDistanceMax: 10
+  atkDistanceMax: 8
   attackZone: {fileID: 1102147875}
   cam: {fileID: 519420031}
   damagePopupPrefab: {fileID: 3310271094668602674, guid: 10661e825947cf14ba22ac85c5652ebf, type: 3}
