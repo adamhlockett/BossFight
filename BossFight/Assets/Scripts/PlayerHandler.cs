@@ -13,15 +13,15 @@ public class PlayerHandler : MonoBehaviour
     private float speed;
 
     [Header("Dashing")]
-    private bool canDash = true, isDashing;
     [SerializeField] float dashDistance; //set in engine inspector
+    private bool canDash = true, isDashing;
     private float dashTime = 0.2f, dashCooldown = 0.5f;
 
     [Header("Attacking")]
-    private bool canAtk = true /*,isAttacking = false*/;
     [SerializeField] float atkDamage, atkHoldTime; //set in engine inspector
-    private float atkTime = 0.2f, atkCooldown = 0.2f, startAtkDistance = 1f, atkDistance, atkTimerMultiplier, atkAnimRunoff = 0.15f, atkDistanceMax = 10f;
     [SerializeField] Transform attackZone;
+    private bool canAtk = true /*,isAttacking = false*/;
+    private float atkTime = 0.2f, atkCooldown = 0.2f, startAtkDistance = 1f, atkDistance, atkTimerMultiplier, atkAnimRunoff = 0.15f, atkDistanceMax = 10f;
 
     [Header("Visual Feedback")]
     [SerializeField] Camera cam;
