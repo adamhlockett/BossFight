@@ -8,14 +8,16 @@ public class Enemy_Idle : State
     public Enemy_Chase chaseState;
     public bool canChase;
 
-    public override void OnEnter(Animator p_anim)
+    public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
-        Debug.Log("Enter Idle");
-        p_anim.Play("DOWN_fly");
+        string animName = p_enemy.GetEnemyShouldFace() + "_fly";
+        p_anim.Play(animName);
     }
 
-    public override State RunCurrentState()
+    public override State RunCurrentState(Animator anim, Enemy p_enemy)
     {
+        if (p_enemy.playerHasChangedSide) StartAnim(anim, p_enemy);
+
         ManageLogic();
 
         return ManageTransitions();
@@ -30,6 +32,12 @@ public class Enemy_Idle : State
 
     private void ManageLogic()
     {
-        // state logic here
+
+    }
+
+    public override void StartAnim(Animator p_anim, Enemy p_enemy)
+    {
+        string animName = p_enemy.GetEnemyShouldFace() + "_fly";
+        p_anim.Play(animName);
     }
 }

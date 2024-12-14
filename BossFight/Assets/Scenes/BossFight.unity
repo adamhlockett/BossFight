@@ -497,7 +497,7 @@ GameObject:
   - component: {fileID: 330107833}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -624,7 +624,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.011877298, y: -0.07158268}
+  m_Offset: {x: -0.019620828, y: -0.07158268}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -635,7 +635,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.26248085, y: 0.2035359}
+  m_Size: {x: 0.32133222, y: 0.2035359}
   m_EdgeRadius: 0
 --- !u!114 &330107832
 MonoBehaviour:
@@ -667,6 +667,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83bf16cdacc5d8041b0435fc869c58bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPos: {fileID: 1527314107}
+  playerHasChangedSide: 0
 --- !u!114 &330107834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,6 +682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 1910922793}
+  enemy: {fileID: 0}
 --- !u!1 &474235850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,6 +1152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackState: {fileID: 44441752}
   canAttack: 0
+  playerPos: {fileID: 1527314107}
 --- !u!1 &1102147874
 GameObject:
   m_ObjectHideFlags: 0

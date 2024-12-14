@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Enemy_Attack : State
 {
-    public override void OnEnter(Animator p_anim)
+    public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
-        Debug.Log("Enter Attack");
-        p_anim.Play("DOWN_attack");
+        
     }
 
-    public override State RunCurrentState()
+    public override State RunCurrentState(Animator anim, Enemy p_enemy)
     {
+        if (p_enemy.playerHasChangedSide) StartAnim(anim, p_enemy);
+
         ManageLogic();
 
         return ManageTransitions();
@@ -25,5 +26,11 @@ public class Enemy_Attack : State
     private void ManageLogic()
     {
         // state logic here
+    }
+
+    public override void StartAnim(Animator p_anim, Enemy p_enemy)
+    {
+        string animName = p_enemy.GetEnemyShouldFace() + "_attack";
+        p_anim.Play(animName);
     }
 }

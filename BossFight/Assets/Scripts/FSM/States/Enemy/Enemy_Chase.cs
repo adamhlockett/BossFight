@@ -8,15 +8,17 @@ public class Enemy_Chase : State
 {
     public Enemy_Attack attackState;
     public bool canAttack;
+    public Transform playerPos;
 
-    public override void OnEnter(Animator p_anim)
+    public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
-        Debug.Log("Enter Chase");
-        p_anim.Play("DOWN_special");
+        
     }
 
-    public override State RunCurrentState()
+    public override State RunCurrentState(Animator anim, Enemy p_enemy)
     {
+        if (p_enemy.playerHasChangedSide) StartAnim(anim, p_enemy);
+
         ManageLogic();
 
         return ManageTransitions();
@@ -32,7 +34,12 @@ public class Enemy_Chase : State
     private void ManageLogic()
     {
         // state logic here
+        Debug.Log(this.gameObject.transform.position);
     }
 
-
+    public override void StartAnim(Animator p_anim, Enemy p_enemy)
+    {
+        string animName = p_enemy.GetEnemyShouldFace() + "_fly";
+        p_anim.Play(animName);
+    }
 }
