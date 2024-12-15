@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class Enemy_Idle : State
 {
-    public Enemy_Chase chaseState;
-    public bool canChase;
+    public Enemy_Charge chargeState;
+    public bool canCharge;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
-        string animName = p_enemy.GetEnemyShouldFace() + "_fly";
-        p_anim.Play(animName);
+        StartAnim(p_anim, p_enemy);
     }
 
     public override State RunCurrentState(Animator anim, Enemy p_enemy)
@@ -25,14 +24,14 @@ public class Enemy_Idle : State
 
     private State ManageTransitions()
     {
-        if (canChase) return chaseState;
+        if (canCharge) return chargeState; // changes state to chase
 
         else return this;
     }
 
     private void ManageLogic()
     {
-
+        // does not have to do anything
     }
 
     public override void StartAnim(Animator p_anim, Enemy p_enemy)

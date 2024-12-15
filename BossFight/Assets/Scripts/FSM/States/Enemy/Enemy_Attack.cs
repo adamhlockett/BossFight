@@ -6,7 +6,7 @@ public class Enemy_Attack : State
 {
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
-        
+        StartAnim(p_anim, p_enemy);
     }
 
     public override State RunCurrentState(Animator anim, Enemy p_enemy)

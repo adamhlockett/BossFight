@@ -1117,7 +1117,7 @@ GameObject:
   - component: {fileID: 1044722777}
   - component: {fileID: 1044722778}
   m_Layer: 0
-  m_Name: Chase
+  m_Name: Charge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1152,7 +1152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackState: {fileID: 44441752}
   canAttack: 0
-  playerPos: {fileID: 1527314107}
+  speed: 5
 --- !u!1 &1102147874
 GameObject:
   m_ObjectHideFlags: 0
@@ -60047,8 +60047,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdac5c78bbb66547a89563ad83fb1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseState: {fileID: 1044722778}
-  canChase: 0
+  chargeState: {fileID: 1044722778}
+  canCharge: 0
 --- !u!1 &1921595727
 GameObject:
   m_ObjectHideFlags: 0

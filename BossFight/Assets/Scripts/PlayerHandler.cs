@@ -31,8 +31,6 @@ public class PlayerHandler : MonoBehaviour
     private float shakeFor = 0f, shakeBy = 0.02f, startShakeBy, decrementBy = 4f, maxShakeFor = 0.5f;
     public float hitStopDuration = 0.1f;
 
-
-
     void Start()
     {
         speed = startSpeed;
@@ -63,8 +61,6 @@ public class PlayerHandler : MonoBehaviour
     {
         rb.velocity = input * speed; //move player
     }
-
-
 
     void ManageInputs()
     {
@@ -129,7 +125,6 @@ public class PlayerHandler : MonoBehaviour
         //    attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyHealth.DamageFor(atkDamage);
         //}
     }
-
 
     private IEnumerator Dash(float power)
     {

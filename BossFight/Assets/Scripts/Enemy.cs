@@ -21,12 +21,7 @@ public class Enemy : MonoBehaviour
         tempAngle = GetPlayerAngleFromEnemy();
     }
 
-    public int GetPlayerAngleFromEnemy()
-    {
-        float angle = Mathf.Atan2(enemyPos.position.y - playerPos.position.y, enemyPos.position.x - playerPos.position.x) * 180 / Mathf.PI;
-        int angleInt = ((int)(angle / 45));
-        return angleInt;
-    }
+    public Vector2 GetChargeToPoint() { return playerPos.position; }
 
     public string GetEnemyShouldFace()
     {
@@ -49,5 +44,11 @@ public class Enemy : MonoBehaviour
             default:
                 return "DOWN";
         }
+    }
+    public int GetPlayerAngleFromEnemy()
+    {
+        float angle = Mathf.Atan2(enemyPos.position.y - playerPos.position.y, enemyPos.position.x - playerPos.position.x) * 180 / Mathf.PI;
+        int angleInt = ((int)(angle / 45));
+        return angleInt;
     }
 }
