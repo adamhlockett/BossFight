@@ -1153,6 +1153,7 @@ MonoBehaviour:
   attackState: {fileID: 44441752}
   canAttack: 0
   speed: 5
+  slamPrefab: {fileID: 667168358938441296, guid: 9c45c61603af76649bbc603922067fdb, type: 3}
 --- !u!1 &1102147874
 GameObject:
   m_ObjectHideFlags: 0

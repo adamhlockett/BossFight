@@ -11,6 +11,7 @@ public class Enemy_Idle : State
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
         StartAnim(p_anim, p_enemy);
+        StartCoroutine(WaitToCharge());
     }
 
     public override State RunCurrentState(Animator anim, Enemy p_enemy)
@@ -38,5 +39,11 @@ public class Enemy_Idle : State
     {
         string animName = p_enemy.GetEnemyShouldFace() + "_fly";
         p_anim.Play(animName);
+    }
+
+    IEnumerator WaitToCharge()
+    {
+        yield return new WaitForSeconds(3);
+        canCharge = true;
     }
 }

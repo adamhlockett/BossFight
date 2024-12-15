@@ -13,6 +13,7 @@ public class Enemy_Charge : State
     public float speed;
     private string animString;
     private bool hasReachedPoint;
+    [SerializeField] GameObject slamPrefab;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
@@ -50,6 +51,7 @@ public class Enemy_Charge : State
             StartAnim(p_anim, p_enemy);
             StartCoroutine(WaitForSlam());
             hasReachedPoint = true;
+            StartCoroutine(WaitForSlamPrefab());
         }
     }
 
@@ -63,5 +65,12 @@ public class Enemy_Charge : State
     {
         yield return new WaitForSeconds(1);
         canAttack = true;
+    }
+
+    IEnumerator WaitForSlamPrefab()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Vector3 spawnPos = new Vector3(transform.root.position.x, transform.root.position.y - 0.75f, transform.root.position.z);
+        Instantiate(slamPrefab, spawnPos, Quaternion.identity);
     }
 }
