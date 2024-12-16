@@ -9,7 +9,7 @@ public class CheckContainsEnemy : MonoBehaviour
     public Transform enemyPos;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Enemy")
+        if(collision.gameObject.tag == "Enemy Hitbox")
         {
             containsEnemy = true;
             enemyHealth = collision.gameObject.GetComponentInParent<Health>();
@@ -18,7 +18,7 @@ public class CheckContainsEnemy : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy Hitbox")
         {
             containsEnemy = false;
         }

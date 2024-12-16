@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 474235852}
   m_Layer: 0
   m_Name: Hitbox
-  m_TagString: Untagged
+  m_TagString: Player Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -886,7 +886,7 @@ GameObject:
   - component: {fileID: 696739212}
   m_Layer: 0
   m_Name: Hitbox
-  m_TagString: Enemy
+  m_TagString: Enemy Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -938,7 +938,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01983244, y: 0.0048849583}
+  m_Offset: {x: -0.015085615, y: -0.012915462}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -949,7 +949,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.51254463, y: 0.614727}
+  m_Size: {x: 0.37488782, y: 0.52216464}
   m_EdgeRadius: 0
 --- !u!1 &821492576
 GameObject:
@@ -59655,7 +59655,7 @@ GameObject:
   - component: {fileID: 1527314113}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

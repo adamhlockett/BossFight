@@ -26,10 +26,7 @@ public class Health : MonoBehaviour
     }
 
     /* setters */
-    public void DamageFor(float damage) { if(canBeDamaged) hp -= damage; UpdateHealthBar(); }
+    public void DamageFor(float damage) { if(canBeDamaged) hp -= damage; UpdateHealthBar(); Debug.Log(damage); }
 
     public void HealFor(float healing) { maxhp += healing; }
-
-    /* UI */
-
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3902408432332757009}
   - component: {fileID: 6982687686050422148}
   - component: {fileID: 1677269962584486029}
+  - component: {fileID: 269924119424259324}
   m_Layer: 0
   m_Name: SlamPrefab
   m_TagString: Untagged
@@ -137,7 +138,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.004241637, y: -0.0000000340598}
@@ -155,3 +156,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50fe1acd538f8f447811f22efee0aff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slamDamage: 15
+--- !u!114 &269924119424259324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667168358938441296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 412eac8c034cb7747801745856b3666c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  containsPlayer: 0
+  playerHealth: {fileID: 0}
+  playerPos: {fileID: 0}
