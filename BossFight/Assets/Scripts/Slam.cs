@@ -8,12 +8,14 @@ public class Slam : MonoBehaviour
     float scaleBy = 0.1f;
     public float slamDamage;
     Health playerHealth;
+    bool canDamage;
 
     // Start is called before the first frame update
     void Start()
     {
         tr = transform;
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+        canDamage = true;
     }
 
     // Update is called once per frame
@@ -22,11 +24,20 @@ public class Slam : MonoBehaviour
         tr.localScale *= 1 + (scaleBy * Time.deltaTime);
 
         //DAMAGE PLAYER
-        if (this.GetComponent<CheckContainsPlayer>().containsPlayer)
+        if (this.GetComponent<CheckContainsPlayer>().containsPlayer && canDamage)
         {
             playerHealth.DamageFor(slamDamage);
             //start damage cooldown
+            canDamage = false;
+            //start coroutine
+            StartCoroutine(damageCooldown());
         }
+    }
+
+    private IEnumerator damageCooldown()
+    {
+        yield return new WaitForSeconds(2);
+        canDamage = true;
     }
 
     private void DestroyThis() //used in animation event
