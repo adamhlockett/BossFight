@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
     [SerializeField] SpriteRenderer overlayBarRenderer;
     public float overlayBarStartWidth, overlayBarEndWidth, overlayBarStartHeight;
     [SerializeField] PlayerHandler playerHandler;
+    public float playerHitStopDuration = 0.2f, enemyHitStopDuration = 0.1f;
 
     void Start()
     {
@@ -32,8 +33,18 @@ public class Health : MonoBehaviour
         if(canBeDamaged)
         {
             hp -= damage;
-            if (isPlayer) playerHandler.SpawnDamagePopup(damage, this.transform.root, true);
-            else playerHandler.SpawnDamagePopup(damage, this.transform.root, false);
+            if (isPlayer)
+            {
+                playerHandler.SpawnDamagePopup(damage, this.transform.root, true);
+                FindObjectOfType<HitStop>().StopFor(playerHitStopDuration);
+                playerHandler.HitShake();
+            }
+            else // is enemy or projectile
+            {
+                playerHandler.SpawnDamagePopup(damage, this.transform.root, false);
+                FindObjectOfType<HitStop>().StopFor(enemyHitStopDuration);
+                playerHandler.HitShake();
+            }
             UpdateHealthBar();
         }  
     }

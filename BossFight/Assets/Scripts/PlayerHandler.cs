@@ -28,7 +28,7 @@ public class PlayerHandler : MonoBehaviour
     [SerializeField] GameObject damagePopupPrefab;
     [SerializeField] GameObject attackLinePrefab;
     Transform enemyPos;
-    private float shakeFor = 0f, shakeBy = 0.02f, startShakeBy, decrementBy = 4f, maxShakeFor = 0.5f;
+    private float shakeFor = 0f, shakeBy = 0.02f, startShakeFor, startShakeBy, decrementBy = 4f, maxShakeFor = 0.5f;
     public float hitStopDuration = 0.1f;
 
     void Start()
@@ -36,6 +36,7 @@ public class PlayerHandler : MonoBehaviour
         speed = startSpeed;
         atkDistance = startAtkDistance;
         atkTimerMultiplier = atkDistanceMax * atkHoldTime;
+        startShakeFor = shakeFor;
         startShakeBy = shakeBy;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -114,16 +115,9 @@ public class PlayerHandler : MonoBehaviour
             else                                                                                                    //hold attack
             {                                                                                                       //hold attack
                 atkDistance = atkDistanceMax;                                                                       //hold attack
-                shakeFor = maxShakeFor;                                                                             //hold attack
+                ChargedShake();                                                                                     //hold attack
             }                                                                                                       //hold attack
         }                                                                                                           //hold attack
-
-        //if(isAttacking && attackZone.gameObject.GetComponent<CheckContainsEnemy>().containsEnemy) //do once
-        //{
-        //    Debug.Log("hitting enemy");
-        //    isAttacking = false;
-        //    attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyHealth.DamageFor(atkDamage);
-        //}
     }
 
     private IEnumerator Dash(float power)
@@ -143,7 +137,6 @@ public class PlayerHandler : MonoBehaviour
     private IEnumerator Attack(float damage)
     {
         canAtk = false;
-        //isAttacking = true;
 
         StartCoroutine(Dash(atkDistance)); //during attack
 
@@ -151,36 +144,18 @@ public class PlayerHandler : MonoBehaviour
 
         if (attackZone.gameObject.GetComponent<CheckContainsEnemy>().containsEnemy)
         {
-            attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyHealth.DamageFor(damage, false);                      //damage enemy
+            attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyHealth.DamageFor(damage, false);
 
-            //enemyPos = attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyPos;
-            //SpawnDamagePopup(damage, enemyPos, false);
-
-            //GameObject currentAttackLine = Instantiate(attackLinePrefab, enemyPos.position, Quaternion.identity) as GameObject;
-            //currentAttackLine.transform.parent = GameObject.FindGameObjectWithTag("Canvas").transform;
-
-            //var points = new Vector3[2];
-            //Vector3 midpoint = new Vector3(this.transform.position.x + (enemyPos.position.x - this.transform.position.x) * 0.5f,
-            //                               this.transform.position.y + (enemyPos.position.y - this.transform.position.y) * 0.5f, 0);
-            //
-            //points[0] = midpoint//currentAttackLine.transform.position;
-            //points[1] = //new Vector3(currentAttackLine.transform.position.x, currentAttackLine.transform.position.y - 1, currentAttackLine.transform.position.z + 1);
-            //points[2] = midpoint + new Vector3()
-            //    currentAttackLine.GetComponent<LineRenderer>().SetPositions(points);
-
-            FindObjectOfType<HitStop>().StopFor(hitStopDuration);                                                                   //hitstop
-            shakeBy *= 0.2f;
-            shakeFor = maxShakeFor * 0.1f;
+            HitShake();
         }
-        //if (isAttacking) isAttacking = false;
-        //yield return new WaitForSeconds(atkAnimRunoff);
+
         anim.SetTrigger("HasAttacked");
         canDash = true;
 
         yield return new WaitForSeconds(atkCooldown);
         atkDistance = startAtkDistance;
         canAtk = true;
-        shakeBy = startShakeBy;
+        ResetShake();
     }
 
     private void ManageVisualFeedback()
@@ -201,4 +176,21 @@ public class PlayerHandler : MonoBehaviour
         if(isPlayer) currentDamagePopup.GetComponent<TMPro.TextMeshProUGUI>().faceColor = Color.red;
     }
 
+    public void HitShake()
+    {
+        shakeFor = maxShakeFor * 0.1f;
+        shakeBy = startShakeBy * 0.2f;
+    }
+
+    public void ChargedShake()
+    {
+        shakeFor = maxShakeFor;
+        shakeBy = startShakeBy;
+    }
+
+    public void ResetShake()
+    {
+        shakeFor = startShakeFor;
+        shakeBy = startShakeBy;
+    }
 }
