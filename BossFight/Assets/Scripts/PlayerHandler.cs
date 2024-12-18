@@ -29,7 +29,7 @@ public class PlayerHandler : MonoBehaviour
     [SerializeField] GameObject damagePopupPrefab;
     [SerializeField] GameObject attackLinePrefab;
     private float shakeFor = 0f, shakeBy = 0.02f, startShakeFor, startShakeBy, decrementBy = 4f, maxShakeFor = 0.5f;
-    public float hitStopDuration = 0.1f;
+    public float hitStopDuration = 0.1f, fullChargeControllerRumble = 0.01f;
 
     void Start()
     {
@@ -114,7 +114,8 @@ public class PlayerHandler : MonoBehaviour
             else                                                                                                    //hold attack
             {                                                                                                       //hold attack
                 atkDistance = atkDistanceMax;                                                                       //hold attack
-                ChargedShake();                                                                                     //hold attack
+                ChargedShake();
+                RumbleController(fullChargeControllerRumble);
             }                                                                                                       //hold attack
         }                                                                                                           //hold attack
     }
