@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Health : MonoBehaviour
 {
     [SerializeField] private float hp; //set in editor inspector
@@ -10,7 +11,7 @@ public class Health : MonoBehaviour
     [SerializeField] SpriteRenderer overlayBarRenderer;
     public float overlayBarStartWidth, overlayBarEndWidth, overlayBarStartHeight;
     [SerializeField] PlayerHandler playerHandler;
-    public float playerHitStopDuration = 0.2f, enemyHitStopDuration = 0.1f;
+    public float playerHitStopDuration = 0.2f, enemyHitStopDuration = 0.1f, playerRumbleDuration = 0.1f, enemyRumbleDuration = 0.05f;
 
     void Start()
     {
@@ -38,12 +39,14 @@ public class Health : MonoBehaviour
                 playerHandler.SpawnDamagePopup(damage, this.transform.root, true);
                 FindObjectOfType<HitStop>().StopFor(playerHitStopDuration);
                 playerHandler.HitShake();
+                playerHandler.RumbleController(playerRumbleDuration);
             }
             else // is enemy or projectile
             {
                 playerHandler.SpawnDamagePopup(damage, this.transform.root, false);
                 FindObjectOfType<HitStop>().StopFor(enemyHitStopDuration);
                 playerHandler.HitShake();
+                playerHandler.RumbleController(enemyRumbleDuration);
             }
             UpdateHealthBar();
         }  

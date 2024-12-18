@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Enemy_Attack : State
 {
+    public Enemy_Idle idleState;
+    public bool toIdle;
+
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
         StartAnim(p_anim, p_enemy);
+        StartCoroutine(WaitToIdle());
     }
 
     public override State RunCurrentState(Animator anim, Enemy p_enemy)
@@ -20,7 +24,9 @@ public class Enemy_Attack : State
 
     private State ManageTransitions()
     {
-        return this;
+        if (toIdle) return idleState;
+
+        else return this;
     }
 
     private void ManageLogic()
@@ -32,5 +38,11 @@ public class Enemy_Attack : State
     {
         string animName = p_enemy.GetEnemyShouldFace() + "_attack";
         p_anim.Play(animName);
+    }
+
+    IEnumerator WaitToIdle()
+    {
+        yield return new WaitForSeconds(2);
+        toIdle = true;
     }
 }

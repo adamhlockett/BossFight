@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerHandler : MonoBehaviour
 {
@@ -20,14 +21,13 @@ public class PlayerHandler : MonoBehaviour
     [Header("Attacking")]
     [SerializeField] float atkDamage, atkHoldTime; //set in engine inspector
     [SerializeField] Transform attackZone;
-    private bool canAtk = true /*,isAttacking = false*/;
+    private bool canAtk = true;
     private float atkTime = 0.2f, atkCooldown = 0.2f, startAtkDistance = 1f, atkDistance, atkTimerMultiplier, atkAnimRunoff = 0.15f, atkDistanceMax = 10f;
 
     [Header("Visual Feedback")]
     [SerializeField] Camera cam;
     [SerializeField] GameObject damagePopupPrefab;
     [SerializeField] GameObject attackLinePrefab;
-    Transform enemyPos;
     private float shakeFor = 0f, shakeBy = 0.02f, startShakeFor, startShakeBy, decrementBy = 4f, maxShakeFor = 0.5f;
     public float hitStopDuration = 0.1f;
 
@@ -55,7 +55,6 @@ public class PlayerHandler : MonoBehaviour
 
         //Visual Feedback
         ManageVisualFeedback();
-
     }
 
     private void FixedUpdate()
@@ -168,6 +167,8 @@ public class PlayerHandler : MonoBehaviour
         else shakeFor = 0f;
     }
 
+    ////need input handler class
+
     public void SpawnDamagePopup(float damage, Transform spawnPos, bool isPlayer) // should ideally be in seperate script
     {
         GameObject currentDamagePopup = Instantiate(damagePopupPrefab, spawnPos.position, Quaternion.identity) as GameObject;
@@ -176,21 +177,17 @@ public class PlayerHandler : MonoBehaviour
         if(isPlayer) currentDamagePopup.GetComponent<TMPro.TextMeshProUGUI>().faceColor = Color.red;
     }
 
-    public void HitShake()
-    {
-        shakeFor = maxShakeFor * 0.1f;
-        shakeBy = startShakeBy * 0.2f;
-    }
+    public void HitShake() { shakeFor = maxShakeFor * 0.1f; shakeBy = startShakeBy * 0.2f; }
 
-    public void ChargedShake()
-    {
-        shakeFor = maxShakeFor;
-        shakeBy = startShakeBy;
-    }
+    public void ChargedShake() { shakeFor = maxShakeFor; shakeBy = startShakeBy; }
 
-    public void ResetShake()
+    public void ResetShake() { shakeFor = startShakeFor; shakeBy = startShakeBy; }
+
+    public void RumbleController(float rumbleFor) { StartCoroutine(RumbleCounter(rumbleFor)); }
+    private IEnumerator RumbleCounter(float rumbleFor)
     {
-        shakeFor = startShakeFor;
-        shakeBy = startShakeBy;
+        Gamepad.current.SetMotorSpeeds(0.123f, 0.234f);
+        yield return new WaitForSeconds(rumbleFor);
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
     }
 }

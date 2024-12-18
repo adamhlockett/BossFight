@@ -167,6 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af7a654f51496d4688d5d605f22f486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleState: {fileID: 1910922793}
+  toIdle: 0
 --- !u!1 &52470948
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,6 +658,10 @@ MonoBehaviour:
   overlayBarEndWidth: 3.71
   overlayBarStartHeight: 0.16
   playerHandler: {fileID: 1527314110}
+  playerHitStopDuration: 0.2
+  enemyHitStopDuration: 0.1
+  playerRumbleDuration: 0.1
+  enemyRumbleDuration: 0.05
 --- !u!114 &330107833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59854,6 +59860,10 @@ MonoBehaviour:
   overlayBarEndWidth: 0.03
   overlayBarStartHeight: 0.31
   playerHandler: {fileID: 1527314110}
+  playerHitStopDuration: 0.2
+  enemyHitStopDuration: 0.1
+  playerRumbleDuration: 0.1
+  enemyRumbleDuration: 0.05
 --- !u!1 &1567680207
 GameObject:
   m_ObjectHideFlags: 0
