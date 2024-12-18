@@ -655,6 +655,7 @@ MonoBehaviour:
   overlayBarStartWidth: 0.08
   overlayBarEndWidth: 3.71
   overlayBarStartHeight: 0.16
+  playerHandler: {fileID: 1527314110}
 --- !u!114 &330107833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59852,6 +59853,7 @@ MonoBehaviour:
   overlayBarStartWidth: 0.49
   overlayBarEndWidth: 0.03
   overlayBarStartHeight: 0.31
+  playerHandler: {fileID: 1527314110}
 --- !u!1 &1567680207
 GameObject:
   m_ObjectHideFlags: 0

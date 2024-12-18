@@ -26,7 +26,7 @@ public class Slam : MonoBehaviour
         //DAMAGE PLAYER
         if (this.GetComponent<CheckContainsPlayer>().containsPlayer && canDamage)
         {
-            playerHealth.DamageFor(slamDamage);
+            playerHealth.DamageFor(slamDamage, true);
             //start damage cooldown
             canDamage = false;
             //start coroutine

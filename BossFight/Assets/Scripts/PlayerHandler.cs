@@ -151,12 +151,10 @@ public class PlayerHandler : MonoBehaviour
 
         if (attackZone.gameObject.GetComponent<CheckContainsEnemy>().containsEnemy)
         {
-            attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyHealth.DamageFor(damage);                                 //damage enemy
+            attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyHealth.DamageFor(damage, false);                      //damage enemy
 
-            enemyPos = attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyPos;                                           //spawn damage number
-            GameObject currentDamagePopup = Instantiate(damagePopupPrefab, enemyPos.position, Quaternion.identity) as GameObject;   
-            currentDamagePopup.transform.parent = GameObject.FindGameObjectWithTag("Canvas").transform;
-            currentDamagePopup.GetComponent<TMPro.TextMeshProUGUI>().text = (Convert.ToInt32(damage)).ToString();
+            //enemyPos = attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyPos;
+            //SpawnDamagePopup(damage, enemyPos, false);
 
             //GameObject currentAttackLine = Instantiate(attackLinePrefab, enemyPos.position, Quaternion.identity) as GameObject;
             //currentAttackLine.transform.parent = GameObject.FindGameObjectWithTag("Canvas").transform;
@@ -194,4 +192,13 @@ public class PlayerHandler : MonoBehaviour
         }
         else shakeFor = 0f;
     }
+
+    public void SpawnDamagePopup(float damage, Transform spawnPos, bool isPlayer) // should ideally be in seperate script
+    {
+        GameObject currentDamagePopup = Instantiate(damagePopupPrefab, spawnPos.position, Quaternion.identity) as GameObject;
+        currentDamagePopup.transform.parent = GameObject.FindGameObjectWithTag("Canvas").transform;
+        currentDamagePopup.GetComponent<TMPro.TextMeshProUGUI>().text = (Convert.ToInt32(damage)).ToString();
+        if(isPlayer) currentDamagePopup.GetComponent<TMPro.TextMeshProUGUI>().faceColor = Color.red;
+    }
+
 }

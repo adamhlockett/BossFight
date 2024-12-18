@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     public bool canBeDamaged = true;
     [SerializeField] SpriteRenderer overlayBarRenderer;
     public float overlayBarStartWidth, overlayBarEndWidth, overlayBarStartHeight;
+    [SerializeField] PlayerHandler playerHandler;
 
     void Start()
     {
@@ -26,7 +27,16 @@ public class Health : MonoBehaviour
     }
 
     /* setters */
-    public void DamageFor(float damage) { if(canBeDamaged) hp -= damage; UpdateHealthBar(); Debug.Log(damage); }
+    public void DamageFor(float damage, bool isPlayer) 
+    { 
+        if(canBeDamaged)
+        {
+            hp -= damage;
+            if (isPlayer) playerHandler.SpawnDamagePopup(damage, this.transform.root, true);
+            else playerHandler.SpawnDamagePopup(damage, this.transform.root, false);
+            UpdateHealthBar();
+        }  
+    }
 
     public void HealFor(float healing) { maxhp += healing; }
 }
