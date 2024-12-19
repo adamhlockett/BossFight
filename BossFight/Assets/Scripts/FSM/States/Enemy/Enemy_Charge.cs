@@ -8,8 +8,6 @@ public class Enemy_Charge : State
 {
     public bool isComplete;
 
-    //public Enemy_Attack attackState;
-    //public bool toAttack;
     private Vector2 chargeTo;
     private float distance;
     public float speed;

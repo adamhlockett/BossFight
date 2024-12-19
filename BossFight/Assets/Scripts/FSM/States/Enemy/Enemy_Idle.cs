@@ -7,9 +7,6 @@ public class Enemy_Idle : State
 {
     public bool isComplete;
 
-    //public Enemy_Charge chargeState;
-    //public bool toCharge;
-
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
         StartAnim(p_anim, p_enemy);

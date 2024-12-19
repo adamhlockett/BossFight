@@ -6,9 +6,6 @@ public class Enemy_Attack : State
 {
     public bool isComplete;
 
-    //public Enemy_Idle idleState;
-    //public bool toIdle;
-
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
         StartAnim(p_anim, p_enemy);
