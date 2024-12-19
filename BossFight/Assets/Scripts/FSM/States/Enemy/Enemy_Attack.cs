@@ -4,30 +4,31 @@ using UnityEngine;
 
 public class Enemy_Attack : State
 {
-    public Enemy_Idle idleState;
-    public bool toIdle;
+    public bool isComplete;
+
+    //public Enemy_Idle idleState;
+    //public bool toIdle;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
         StartAnim(p_anim, p_enemy);
         StartCoroutine(WaitToIdle());
-        toIdle = false;
+        isComplete = false;
+        //toIdle = false;
     }
 
-    public override State RunCurrentState(Animator anim, Enemy p_enemy)
+    public override void RunCurrentState(Animator anim, Enemy p_enemy)
     {
         if (p_enemy.playerHasChangedSide) StartAnim(anim, p_enemy);
 
         ManageLogic();
 
-        return ManageTransitions();
+        ManageTransitions();
     }
 
-    private State ManageTransitions()
+    private void ManageTransitions()
     {
-        if (toIdle) return idleState;
-
-        else return this;
+        //if (toIdle)
     }
 
     private void ManageLogic()
@@ -44,6 +45,8 @@ public class Enemy_Attack : State
     IEnumerator WaitToIdle()
     {
         yield return new WaitForSeconds(2);
-        toIdle = true;
+        isComplete = true;
     }
+
+    public override bool CheckIfComplete() { return isComplete; }
 }

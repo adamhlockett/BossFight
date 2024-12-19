@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class Enemy_Charge : State
 {
-    public Enemy_Attack attackState;
-    public bool toAttack;
+    public bool isComplete;
+
+    //public Enemy_Attack attackState;
+    //public bool toAttack;
     private Vector2 chargeTo;
     private float distance;
     public float speed;
@@ -21,23 +23,21 @@ public class Enemy_Charge : State
         animString = "_fly";
         StartAnim(p_anim, p_enemy);
         hasReachedPoint = false;
-        toAttack = false;
+        isComplete = false;
     }
 
-    public override State RunCurrentState(Animator p_anim, Enemy p_enemy)
+    public override void RunCurrentState(Animator p_anim, Enemy p_enemy)
     {
         if (p_enemy.playerHasChangedSide && animString != "_special") StartAnim(p_anim, p_enemy);
 
         ManageLogic(p_anim, p_enemy);
 
-        return ManageTransitions();
+        ManageTransitions();
     }
 
-    private State ManageTransitions()
+    private void ManageTransitions()
     {
-        if (toAttack) return attackState; // changes state to attack
-
-        else return this;
+        //if (toAttack)
     }
 
     private void ManageLogic(Animator p_anim, Enemy p_enemy)
@@ -65,7 +65,7 @@ public class Enemy_Charge : State
     IEnumerator WaitForSlam()
     {
         yield return new WaitForSeconds(1);
-        toAttack = true;
+        isComplete = true;
     }
 
     IEnumerator WaitForSlamPrefab()
@@ -74,4 +74,6 @@ public class Enemy_Charge : State
         Vector3 spawnPos = new Vector3(transform.root.position.x, transform.root.position.y - 0.75f, transform.root.position.z);
         Instantiate(slamPrefab, spawnPos, Quaternion.identity);
     }
+
+    public override bool CheckIfComplete() { return isComplete; }
 }

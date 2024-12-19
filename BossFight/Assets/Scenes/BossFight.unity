@@ -690,6 +690,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: {fileID: 1910922793}
   enemy: {fileID: 0}
+  states:
+  - {fileID: 1910922793}
+  - {fileID: 1044722778}
+  - {fileID: 44441752}
 --- !u!1 &474235850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,7 +1162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackState: {fileID: 44441752}
-  canAttack: 0
+  toAttack: 0
   speed: 5
   slamPrefab: {fileID: 667168358938441296, guid: 9c45c61603af76649bbc603922067fdb, type: 3}
 --- !u!1 &1102147874
@@ -59785,6 +59789,7 @@ MonoBehaviour:
   damagePopupPrefab: {fileID: 3310271094668602674, guid: 10661e825947cf14ba22ac85c5652ebf, type: 3}
   attackLinePrefab: {fileID: 6080632661918101860, guid: 26dbb4ab564244d4fb2d404342ce9e0a, type: 3}
   hitStopDuration: 0.2
+  fullChargeControllerRumble: 0.01
 --- !u!95 &1527314111
 Animator:
   serializedVersion: 5
@@ -60061,7 +60066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeState: {fileID: 1044722778}
-  canCharge: 0
+  toCharge: 0
 --- !u!1 &1921595727
 GameObject:
   m_ObjectHideFlags: 0

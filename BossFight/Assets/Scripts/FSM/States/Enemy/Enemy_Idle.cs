@@ -5,30 +5,31 @@ using UnityEngine;
 
 public class Enemy_Idle : State
 {
-    public Enemy_Charge chargeState;
-    public bool toCharge;
+    public bool isComplete;
+
+    //public Enemy_Charge chargeState;
+    //public bool toCharge;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
         StartAnim(p_anim, p_enemy);
         StartCoroutine(WaitToCharge());
-        toCharge = false;
+        //toCharge = false;
+        isComplete = false;
     }
 
-    public override State RunCurrentState(Animator anim, Enemy p_enemy)
+    public override void RunCurrentState(Animator anim, Enemy p_enemy)
     {
         if (p_enemy.playerHasChangedSide) StartAnim(anim, p_enemy);
 
         ManageLogic();
 
-        return ManageTransitions();
+        ManageTransitions();
     }
 
-    private State ManageTransitions()
+    private void ManageTransitions()
     {
-        if (toCharge) return chargeState; // changes state to chase
-
-        else return this;
+        //if (toCharge) //can transition
     }
 
     private void ManageLogic()
@@ -45,6 +46,9 @@ public class Enemy_Idle : State
     IEnumerator WaitToCharge()
     {
         yield return new WaitForSeconds(3);
-        toCharge = true;
+        //toCharge = true;
+        isComplete = true;
     }
+
+    public override bool CheckIfComplete() { return isComplete; }
 }
