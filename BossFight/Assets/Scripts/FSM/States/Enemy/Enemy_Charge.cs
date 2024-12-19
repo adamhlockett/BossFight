@@ -7,7 +7,7 @@ using UnityEngine;
 public class Enemy_Charge : State
 {
     public Enemy_Attack attackState;
-    public bool canAttack;
+    public bool toAttack;
     private Vector2 chargeTo;
     private float distance;
     public float speed;
@@ -21,6 +21,7 @@ public class Enemy_Charge : State
         animString = "_fly";
         StartAnim(p_anim, p_enemy);
         hasReachedPoint = false;
+        toAttack = false;
     }
 
     public override State RunCurrentState(Animator p_anim, Enemy p_enemy)
@@ -34,7 +35,7 @@ public class Enemy_Charge : State
 
     private State ManageTransitions()
     {
-        if (canAttack) return attackState; // changes state to attack
+        if (toAttack) return attackState; // changes state to attack
 
         else return this;
     }
@@ -64,7 +65,7 @@ public class Enemy_Charge : State
     IEnumerator WaitForSlam()
     {
         yield return new WaitForSeconds(1);
-        canAttack = true;
+        toAttack = true;
     }
 
     IEnumerator WaitForSlamPrefab()

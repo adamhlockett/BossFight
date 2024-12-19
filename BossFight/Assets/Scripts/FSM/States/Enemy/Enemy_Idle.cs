@@ -6,12 +6,13 @@ using UnityEngine;
 public class Enemy_Idle : State
 {
     public Enemy_Charge chargeState;
-    public bool canCharge;
+    public bool toCharge;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
         StartAnim(p_anim, p_enemy);
         StartCoroutine(WaitToCharge());
+        toCharge = false;
     }
 
     public override State RunCurrentState(Animator anim, Enemy p_enemy)
@@ -25,7 +26,7 @@ public class Enemy_Idle : State
 
     private State ManageTransitions()
     {
-        if (canCharge) return chargeState; // changes state to chase
+        if (toCharge) return chargeState; // changes state to chase
 
         else return this;
     }
@@ -44,6 +45,6 @@ public class Enemy_Idle : State
     IEnumerator WaitToCharge()
     {
         yield return new WaitForSeconds(3);
-        canCharge = true;
+        toCharge = true;
     }
 }

@@ -11,6 +11,7 @@ public class Enemy_Attack : State
     {
         StartAnim(p_anim, p_enemy);
         StartCoroutine(WaitToIdle());
+        toIdle = false;
     }
 
     public override State RunCurrentState(Animator anim, Enemy p_enemy)
