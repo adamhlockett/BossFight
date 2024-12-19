@@ -1,6 +1,15 @@
+using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum StateNames
+{
+    Idle = 0,
+    Charge = 1,
+    Attack = 2
+}
 
 public class StateMachine : MonoBehaviour
 {
@@ -9,13 +18,14 @@ public class StateMachine : MonoBehaviour
     private Animator anim;
     public Enemy enemy;
     public State[] states;
+    //public Dictionary<int, Dictionary<string, State>> stateDict;
     private int currentStateNum = 0;
 
     private void Start()
     {
         anim = transform.root.GetComponent<Animator>();
         enemy = transform.root.GetComponent<Enemy>();
-        currentState = states[currentStateNum];
+        currentState = states[0];
         currentState.OnEnter(anim, enemy);
     }
 
@@ -26,9 +36,9 @@ public class StateMachine : MonoBehaviour
 
     private void RunMachine()
     {
-        //State nextState = //currentState?.RunCurrentState(anim, enemy); // ? checks if NULL
+        Debug.Log((StateNames)currentStateNum);
 
-        //if (nextState != null && nextState != currentState)
+
         currentState?.RunCurrentState(anim, enemy);
         if ( currentState.CheckIfComplete() )
         {
