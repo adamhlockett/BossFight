@@ -7,17 +7,20 @@ using UnityEngine;
 public class Enemy_Charge : State
 {
     public bool isComplete;
-
     private Vector2 chargeTo;
-    private float distance;
-    public float speed;
     private string animString;
     private bool hasReachedPoint;
     [SerializeField] GameObject slamPrefab;
 
+    [Header("Dynamic Adjustments")]
+    public float slamPrefabSize = 1f; 
+    public float speed = 5f; 
+    public float canDamageEvery = 2f; 
+    public float damage = 15f;
+
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
-        chargeTo = p_enemy.GetChargeToPoint();
+        chargeTo = p_enemy.GetPlayerPos();
         animString = "_fly";
         StartAnim(p_anim, p_enemy);
         hasReachedPoint = false;
@@ -35,7 +38,7 @@ public class Enemy_Charge : State
 
     private void ManageTransitions()
     {
-        //if (toAttack)
+        
     }
 
     private void ManageLogic(Animator p_anim, Enemy p_enemy)

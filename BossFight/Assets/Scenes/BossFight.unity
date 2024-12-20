@@ -167,8 +167,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af7a654f51496d4688d5d605f22f486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleState: {fileID: 1910922793}
-  toIdle: 0
+  isComplete: 0
+  projectilePrefab: {fileID: 667168358938441296, guid: 80141afc677381b4489665e64e89889f, type: 3}
+  damage: 10
+  speed: 7
+  canFireEvery: 1
+  attackFor: 5
 --- !u!1 &52470948
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,6 +575,7 @@ Transform:
   m_Children:
   - {fileID: 696739211}
   - {fileID: 857311617}
+  - {fileID: 542308763}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &330107830
@@ -688,7 +693,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365dca538bf28854b97ea86d2b728d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 1910922793}
   enemy: {fileID: 0}
   states:
   - {fileID: 1910922793}
@@ -852,6 +856,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &542308762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 542308763}
+  m_Layer: 0
+  m_Name: EndOfStaff
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &542308763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542308762}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.126, y: 0.141, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 330107829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &589537500
 GameObject:
@@ -1161,10 +1196,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d619c991e40af47b94678bb1d8332f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackState: {fileID: 44441752}
-  toAttack: 0
-  speed: 5
+  isComplete: 0
   slamPrefab: {fileID: 667168358938441296, guid: 9c45c61603af76649bbc603922067fdb, type: 3}
+  slamPrefabSize: 1
+  speed: 5
+  canDamageEvery: 2
+  damage: 15
 --- !u!1 &1102147874
 GameObject:
   m_ObjectHideFlags: 0
@@ -60065,8 +60102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdac5c78bbb66547a89563ad83fb1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeState: {fileID: 1044722778}
-  toCharge: 0
+  isComplete: 0
+  idleFor: 3
 --- !u!1 &1921595727
 GameObject:
   m_ObjectHideFlags: 0

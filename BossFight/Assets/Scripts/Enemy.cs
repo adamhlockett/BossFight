@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         tempAngle = GetPlayerAngleFromEnemy();
     }
 
-    public Vector2 GetChargeToPoint() { return playerPos.position; }
+    public Vector2 GetPlayerPos() { return playerPos.position; }
 
     public string GetEnemyShouldFace()
     {

@@ -191,4 +191,10 @@ public class PlayerHandler : MonoBehaviour
         yield return new WaitForSeconds(rumbleFor);
         Gamepad.current.SetMotorSpeeds(0f, 0f);
     }
+
+    private void OnApplicationQuit()
+    {
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
+        Debug.Log("quit");
+    }
 }

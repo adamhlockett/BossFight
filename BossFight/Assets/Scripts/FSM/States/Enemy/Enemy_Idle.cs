@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class Enemy_Idle : State
 {
+
     public bool isComplete;
+
+    [Header("Dynamic Adjustments")]
+    public float idleFor = 3f;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
         StartAnim(p_anim, p_enemy);
-        StartCoroutine(WaitToCharge());
-        //toCharge = false;
+        StartCoroutine(WaitToCharge(idleFor));
         isComplete = false;
     }
 
@@ -26,7 +29,7 @@ public class Enemy_Idle : State
 
     private void ManageTransitions()
     {
-        //if (toCharge) //can transition
+
     }
 
     private void ManageLogic()
@@ -40,10 +43,9 @@ public class Enemy_Idle : State
         p_anim.Play(animName);
     }
 
-    IEnumerator WaitToCharge()
+    IEnumerator WaitToCharge(float p_idleFor)
     {
-        yield return new WaitForSeconds(3);
-        //toCharge = true;
+        yield return new WaitForSeconds(p_idleFor);
         isComplete = true;
     }
 
