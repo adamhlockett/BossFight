@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     private Enemy_Attack attackState;
     private Vector2 moveTo;
     private Enemy enemy;
+    public GameObject slamPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -38,5 +39,13 @@ public class Projectile : MonoBehaviour
             canDamage = false;
             Destroy(gameObject); //needs to be called when projectile exits view also
         }
+    }
+
+    public void Detonate()
+    {
+        //instantiate a slam
+        Instantiate(slamPrefab, this.transform.position, Quaternion.identity);
+        Debug.Log("detonate");
+        Destroy(gameObject);
     }
 }

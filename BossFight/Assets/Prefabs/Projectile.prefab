@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 269924119424259324}
   m_Layer: 0
   m_Name: Projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ddc152e9996f6b45a24a7e6d04769e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slamPrefab: {fileID: 667168358938441296, guid: 9c45c61603af76649bbc603922067fdb, type: 3}
 --- !u!114 &269924119424259324
 MonoBehaviour:
   m_ObjectHideFlags: 0

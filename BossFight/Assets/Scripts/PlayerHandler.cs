@@ -187,6 +187,7 @@ public class PlayerHandler : MonoBehaviour
     public void RumbleController(float rumbleFor) { StartCoroutine(RumbleCounter(rumbleFor)); }
     private IEnumerator RumbleCounter(float rumbleFor)
     {
+        
         Gamepad.current.SetMotorSpeeds(0.123f, 0.234f);
         yield return new WaitForSeconds(rumbleFor);
         Gamepad.current.SetMotorSpeeds(0f, 0f);

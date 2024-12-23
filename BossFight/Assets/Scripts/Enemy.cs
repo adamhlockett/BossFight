@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -8,6 +9,9 @@ public class Enemy : MonoBehaviour
     Transform enemyPos;
     int tempAngle;
     public bool playerHasChangedSide = false;
+    GameObject[] projectiles;
+    public Enemy_Attack attackRef;
+    private int detonateProjectilesAfterMultiplier = 3;
 
     private void Start()
     {
@@ -19,6 +23,15 @@ public class Enemy : MonoBehaviour
         if (GetPlayerAngleFromEnemy() != tempAngle) playerHasChangedSide = true;
         else playerHasChangedSide = false;
         tempAngle = GetPlayerAngleFromEnemy();
+
+        projectiles = GameObject.FindGameObjectsWithTag("Projectile");
+        if(projectiles.Length >= attackRef.fireAmount * detonateProjectilesAfterMultiplier)
+        {
+            foreach (GameObject projectile in projectiles) 
+            {
+                projectile.GetComponent<Projectile>().Detonate();
+            }
+        }
     }
 
     public Vector2 GetPlayerPos() { return playerPos.position; }

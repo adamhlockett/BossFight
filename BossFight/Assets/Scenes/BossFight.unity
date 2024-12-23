@@ -173,6 +173,7 @@ MonoBehaviour:
   speed: 7
   canFireEvery: 1
   attackFor: 5
+  fireAmount: 0
 --- !u!1 &52470948
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,22 +191,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &52470949
-Transform:
+--- !u!224 &52470949
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52470948}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -408.3, y: 294.78, z: 0}
-  m_LocalScale: {x: 211.80423, y: 211.80423, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 118.343925, y: 118.343925, z: 0.55874205}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1149227294}
   m_Father: {fileID: 89476337}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 115, y: -35}
+  m_SizeDelta: {x: 1.1, y: 0.3568}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!212 &52470950
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -681,6 +686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPos: {fileID: 1527314107}
   playerHasChangedSide: 0
+  attackRef: {fileID: 44441752}
 --- !u!114 &330107834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59618,22 +59624,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1372493453
-Transform:
+--- !u!224 &1372493453
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372493452}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -212, y: 305, z: 0}
-  m_LocalScale: {x: 213.17853, y: 213.17853, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 119.11181, y: 119.11181, z: 0.55874205}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1623332286}
   m_Father: {fileID: 89476337}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -465, y: -22}
+  m_SizeDelta: {x: 3.8399963, y: 0.32000732}
+  m_Pivot: {x: -0, y: 0.5}
 --- !u!212 &1372493454
 SpriteRenderer:
   m_ObjectHideFlags: 0

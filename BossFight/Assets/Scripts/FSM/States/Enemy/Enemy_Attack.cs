@@ -12,6 +12,7 @@ public class Enemy_Attack : State
     public float speed = 7f;
     public float canFireEvery = 1f;
     public float attackFor = 5f;
+    public float fireAmount;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
@@ -19,6 +20,7 @@ public class Enemy_Attack : State
         StartCoroutine(WaitToIdle());
         isComplete = false;
         InvokeRepeating("Fire", 0.1f, canFireEvery);
+        fireAmount = attackFor / canFireEvery;
     }
 
     public override void RunCurrentState(Animator anim, Enemy p_enemy)
