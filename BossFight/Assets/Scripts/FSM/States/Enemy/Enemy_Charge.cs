@@ -13,13 +13,15 @@ public class Enemy_Charge : State
     [SerializeField] GameObject slamPrefab;
 
     [Header("Dynamic Adjustments")]
-    public float slamPrefabSize = 1f; 
-    public float speed = 5f; 
-    public float canDamageEvery = 2f; 
+    public float defaultSlamPrefabSize = 1f;
+    public float slamPrefabSize;
+    public float speed = 5f;
+    public float canDamageEvery = 2f;
     public float damage = 15f;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
+        slamPrefabSize = defaultSlamPrefabSize;
         chargeTo = p_enemy.GetPlayerPos();
         animString = "_fly";
         StartAnim(p_anim, p_enemy);

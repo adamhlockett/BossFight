@@ -6,6 +6,7 @@ public class Enemy_Attack : State
 {
     public bool isComplete;
     [SerializeField] GameObject projectilePrefab;
+    Enemy_Charge chargeState;
 
     [Header("Dynamic Adjustments")]
     public float damage = 10f; 
@@ -13,6 +14,7 @@ public class Enemy_Attack : State
     public float canFireEvery = 1f;
     public float attackFor = 5f;
     public float fireAmount;
+    public float projectileSlamSize = 0.5f;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
@@ -21,7 +23,9 @@ public class Enemy_Attack : State
         isComplete = false;
         InvokeRepeating("Fire", 0.1f, canFireEvery);
         fireAmount = attackFor / canFireEvery;
-    }
+        chargeState = GameObject.Find("Charge").GetComponent<Enemy_Charge>();
+        chargeState.slamPrefabSize = projectileSlamSize;
+    } 
 
     public override void RunCurrentState(Animator anim, Enemy p_enemy)
     {
