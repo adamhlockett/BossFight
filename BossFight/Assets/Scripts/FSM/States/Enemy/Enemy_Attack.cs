@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Attack : State
+public class Enemy_Attack : EnemyState
 {
     public bool isComplete;
     [SerializeField] GameObject projectilePrefab;

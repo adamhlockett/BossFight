@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Idle : State
+public class Enemy_Idle : EnemyState
 {
     public bool isComplete;
 

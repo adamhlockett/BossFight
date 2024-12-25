@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy_Charge : State
+public class Enemy_Charge : EnemyState
 {
     public bool isComplete;
     private Vector2 chargeTo;

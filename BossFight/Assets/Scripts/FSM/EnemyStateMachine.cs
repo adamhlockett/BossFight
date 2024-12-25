@@ -11,13 +11,13 @@ using UnityEngine;
 //    Attack = 2
 //}
 
-public class StateMachine : MonoBehaviour
+public class EnemyStateMachine : MonoBehaviour
 {
     [Header("Start State")]
-    private State currentState;
+    private EnemyState currentState;
     private Animator anim;
     public Enemy enemy;
-    public State[] states;
+    public EnemyState[] states;
     //public Dictionary<int, Dictionary<string, State>> stateDict;
     private int currentStateNum = 0;
 
