@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class Enemy_Idle : State
 {
-
     public bool isComplete;
 
     [Header("Dynamic Adjustments")]
-    public float idleFor = 3f;
+    public float idleFor = 5f;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
+        stateName = "idle";
         StartAnim(p_anim, p_enemy);
         StartCoroutine(WaitToCharge(idleFor));
         isComplete = false;

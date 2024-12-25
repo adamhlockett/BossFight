@@ -4,12 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StateNames
-{
-    Idle = 0,
-    Charge = 1,
-    Attack = 2
-}
+//public enum StateNames
+//{
+//    Idle = 0,
+//    Charge = 1,
+//    Attack = 2
+//}
 
 public class StateMachine : MonoBehaviour
 {
@@ -37,7 +37,7 @@ public class StateMachine : MonoBehaviour
     private void RunMachine()
     {
         //Debug.Log((StateNames)currentStateNum);
-
+        //Debug.Log(currentState.stateName);
 
         currentState?.RunCurrentState(anim, enemy);
         if ( currentState.CheckIfComplete() )
@@ -48,7 +48,7 @@ public class StateMachine : MonoBehaviour
 
     private void SwitchState()
     {
-        currentStateNum += 1;
+        currentStateNum++;
         if (currentStateNum >= states.Length) currentStateNum = 0;
         currentState = states[currentStateNum];
         currentState.OnEnter(anim, enemy);

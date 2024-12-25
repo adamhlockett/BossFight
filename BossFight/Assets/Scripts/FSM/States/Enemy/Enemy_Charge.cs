@@ -21,6 +21,7 @@ public class Enemy_Charge : State
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
+        stateName = "charge";
         slamPrefabSize = defaultSlamPrefabSize;
         chargeTo = p_enemy.GetPlayerPos();
         animString = "_fly";
@@ -67,6 +68,7 @@ public class Enemy_Charge : State
 
     IEnumerator WaitForSlam()
     {
+        //telegraphIndicator.SetActive(true);
         yield return new WaitForSeconds(1);
         isComplete = true;
     }
@@ -76,6 +78,7 @@ public class Enemy_Charge : State
         yield return new WaitForSeconds(0.5f);
         Vector3 spawnPos = new Vector3(transform.root.position.x, transform.root.position.y - 0.75f, transform.root.position.z);
         Instantiate(slamPrefab, spawnPos, Quaternion.identity);
+        //telegraphIndicator.SetActive(false);
     }
 
     public override bool CheckIfComplete() { return isComplete; }
