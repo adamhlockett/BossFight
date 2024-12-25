@@ -22,7 +22,7 @@ public class PlayerHandler : MonoBehaviour
     [SerializeField] float atkDamage, atkHoldTime; //set in engine inspector
     [SerializeField] Transform attackZone;
     private bool canAtk = true;
-    private float atkTime = 0.2f, atkCooldown = 0.2f, startAtkDistance = 1f, atkDistance, atkTimerMultiplier, /*atkAnimRunoff = 0.15f,*/ atkDistanceMax = 10f;
+    private float atkTime = 0.2f, atkCooldown = 0.05f, startAtkDistance = 1f, atkDistance, atkTimerMultiplier, /*atkAnimRunoff = 0.15f,*/ atkDistanceMax = 10f;
 
     [Header("Visual Feedback")]
     [SerializeField] Camera cam;

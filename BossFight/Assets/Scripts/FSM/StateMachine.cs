@@ -36,7 +36,7 @@ public class StateMachine : MonoBehaviour
 
     private void RunMachine()
     {
-        //Debug.Log((StateNames)currentStateNum);
+        ////Debug.Log((StateNames)currentStateNum);
         //Debug.Log(currentState.stateName);
 
         currentState?.RunCurrentState(anim, enemy);
