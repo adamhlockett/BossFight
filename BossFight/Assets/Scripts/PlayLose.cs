@@ -6,9 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayLose : MonoBehaviour
 {
     private void Start() { Time.timeScale = 1f; PlayLoseScreen(); }
-    public void PlayLoseScreen() 
+    private void PlayLoseScreen() 
     {
         GetComponent<Animator>().Play("playthrough");
-        Debug.Log("play anim");
     }
 }
