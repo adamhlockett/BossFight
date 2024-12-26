@@ -44,18 +44,7 @@ public class GameStates : MonoBehaviour
 
     // if player presses PAUSE KEY the first time, allow PLAY - if player presses PAUSE KEY after the first time, pause game
     public void PauseAndPlay() 
-    {;
-        //switch (pauseKeyPresses){
-        //    case 0:
-        //        return;
-        //    case 1:
-        //        //enemy can act and take damage
-        //        return;
-        //    case (pauseKeyPresses % 2 == 0):
-        //        //even number
-        //        return;
-        //}
-
+    {
         if (pauseKeyPresses == 0) { return; }
 
         else if (pauseKeyPresses == 1)
@@ -63,18 +52,21 @@ public class GameStates : MonoBehaviour
             BeginGameLoop();
             return;
         }
+
         else if (pauseKeyPresses % 2 == 0) // even number
         {
             pauseKeyPresses = 2;
             Pause();
             return;
         }
+
         else if (pauseKeyPresses % 2 == 1) // odd number
         {
             pauseKeyPresses = 3;
             Play();
             return;
         }
+
         // FIRST PRESS - enemy can act and take damage
         // SUBSEQUENT PRESSES - PAUSE/PLAY game (can figure this out with a press-counter that checked if EVEN or ODD)
     }
