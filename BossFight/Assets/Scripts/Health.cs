@@ -52,5 +52,7 @@ public class Health : MonoBehaviour
         }  
     }
 
-    public void HealFor(float healing) { maxhp += healing; }
+    public void HealFor(float healing) { hp += healing; }
+
+    public bool IsDead() { return hp <= 0; }
 }

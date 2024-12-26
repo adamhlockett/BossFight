@@ -1,19 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameStates : MonoBehaviour
 {
-    public Health enemyHealth;
-    public Health playerHealth;
+    [SerializeField] Health enemyHealth;
+    [SerializeField] Health playerHealth;
     private float pauseKeyPresses;
+    private bool canLose = true, canWin = true;
 
     // initial setup
-    private void Restart() // call this when game is restarted and when it is started initially (probably in Enemy)
+    private void Restart() // call this when game is restarted AND when it is started initially (probably in Enemy)
     {
         // enemy cannot leave idle state nor take damage
+        canLose = false;
+        canWin = false;
     }
+
 
     private void LateUpdate()
     {
@@ -23,8 +29,8 @@ public class GameStates : MonoBehaviour
 
     private void CheckConditions()
     {
-        //if player is dead then lose
-        //if enemy is dead then win
+        if (playerHealth.IsDead()) { Lose(); }
+        if (enemyHealth.IsDead()) { Win(); }
     }
 
     private void CheckInputs()
@@ -32,6 +38,7 @@ public class GameStates : MonoBehaviour
         if (Input.GetButtonDown("Pause"))
         {
             pauseKeyPresses++;
+            PauseAndPlay();
         }
     }
 
@@ -55,18 +62,18 @@ public class GameStates : MonoBehaviour
         }
         else if (pauseKeyPresses == 1)
         {
-            // call method on enemy that allows it to act and take damage
+            BeginGameLoop();
             return;
         }
         else if (pauseKeyPresses % 2 == 0) // even number
         {
             pauseKeyPresses = 2;
-            // pause game
+            Pause();
         }
         else if (pauseKeyPresses % 2 == 1) // odd number
         {
             pauseKeyPresses = 3;
-            // play game
+            Play();
         }
         // FIRST PRESS - enemy can act and take damage
         // SUBSEQUENT PRESSES - PAUSE/PLAY game (can figure this out with a press-counter that checked if EVEN or ODD)
@@ -74,13 +81,36 @@ public class GameStates : MonoBehaviour
 
     // if player is dead, move to loss screen
     public void Lose() 
-    { 
-        //if(playerHealth.)
+    {
+        Debug.Log("lose");
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
+        SceneManager.LoadScene("Lose");
     }
 
     // if enemy is dead, move to win screen
     public void Win()
     {
-    
+        Debug.Log("win");
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
+        SceneManager.LoadScene("Win");
+    }
+
+    public void Pause()
+    {
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
+
+    }
+
+    public void Play()
+    {
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
+
+    }
+
+    public void BeginGameLoop()
+    {
+        // call method on enemy that allows it to act and take damage
+        canLose = true;
+        canWin = true;
     }
 }
