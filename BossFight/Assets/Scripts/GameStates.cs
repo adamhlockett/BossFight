@@ -98,13 +98,13 @@ public class GameStates : MonoBehaviour
     public void Pause()
     {
         Gamepad.current.SetMotorSpeeds(0f, 0f);
-
+        Time.timeScale = 0f;
     }
 
     public void Play()
     {
         Gamepad.current.SetMotorSpeeds(0f, 0f);
-
+        Time.timeScale = 1f;
     }
 
     public void BeginGameLoop()
