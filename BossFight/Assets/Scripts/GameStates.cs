@@ -56,10 +56,8 @@ public class GameStates : MonoBehaviour
         //        return;
         //}
 
-        if (pauseKeyPresses == 0)
-        {
-            return;
-        }
+        if (pauseKeyPresses == 0) { return; }
+
         else if (pauseKeyPresses == 1)
         {
             BeginGameLoop();
@@ -69,11 +67,13 @@ public class GameStates : MonoBehaviour
         {
             pauseKeyPresses = 2;
             Pause();
+            return;
         }
         else if (pauseKeyPresses % 2 == 1) // odd number
         {
             pauseKeyPresses = 3;
             Play();
+            return;
         }
         // FIRST PRESS - enemy can act and take damage
         // SUBSEQUENT PRESSES - PAUSE/PLAY game (can figure this out with a press-counter that checked if EVEN or ODD)
