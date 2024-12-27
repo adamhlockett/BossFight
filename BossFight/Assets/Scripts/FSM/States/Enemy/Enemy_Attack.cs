@@ -44,8 +44,7 @@ public class Enemy_Attack : EnemyState
 
     private void ManageLogic()
     {
-        // state logic here
-
+        
     }
 
     public override void StartAnim(Animator p_anim, Enemy p_enemy)
