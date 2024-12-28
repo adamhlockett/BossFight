@@ -20,6 +20,7 @@ public class Slam : MonoBehaviour
         canDamage = true;
         tr.localScale *= chargeState.slamPrefabSize;
         slamDamage = chargeState.damage;
+        
     }
 
     // Update is called once per frame

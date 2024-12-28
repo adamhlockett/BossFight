@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slamPrefab: {fileID: 667168358938441296, guid: 9c45c61603af76649bbc603922067fdb, type: 3}
+  telegraphIndicator: {fileID: 2742002571913456469, guid: 8e780adcbf69351449e76cd2d52e97cd, type: 3}
 --- !u!114 &269924119424259324
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,14 +10,17 @@ public class Projectile : MonoBehaviour
     private Health playerHealth;
     private bool canDamage;
     private Enemy_Attack attackState;
+    private Enemy_Idle idleState;
     private Vector2 moveTo;
     private Enemy enemy;
     public GameObject slamPrefab;
+    [SerializeField] private GameObject telegraphIndicator;
 
     // Start is called before the first frame update
     void Start()
     {
         attackState = GameObject.Find("Attack").GetComponent<Enemy_Attack>();
+        idleState = GameObject.Find("Idle").GetComponent<Enemy_Idle>();
         enemy = GameObject.Find("Boss").GetComponent<Enemy>();
         moveTo = enemy.GetPlayerPos();
         tr = transform;
@@ -43,9 +46,14 @@ public class Projectile : MonoBehaviour
 
     public void Detonate()
     {
-        //instantiate a slam
+        Instantiate(telegraphIndicator, this.transform.position, Quaternion.identity);
+        StartCoroutine(WaitToDetonate());
+    }
+
+    IEnumerator WaitToDetonate()
+    {
+        yield return new WaitForSeconds(idleState.telegraphWarning);
         Instantiate(slamPrefab, this.transform.position, Quaternion.identity);
-        Debug.Log("detonate");
         Destroy(gameObject);
     }
 }
