@@ -737,6 +737,7 @@ MonoBehaviour:
   playerPos: {fileID: 1527314107}
   playerHasChangedSide: 0
   attackRef: {fileID: 44441752}
+  turnsBeforeDetonation: 3
 --- !u!114 &330107834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60201,6 +60202,8 @@ MonoBehaviour:
   telegraphIndicator: {fileID: 2742002571913456469, guid: 8e780adcbf69351449e76cd2d52e97cd, type: 3}
   isComplete: 0
   idleFor: 3
+  telegraphWarning: 0.5
+  detonateTelegraphWarning: 0
 --- !u!1 &1921595727
 GameObject:
   m_ObjectHideFlags: 0

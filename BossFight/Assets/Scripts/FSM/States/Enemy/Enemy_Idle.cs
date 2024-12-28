@@ -10,6 +10,7 @@ public class Enemy_Idle : EnemyState
     [Header("Dynamic Adjustments")]
     public float idleFor = 5f;
     public float telegraphWarning = 0.5f;
+    public float detonateTelegraphWarning = 1f;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {

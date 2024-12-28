@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour
     private Enemy enemy;
     public GameObject slamPrefab;
     [SerializeField] private GameObject telegraphIndicator;
+    private int detonateCount;
 
     // Start is called before the first frame update
     void Start()
@@ -46,13 +47,23 @@ public class Projectile : MonoBehaviour
 
     public void Detonate()
     {
-        Instantiate(telegraphIndicator, this.transform.position, Quaternion.identity);
-        StartCoroutine(WaitToDetonate());
+        if(detonateCount < 1)
+        {
+            StartCoroutine(WaitToDetonate());
+            detonateCount++;
+        }
+        //do
+        //{
+        //    Instantiate(telegraphIndicator, this.transform.position, Quaternion.identity);
+        //    Debug.Log("blow up");
+        //    detonateCount++;
+        //} while (detonateCount < 1);
     }
 
     IEnumerator WaitToDetonate()
     {
-        yield return new WaitForSeconds(idleState.telegraphWarning);
+        Instantiate(telegraphIndicator, this.transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(idleState.detonateTelegraphWarning);
         Instantiate(slamPrefab, this.transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

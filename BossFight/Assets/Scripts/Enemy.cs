@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     public bool playerHasChangedSide = false;
     GameObject[] projectiles;
     public Enemy_Attack attackRef;
-    private int detonateProjectilesAfterMultiplier = 3;
+    public float turnsBeforeDetonation = 3;
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
         tempAngle = GetPlayerAngleFromEnemy();
 
         projectiles = GameObject.FindGameObjectsWithTag("Projectile");
-        if(projectiles.Length >= attackRef.fireAmount * detonateProjectilesAfterMultiplier)
+        if(projectiles.Length >= attackRef.fireAmount * turnsBeforeDetonation)
         {
             foreach (GameObject projectile in projectiles) 
             {
