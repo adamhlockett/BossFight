@@ -5,10 +5,16 @@ using UnityEngine;
 public class HitStop : MonoBehaviour
 {
     bool isWaiting;
+    GameStates gameStates;
+
+    private void Awake()
+    {
+        gameStates = GameObject.Find("GameStateHandler").GetComponent<GameStates>();
+    }
 
     public void StopFor(float duration)
     {
-        if (isWaiting) return;
+        if (isWaiting || gameStates.isPaused) return;
         Time.timeScale = 0.0f;
         StartCoroutine(Wait(duration));
     }
@@ -17,7 +23,7 @@ public class HitStop : MonoBehaviour
     {
         isWaiting = true;
         yield return new WaitForSecondsRealtime(duration);
-        Time.timeScale = 1.0f;
+        if(!gameStates.isPaused) Time.timeScale = 1.0f;
         isWaiting = false;
     }
 }

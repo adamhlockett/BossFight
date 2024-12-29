@@ -12,6 +12,7 @@ public class GameStates : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     private float pauseKeyPresses;
     private bool canLose = true, canWin = true;
+    public bool isPaused = false;
 
     // initial setup
     private void Restart() // call this when game is restarted AND when it is started initially (probably in Enemy)
@@ -90,6 +91,7 @@ public class GameStates : MonoBehaviour
 
     public void Pause()
     {
+        isPaused = true;
         Gamepad.current.SetMotorSpeeds(0f, 0f);
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
@@ -97,6 +99,7 @@ public class GameStates : MonoBehaviour
 
     public void Play()
     {
+        isPaused = false;
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
     }
