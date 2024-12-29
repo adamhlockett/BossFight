@@ -9,6 +9,7 @@ public class GameStates : MonoBehaviour
 {
     [SerializeField] Health enemyHealth;
     [SerializeField] Health playerHealth;
+    [SerializeField] GameObject pauseMenu;
     private float pauseKeyPresses;
     private bool canLose = true, canWin = true;
 
@@ -90,12 +91,13 @@ public class GameStates : MonoBehaviour
     public void Pause()
     {
         Gamepad.current.SetMotorSpeeds(0f, 0f);
+        pauseMenu.SetActive(true);
         Time.timeScale = 0f;
     }
 
     public void Play()
     {
-        Gamepad.current.SetMotorSpeeds(0f, 0f);
+        pauseMenu.SetActive(false);
         Time.timeScale = 1f;
     }
 
