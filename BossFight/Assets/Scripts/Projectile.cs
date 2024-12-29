@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
     {
         attackState = GameObject.Find("Attack").GetComponent<Enemy_Attack>();
         idleState = GameObject.Find("Idle").GetComponent<Enemy_Idle>();
-        enemy = GameObject.Find("Boss").GetComponent<Enemy>();
+        enemy = GameObject.Find("Enemy").GetComponent<Enemy>();
         moveTo = enemy.GetPlayerPos();
         tr = transform;
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();

@@ -10,6 +10,7 @@ public class GameStates : MonoBehaviour
     [SerializeField] Health enemyHealth;
     [SerializeField] Health playerHealth;
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] EnemyStateMachine enemyFSM;
     private float pauseKeyPresses;
     private bool canLose = true, canWin = true;
     public bool isPaused = false;
@@ -17,7 +18,8 @@ public class GameStates : MonoBehaviour
     // initial setup
     private void Restart() // call this when game is restarted AND when it is started initially (probably in Enemy)
     {
-        // enemy cannot leave idle state nor take damage
+        enemyHealth.canBeDamaged = false;
+
         canLose = false;
         canWin = false;
     }
@@ -27,6 +29,12 @@ public class GameStates : MonoBehaviour
     {
         CheckConditions();
         CheckInputs();
+    }
+
+    private void Start()
+    {
+        enemyFSM = GameObject.Find("Enemy").GetComponent<EnemyStateMachine>();
+        Restart();
     }
 
     private void CheckConditions()
@@ -51,7 +59,7 @@ public class GameStates : MonoBehaviour
 
         else if (pauseKeyPresses == 1)
         {
-            BeginGameLoop();
+            ExitTraining();
             return;
         }
 
@@ -104,9 +112,12 @@ public class GameStates : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void BeginGameLoop()
+    public void ExitTraining()
     {
         // call method on enemy that allows it to act and take damage
+        //enemy.beginplay
+        enemyFSM.canChangeState = true;
+        enemyHealth.canBeDamaged = true;
         canLose = true;
         canWin = true;
     }

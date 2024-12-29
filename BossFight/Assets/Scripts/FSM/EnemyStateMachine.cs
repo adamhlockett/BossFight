@@ -20,6 +20,7 @@ public class EnemyStateMachine : MonoBehaviour
     public EnemyState[] states;
     //public Dictionary<int, Dictionary<string, State>> stateDict;
     private int currentStateNum = 0;
+    public bool canChangeState = false;
 
     private void Start()
     {
@@ -48,6 +49,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void SwitchState()
     {
+        if (!canChangeState) return;
         currentStateNum++;
         if (currentStateNum >= states.Length) currentStateNum = 0;
         currentState = states[currentStateNum];

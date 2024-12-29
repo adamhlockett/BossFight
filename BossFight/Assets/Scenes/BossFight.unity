@@ -576,6 +576,7 @@ MonoBehaviour:
   enemyHealth: {fileID: 330107832}
   playerHealth: {fileID: 1527314113}
   pauseMenu: {fileID: 389542504}
+  isPaused: 0
 --- !u!1 &214069344
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +642,7 @@ GameObject:
   - component: {fileID: 330107832}
   - component: {fileID: 330107833}
   m_Layer: 0
-  m_Name: Boss
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -842,6 +843,7 @@ MonoBehaviour:
   - {fileID: 1044722778}
   - {fileID: 1910922793}
   - {fileID: 44441752}
+  canChangeState: 0
 --- !u!1 &389542504
 GameObject:
   m_ObjectHideFlags: 0

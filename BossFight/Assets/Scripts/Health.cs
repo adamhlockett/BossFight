@@ -35,23 +35,23 @@ public class Health : MonoBehaviour
         if(canBeDamaged)
         {
             hp -= damage;
-            if (isPlayer)
-            {
-                playerHandler.SpawnDamagePopup(damage, this.transform.root, true);
-                FindObjectOfType<HitStop>().StopFor(playerHitStopDuration);
-                playerHandler.HitShake();
-                playerHandler.RumbleController(playerRumbleDuration);
-                UpdateLowHealthIndicator();
-            }
-            else // is enemy or projectile
-            {
-                playerHandler.SpawnDamagePopup(damage, this.transform.root, false);
-                FindObjectOfType<HitStop>().StopFor(enemyHitStopDuration);
-                playerHandler.HitShake();
-                playerHandler.RumbleController(enemyRumbleDuration);
-            }
             UpdateHealthBar();
         }  
+        if (isPlayer)
+        {
+            playerHandler.SpawnDamagePopup(damage, this.transform.root, true);
+            FindObjectOfType<HitStop>().StopFor(playerHitStopDuration);
+            playerHandler.HitShake();
+            playerHandler.RumbleController(playerRumbleDuration);
+            UpdateLowHealthIndicator();
+        }
+        else // is enemy or projectile
+        {
+            playerHandler.SpawnDamagePopup(damage, this.transform.root, false);
+            FindObjectOfType<HitStop>().StopFor(enemyHitStopDuration);
+            playerHandler.HitShake();
+            playerHandler.RumbleController(enemyRumbleDuration);
+        }
     }
 
     public void HealFor(float healing) { hp += healing; }
