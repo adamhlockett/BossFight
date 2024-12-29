@@ -12,6 +12,7 @@ public class Health : MonoBehaviour
     public float overlayBarStartWidth, overlayBarEndWidth, overlayBarStartHeight;
     [SerializeField] PlayerHandler playerHandler;
     public float playerHitStopDuration = 0.2f, enemyHitStopDuration = 0.1f, playerRumbleDuration = 0.1f, enemyRumbleDuration = 0.05f;
+    [SerializeField] SpriteRenderer lowHealthIndicator;
 
     void Start()
     {
@@ -40,6 +41,7 @@ public class Health : MonoBehaviour
                 FindObjectOfType<HitStop>().StopFor(playerHitStopDuration);
                 playerHandler.HitShake();
                 playerHandler.RumbleController(playerRumbleDuration);
+                UpdateLowHealthIndicator();
             }
             else // is enemy or projectile
             {
@@ -55,4 +57,13 @@ public class Health : MonoBehaviour
     public void HealFor(float healing) { hp += healing; }
 
     public bool IsDead() { return hp <= 0; }
+
+    private void UpdateLowHealthIndicator()
+    {
+        float alpha = (1 - ((float)hp / (float)maxhp));
+        lowHealthIndicator.color = new Color(lowHealthIndicator.color.r, 
+            lowHealthIndicator.color.g, lowHealthIndicator.color.b, 
+            alpha);
+        Debug.Log(alpha);
+    }
 }
