@@ -10,31 +10,28 @@ public class GameStates : MonoBehaviour
     [SerializeField] Health enemyHealth;
     [SerializeField] Health playerHealth;
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject testInfo;
     [SerializeField] EnemyStateMachine enemyFSM;
     private float pauseKeyPresses;
     private bool canLose = true, canWin = true;
     public bool isPaused = false;
 
-    // initial setup
-    private void Restart() // call this when game is restarted AND when it is started initially (probably in Enemy)
+    private void Start()
+    {
+        Restart();
+    }
+
+    public void Restart() // call this when game is restarted
     {
         enemyHealth.canBeDamaged = false;
-
         canLose = false;
         canWin = false;
     }
-
 
     private void LateUpdate()
     {
         CheckConditions();
         CheckInputs();
-    }
-
-    private void Start()
-    {
-        enemyFSM = GameObject.Find("Enemy").GetComponent<EnemyStateMachine>();
-        Restart();
     }
 
     private void CheckConditions()
@@ -114,8 +111,7 @@ public class GameStates : MonoBehaviour
 
     public void ExitTraining()
     {
-        // call method on enemy that allows it to act and take damage
-        //enemy.beginplay
+        testInfo.SetActive(false);
         enemyFSM.canChangeState = true;
         enemyHealth.canBeDamaged = true;
         canLose = true;
