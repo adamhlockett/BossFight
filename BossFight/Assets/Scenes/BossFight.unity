@@ -1571,9 +1571,9 @@ MonoBehaviour:
   slamPrefab: {fileID: 667168358938441296, guid: 9c45c61603af76649bbc603922067fdb, type: 3}
   defaultSlamPrefabSize: 1
   slamPrefabSize: 1
+  damage: 15
   speed: 5
   canDamageEvery: 2
-  damage: 15
 --- !u!1 &1102147874
 GameObject:
   m_ObjectHideFlags: 0

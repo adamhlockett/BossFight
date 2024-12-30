@@ -15,9 +15,9 @@ public class Enemy_Charge : EnemyState
     [Header("Dynamic Adjustments")]
     public float defaultSlamPrefabSize = 1f;
     public float slamPrefabSize;
+    public float damage = 15f;
     public float speed = 5f;
     public float canDamageEvery = 2f;
-    public float damage = 15f;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {

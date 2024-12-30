@@ -16,8 +16,8 @@ public class EnemyStateMachine : MonoBehaviour
     [Header("Start State")]
     private EnemyState currentState;
     private Animator anim;
-    public Enemy enemy;
-    public EnemyState[] states;
+    [HideInInspector] public Enemy enemy;
+    [SerializeField] EnemyState[] states;
     //public Dictionary<int, Dictionary<string, State>> stateDict;
     private int currentStateNum = 0;
     public bool canChangeState = false;
