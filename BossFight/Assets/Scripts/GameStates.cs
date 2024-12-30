@@ -12,9 +12,11 @@ public class GameStates : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject testInfo;
     [SerializeField] EnemyStateMachine enemyFSM;
+    [SerializeField] Animator transitionAnim;
     private float pauseKeyPresses;
     private bool canLose = true, canWin = true;
     public bool isPaused = false;
+    public float transitionLength = 1f;
 
     private void Start()
     {
@@ -83,7 +85,7 @@ public class GameStates : MonoBehaviour
     {
         Debug.Log("lose");
         Gamepad.current.SetMotorSpeeds(0f, 0f);
-        SceneManager.LoadScene("Lose");
+        StartCoroutine(LoadThisScene("Lose"));
     }
 
     // if enemy is dead, move to win screen
@@ -91,7 +93,7 @@ public class GameStates : MonoBehaviour
     {
         Debug.Log("win");
         Gamepad.current.SetMotorSpeeds(0f, 0f);
-        SceneManager.LoadScene("Win");
+        StartCoroutine(LoadThisScene("Win"));
     }
 
     public void Pause()
@@ -116,5 +118,13 @@ public class GameStates : MonoBehaviour
         enemyHealth.canBeDamaged = true;
         canLose = true;
         canWin = true;
+    }
+
+    IEnumerator LoadThisScene(string sceneName)
+    {
+        //trigger animation start
+        transitionAnim.SetTrigger("Start");
+        yield return new WaitForSeconds(transitionLength);
+        SceneManager.LoadScene(sceneName);
     }
 }
