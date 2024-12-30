@@ -6,7 +6,7 @@ using UnityEngine;
 struct DynamicAdjustments
 {
     [Header("Player")]
-    float playerDamage; // from Player
+    float playerDamage;                           // from Player
 
     [Header("Enemy")]
     //+adjust states in array
