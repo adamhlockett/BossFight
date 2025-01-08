@@ -6,19 +6,19 @@ public class MCState : MonoBehaviour
 {
     public int currentPlayer;
 
-    public List<MCState> GetLegalMoves()
+    public List<MCState> GetPossibleNextStates()
     {
-        return null; // return all possible actions
+        return null; // return all possible actions depending on state
     }
 
     public MCState Clone() 
     {
-        return null; // return copy of state??
+        return null; // return copy of state ??
     }
 
     public bool IsTerminal()
     {
-        return false; //return true if at end of tree
+        return false; // return true if at end of tree
     }
 
     public MCState GetRandomNextState()
@@ -28,6 +28,6 @@ public class MCState : MonoBehaviour
 
     public int GetWinner()
     {
-        return 0;
+        return 0; // playout needs to happen here, returns int ???, in current version, IF WINS, currentPlayer must equal simulationResult to add a win to the node
     }
 }
