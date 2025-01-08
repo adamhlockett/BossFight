@@ -847,6 +847,11 @@ MonoBehaviour:
   - {fileID: 1044722778}
   - {fileID: 1910922793}
   - {fileID: 44441752}
+  enemyStates:
+  - {fileID: 1910922793}
+  - {fileID: 1044722778}
+  - {fileID: 1910922793}
+  - {fileID: 44441752}
   canChangeState: 0
 --- !u!1 &389542504
 GameObject:
@@ -90076,6 +90081,10 @@ PrefabInstance:
     - target: {fileID: 7545170484006326432, guid: 98e82f2be0c36324b93d3203c59cf16e, type: 3}
       propertyPath: m_Name
       value: LevelLoader
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760350871688434273, guid: 98e82f2be0c36324b93d3203c59cf16e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7788748756716603863, guid: 98e82f2be0c36324b93d3203c59cf16e, type: 3}
       propertyPath: m_LocalPosition.x

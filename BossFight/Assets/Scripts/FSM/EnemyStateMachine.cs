@@ -17,7 +17,8 @@ public class EnemyStateMachine : MonoBehaviour
     private EnemyState currentState;
     private Animator anim;
     [HideInInspector] public Enemy enemy;
-    [SerializeField] EnemyState[] states;
+    //[SerializeField] EnemyState[] states;
+    [SerializeField] List<EnemyState> enemyStates;
     //public Dictionary<int, Dictionary<string, State>> stateDict;
     private int currentStateNum = 0;
     public bool canChangeState = false;
@@ -26,7 +27,8 @@ public class EnemyStateMachine : MonoBehaviour
     {
         anim = transform.root.GetComponent<Animator>();
         enemy = transform.root.GetComponent<Enemy>();
-        currentState = states[0];
+        //currentState = states[0];
+        currentState = enemyStates[0];
         currentState.OnEnter(anim, enemy);
     }
 
@@ -51,8 +53,8 @@ public class EnemyStateMachine : MonoBehaviour
     {
         if (!canChangeState) return;
         currentStateNum++;
-        if (currentStateNum >= states.Length) currentStateNum = 0;
-        currentState = states[currentStateNum];
+        if (currentStateNum >= enemyStates.Count) currentStateNum = 0;
+        currentState = enemyStates[currentStateNum];
         currentState.OnEnter(anim, enemy);
     }
 }
