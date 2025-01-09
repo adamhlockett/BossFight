@@ -656,12 +656,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181995058}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.6411929, y: 1.46, z: 0.2096968}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 589537501}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &208924287
 GameObject:
@@ -674,7 +674,7 @@ GameObject:
   - component: {fileID: 208924288}
   - component: {fileID: 208924289}
   m_Layer: 0
-  m_Name: Point Light (1)
+  m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -978,6 +978,8 @@ MonoBehaviour:
   playerRumbleDuration: 0.1
   enemyRumbleDuration: 0.05
   lowHealthIndicator: {fileID: 52381647}
+  playerMat: {fileID: 2100000, guid: 3e03defe03aa1ee4da38724f948be51e, type: 2}
+  playerHurtMat: {fileID: 2100000, guid: a4b5da058dd9ad541a37a59edfa6852c, type: 2}
 --- !u!114 &330107833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1364,6 +1366,8 @@ Transform:
   - {fileID: 214069345}
   - {fileID: 138595961}
   - {fileID: 2127471042}
+  - {fileID: 1097558524}
+  - {fileID: 181995060}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &696739210
@@ -1826,12 +1830,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097558522}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.6411929, y: 1.46, z: 0.2096968}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 589537501}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1102147874
 GameObject:
@@ -60628,6 +60632,8 @@ MonoBehaviour:
   playerRumbleDuration: 0.1
   enemyRumbleDuration: 0.05
   lowHealthIndicator: {fileID: 52381647}
+  playerMat: {fileID: 2100000, guid: 3e03defe03aa1ee4da38724f948be51e, type: 2}
+  playerHurtMat: {fileID: 2100000, guid: a4b5da058dd9ad541a37a59edfa6852c, type: 2}
 --- !u!1 &1567680207
 GameObject:
   m_ObjectHideFlags: 0
@@ -90551,5 +90557,3 @@ SceneRoots:
   - {fileID: 330107829}
   - {fileID: 589537501}
   - {fileID: 838172158}
-  - {fileID: 181995060}
-  - {fileID: 1097558524}

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PlayerHurt
-  m_Shader: {fileID: -6465566751694194690, guid: 0599d51deb621904b8b531fbf382b699, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: df89d94eee9c1fd49a77343bfdfc530e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,11 +24,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Emission:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 3969862274739384297b607dfb758e60, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e00710e5f70d22f4c9819f2b6a19203a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -48,7 +48,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 17.148376, g: 7.319815, b: 7.0373054, a: 0}
+    - _Color: {r: 0.17734429, g: 0.016104296, b: 0.010874891, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1801589375484886554
 MonoBehaviour:

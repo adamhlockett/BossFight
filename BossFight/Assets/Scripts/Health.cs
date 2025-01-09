@@ -11,14 +11,17 @@ public class Health : MonoBehaviour
     [SerializeField] SpriteRenderer overlayBarRenderer;
     public float overlayBarStartWidth, overlayBarEndWidth, overlayBarStartHeight;
     [SerializeField] PlayerHandler playerHandler;
-    public float playerHitStopDuration = 0.2f, enemyHitStopDuration = 0.1f, playerRumbleDuration = 0.1f, enemyRumbleDuration = 0.05f;
+    public float playerHitStopDuration = 0.2f, enemyHitStopDuration = 0.1f, playerRumbleDuration = 0.1f, enemyRumbleDuration = 0.05f, materialChangeWaitFor;
     [SerializeField] SpriteRenderer lowHealthIndicator;
+    [SerializeField] Material playerMat;
+    [SerializeField] Material playerHurtMat;
 
     void Start()
     {
         maxhp = hp;
         overlayBarRenderer.size = new Vector2(overlayBarStartWidth, overlayBarStartHeight);
         overlayBarRange = overlayBarEndWidth - overlayBarStartWidth; //get range between start and end width
+        materialChangeWaitFor = playerHitStopDuration;
     }
 
     private void UpdateHealthBar() //only needs to happen when taking damage
@@ -40,9 +43,10 @@ public class Health : MonoBehaviour
         if (isPlayer)
         {
             playerHandler.SpawnDamagePopup(damage, this.transform.root, true);
-            FindObjectOfType<HitStop>().StopFor(playerHitStopDuration);
-            playerHandler.HitShake();
-            playerHandler.RumbleController(playerRumbleDuration);
+            FindObjectOfType<HitStop>().StopFor(playerHitStopDuration); //hitstop
+            playerHandler.HitShake(); //shake screen
+            playerHandler.RumbleController(playerRumbleDuration); //rumble controller
+            StartCoroutine(HitMaterialChange());
             UpdateLowHealthIndicator();
         }
         else // is enemy or projectile
@@ -65,5 +69,12 @@ public class Health : MonoBehaviour
             lowHealthIndicator.color.g, lowHealthIndicator.color.b, 
             alpha);
         Debug.Log(alpha);
+    }
+
+    IEnumerator HitMaterialChange()
+    {
+        this.gameObject.GetComponent<SpriteRenderer>().material = playerHurtMat;
+        yield return new WaitForSeconds(materialChangeWaitFor);
+        this.gameObject.GetComponent<SpriteRenderer>().material = playerMat;
     }
 }
