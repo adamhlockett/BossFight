@@ -295,7 +295,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 113.6101, y: -35}
+  m_AnchoredPosition: {x: 113.61011, y: -35}
   m_SizeDelta: {x: 1.1, y: 0.3568}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!212 &52470950
@@ -981,6 +981,7 @@ MonoBehaviour:
   lowHealthIndicator: {fileID: 52381647}
   playerMat: {fileID: 2100000, guid: 3e03defe03aa1ee4da38724f948be51e, type: 2}
   playerHurtMat: {fileID: 2100000, guid: a4b5da058dd9ad541a37a59edfa6852c, type: 2}
+  hitParticles: {fileID: 946911007276002924, guid: b51542682f2b92b48b471b06c5f09b31, type: 3}
 --- !u!114 &330107833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1593,7 +1594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 838172158}
   m_Layer: 0
-  m_Name: UI
+  m_Name: UI + HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60670,7 +60671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f1db1a29fb0754cb0fbd300f0501f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 40
+  hp: 320
   canBeDamaged: 1
   overlayBarRenderer: {fileID: 1149227295}
   overlayBarStartWidth: 0.49
@@ -60685,6 +60686,7 @@ MonoBehaviour:
   lowHealthIndicator: {fileID: 52381647}
   playerMat: {fileID: 2100000, guid: 3e03defe03aa1ee4da38724f948be51e, type: 2}
   playerHurtMat: {fileID: 2100000, guid: a4b5da058dd9ad541a37a59edfa6852c, type: 2}
+  hitParticles: {fileID: 946911007276002924, guid: b51542682f2b92b48b471b06c5f09b31, type: 3}
 --- !u!1 &1567680207
 GameObject:
   m_ObjectHideFlags: 0

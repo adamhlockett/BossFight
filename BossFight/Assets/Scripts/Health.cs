@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     [SerializeField] SpriteRenderer lowHealthIndicator;
     [SerializeField] Material playerMat;
     [SerializeField] Material playerHurtMat;
+    [SerializeField] GameObject hitParticles;
 
     void Start()
     {
@@ -43,6 +44,7 @@ public class Health : MonoBehaviour
         if (isPlayer)
         {
             playerHandler.SpawnDamagePopup(damage, this.transform.root, true);
+            Instantiate(hitParticles, transform.position, Quaternion.identity);
             FindObjectOfType<HitStop>().StopFor(playerHitStopDuration); //hitstop
             playerHandler.HitShake(); //shake screen
             playerHandler.RumbleController(playerRumbleDuration); //rumble controller
@@ -52,6 +54,7 @@ public class Health : MonoBehaviour
         else // is enemy or projectile
         {
             playerHandler.SpawnDamagePopup(damage, this.transform.root, false);
+            Instantiate(hitParticles, transform.position, Quaternion.identity);
             FindObjectOfType<HitStop>().StopFor(enemyHitStopDuration);
             playerHandler.HitShake();
             playerHandler.RumbleController(enemyRumbleDuration);
