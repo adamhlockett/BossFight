@@ -657,7 +657,7 @@ Transform:
   m_GameObject: {fileID: 181995058}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6411929, y: 1.46, z: 0.2096968}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -977,6 +977,7 @@ MonoBehaviour:
   enemyHitStopDuration: 0.1
   playerRumbleDuration: 0.1
   enemyRumbleDuration: 0.05
+  materialChangeWaitFor: 0
   lowHealthIndicator: {fileID: 52381647}
   playerMat: {fileID: 2100000, guid: 3e03defe03aa1ee4da38724f948be51e, type: 2}
   playerHurtMat: {fileID: 2100000, guid: a4b5da058dd9ad541a37a59edfa6852c, type: 2}
@@ -1831,7 +1832,7 @@ Transform:
   m_GameObject: {fileID: 1097558522}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6411929, y: 1.46, z: 0.2096968}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -60631,6 +60632,7 @@ MonoBehaviour:
   enemyHitStopDuration: 0.1
   playerRumbleDuration: 0.1
   enemyRumbleDuration: 0.05
+  materialChangeWaitFor: 0
   lowHealthIndicator: {fileID: 52381647}
   playerMat: {fileID: 2100000, guid: 3e03defe03aa1ee4da38724f948be51e, type: 2}
   playerHurtMat: {fileID: 2100000, guid: a4b5da058dd9ad541a37a59edfa6852c, type: 2}
