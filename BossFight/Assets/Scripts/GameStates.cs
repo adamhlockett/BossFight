@@ -40,8 +40,8 @@ public class GameStates : MonoBehaviour
 
     private void CheckConditions()
     {
-        if (playerHealth.IsDead()) { Lose(); }
-        if (enemyHealth.IsDead()) { Win(); }
+        if (playerHealth.IsDead() && canLose) { Lose(); }
+        if (enemyHealth.IsDead() && canWin) { Win(); }
     }
 
     private void CheckInputs()
