@@ -25,6 +25,8 @@ public class GameStates : MonoBehaviour
 
     public void Restart() // call this when game is restarted
     {
+        testInfo.SetActive(true);
+        enemyFSM.canChangeState = false;
         enemyHealth.canBeDamaged = false;
         canLose = false;
         canWin = false;
