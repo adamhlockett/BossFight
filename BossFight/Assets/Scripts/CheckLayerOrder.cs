@@ -19,7 +19,7 @@ public class CheckLayerOrder : MonoBehaviour
     {
         if (playerTr.position.y > enemyTr.position.y)
         {
-            enemySprite.sortingOrder = 2;
+            enemySprite.sortingOrder = 3;
         }
         else enemySprite.sortingOrder = 1;
     }
