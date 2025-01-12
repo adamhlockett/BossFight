@@ -6,16 +6,17 @@ public class HoverModeButton : MonoBehaviour
 {
     [SerializeField] Animator anim;
     float normalTime = 0f;
+    [SerializeField] CheckMenuInputs inputChecker;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         normalTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
         anim.Play("menubackgroundhovermode", 0, normalTime);
-        //canMode = true;
+        inputChecker.canMode = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         normalTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
         anim.Play("menubackgroundidle", 0, normalTime);
-        //canMode = false;
+        inputChecker.canMode = false;
     }
 }

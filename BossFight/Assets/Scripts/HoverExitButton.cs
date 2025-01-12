@@ -6,16 +6,17 @@ public class HoverExitButton : MonoBehaviour
 {
     [SerializeField] Animator anim;
     float normalTime = 0f;
+    [SerializeField] CheckMenuInputs inputChecker;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         normalTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
         anim.Play("menubackgroundhoverexit", 0, normalTime);
-        //canMode = true;
+        inputChecker.canExit = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         normalTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
         anim.Play("menubackgroundidle", 0, normalTime);
-        //canMode = false;
+        inputChecker.canExit = false;
     }
 }
