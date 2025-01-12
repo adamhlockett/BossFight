@@ -5,15 +5,17 @@ using UnityEngine;
 public class HoverPlayButton : MonoBehaviour
 {
     [SerializeField] Animator anim;
-
+    float normalTime = 0f;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        anim.Play("menubackgroundhoverplay");
-        //canPlay = true;
+        normalTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        anim.Play("menubackgroundhoverplay", 0, normalTime);
+        //canMode = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        anim.Play("menubackgroundidle");
-        //canPlay = false;
+        normalTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        anim.Play("menubackgroundidle", 0, normalTime);
+        //canMode = false;
     }
 }
