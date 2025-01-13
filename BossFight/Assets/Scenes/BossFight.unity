@@ -238,6 +238,7 @@ MonoBehaviour:
   isComplete: 0
   projectilePrefab: {fileID: 667168358938441296, guid: 80141afc677381b4489665e64e89889f, type: 3}
   gameStates: {fileID: 138595962}
+  d: {fileID: 81036573}
   damage: 10
   speed: 7
   canFireEvery: 1
@@ -417,6 +418,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &81036572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 81036574}
+  - component: {fileID: 81036573}
+  m_Layer: 0
+  m_Name: Dynamic Adjuster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &81036573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81036572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6164426300c0d124b9510c142efb29a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &81036574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81036572}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.6242636, y: 0.28986084, z: 4.027608}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &89476333
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,6 +643,7 @@ MonoBehaviour:
   playerStartPos: {fileID: 30743664}
   enemy: {fileID: 330107827}
   enemyStartPos: {fileID: 1091846256}
+  dA: {fileID: 81036573}
   transitionLength: 0
   isPaused: 0
   inTraining: 1
@@ -1083,10 +1129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83bf16cdacc5d8041b0435fc869c58bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  d: {fileID: 81036573}
   playerPos: {fileID: 1527314107}
   playerHasChangedSide: 0
   attackRef: {fileID: 44441752}
-  turnsBeforeDetonation: 3
 --- !u!114 &330107834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1995,6 +2041,7 @@ MonoBehaviour:
   telegraphIndicator: {fileID: 2742002571913456469, guid: 8e780adcbf69351449e76cd2d52e97cd, type: 3}
   isComplete: 0
   slamPrefab: {fileID: 667168358938441296, guid: 9c45c61603af76649bbc603922067fdb, type: 3}
+  d: {fileID: 81036573}
   defaultSlamPrefabSize: 1
   slamPrefabSize: 1
   damage: 15
@@ -61358,9 +61405,7 @@ MonoBehaviour:
   stateName: 
   telegraphIndicator: {fileID: 2742002571913456469, guid: 8e780adcbf69351449e76cd2d52e97cd, type: 3}
   isComplete: 0
-  idleFor: 3
-  telegraphWarning: 0.5
-  detonateTelegraphWarning: 0
+  d: {fileID: 81036573}
   gameStates: {fileID: 138595962}
 --- !u!1 &1921595727
 GameObject:
@@ -91161,3 +91206,4 @@ SceneRoots:
   - {fileID: 330107829}
   - {fileID: 589537501}
   - {fileID: 838172158}
+  - {fileID: 81036574}

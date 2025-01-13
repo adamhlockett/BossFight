@@ -9,13 +9,9 @@ public class Enemy_Attack : EnemyState
     [SerializeField] GameStates gameStates;
     Enemy_Charge chargeState;
 
-    [Header("Dynamic Adjustments")]
-    public float damage = 10f; 
-    public float speed = 7f;
-    public float canFireEvery = 1f;
-    public float attackFor = 5f;
+    [SerializeField] DynamicAdjuster d;
+
     public float fireAmount;
-    public float projectileSlamSize = 0.5f;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
@@ -23,10 +19,9 @@ public class Enemy_Attack : EnemyState
         StartAnim(p_anim, p_enemy);
         StartCoroutine(WaitToIdle());
         isComplete = false;
-        InvokeRepeating("Fire", 0.1f, canFireEvery);
-        fireAmount = attackFor / canFireEvery;
+        InvokeRepeating("Fire", 0.1f, d.dA.fireRate);
+        fireAmount = d.dA.fireFor / d.dA.fireRate;
         chargeState = GameObject.Find("Charge").GetComponent<Enemy_Charge>();
-        chargeState.slamPrefabSize = projectileSlamSize;
     } 
 
     public override void RunCurrentState(Animator anim, Enemy p_enemy)
@@ -56,7 +51,7 @@ public class Enemy_Attack : EnemyState
 
     IEnumerator WaitToIdle()
     {
-        yield return new WaitForSeconds(attackFor);
+        yield return new WaitForSeconds(d.dA.fireFor);
         CancelInvoke("Fire");
         isComplete = true;
     }

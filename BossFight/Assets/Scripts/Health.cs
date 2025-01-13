@@ -74,7 +74,6 @@ public class Health : MonoBehaviour
         lowHealthIndicator.color = new Color(lowHealthIndicator.color.r, 
             lowHealthIndicator.color.g, lowHealthIndicator.color.b, 
             alpha);
-        Debug.Log(alpha);
     }
 
     IEnumerator HitMaterialChange()

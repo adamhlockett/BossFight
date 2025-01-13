@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] DynamicAdjuster d;
     [SerializeField] Transform playerPos;
     Transform enemyPos;
     int tempAngle;
     public bool playerHasChangedSide = false;
     GameObject[] projectiles;
     public Enemy_Attack attackRef;
-    public float turnsBeforeDetonation = 3;
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
         tempAngle = GetPlayerAngleFromEnemy();
 
         projectiles = GameObject.FindGameObjectsWithTag("Projectile");
-        if(projectiles.Length >= attackRef.fireAmount * turnsBeforeDetonation)
+        if(projectiles.Length >= attackRef.fireAmount * d.dA.detonateAfterTurns)
         {
             foreach (GameObject projectile in projectiles) 
             {

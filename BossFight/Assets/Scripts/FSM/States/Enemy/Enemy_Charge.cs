@@ -12,17 +12,11 @@ public class Enemy_Charge : EnemyState
     private bool hasReachedPoint;
     [SerializeField] GameObject slamPrefab;
 
-    [Header("Dynamic Adjustments")]
-    public float defaultSlamPrefabSize = 1f;
-    public float slamPrefabSize;
-    public float damage = 15f;
-    public float speed = 5f;
-    public float canDamageEvery = 2f;
+    [SerializeField] DynamicAdjuster d;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
         stateName = "charge";
-        slamPrefabSize = defaultSlamPrefabSize;
         chargeTo = p_enemy.GetPlayerPos();
         animString = "_fly";
         StartAnim(p_anim, p_enemy);
@@ -47,7 +41,7 @@ public class Enemy_Charge : EnemyState
     private void ManageLogic(Animator p_anim, Enemy p_enemy)
     {
         //charge toward
-        transform.root.position = Vector2.MoveTowards(transform.root.position, chargeTo, speed * Time.deltaTime);
+        transform.root.position = Vector2.MoveTowards(transform.root.position, chargeTo, d.dA.chargeSpeed * Time.deltaTime);
 
         //check if reached destination
         if (Vector3.Distance(transform.root.position, chargeTo) <= 0.2f && !hasReachedPoint)

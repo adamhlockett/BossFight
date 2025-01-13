@@ -10,17 +10,20 @@ public class Slam : MonoBehaviour
     Health playerHealth;
     bool canDamage;
     Enemy_Charge chargeState;
+    [SerializeField] DynamicAdjuster d;
+    public float size;
 
     // Start is called before the first frame update
     void Start()
     {
+        d = GameObject.Find("Dynamic Adjuster").GetComponent<DynamicAdjuster>();
         chargeState = GameObject.Find("Charge").GetComponent<Enemy_Charge>();
         tr = transform;
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
         canDamage = true;
-        tr.localScale *= chargeState.slamPrefabSize;
-        slamDamage = chargeState.damage;
-        
+        size = d.dA.slamRadius;
+        tr.localScale *= size;
+        slamDamage = d.dA.slamDamage;
     }
 
     // Update is called once per frame
@@ -33,13 +36,13 @@ public class Slam : MonoBehaviour
         {
             playerHealth.DamageFor(slamDamage, true);
             canDamage = false;
-            StartCoroutine(damageCooldown());
+            StartCoroutine(DamageCooldown());
         }
     }
 
-    private IEnumerator damageCooldown()
+    private IEnumerator DamageCooldown()
     {
-        yield return new WaitForSeconds(chargeState.canDamageEvery);
+        yield return new WaitForSeconds(d.dA.damageRate);
         canDamage = true;
     }
 

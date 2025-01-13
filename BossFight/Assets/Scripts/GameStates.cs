@@ -24,6 +24,7 @@ public class GameStates : MonoBehaviour
     [SerializeField] GameObject playerStartPos;
     [SerializeField] GameObject enemy;
     [SerializeField] GameObject enemyStartPos;
+    [SerializeField] DynamicAdjuster dA;
     GameObject[] projectiles;
     GameObject[] slams;
     public float transitionLength = 1f;
@@ -58,6 +59,7 @@ public class GameStates : MonoBehaviour
         slams = GameObject.FindGameObjectsWithTag("Slam");
         foreach (GameObject s in slams) Destroy(s);
         enemyFSM.Restart();
+        dA.ApplyInitialValues();
     }
 
     private void LateUpdate()
