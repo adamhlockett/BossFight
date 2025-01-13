@@ -77,13 +77,10 @@ public class GameStates : MonoBehaviour
 
     private void TrainingSequence()
     {
-        if (pauseKeyPresses >= trainingPrompts.Length + 1) ExitTraining();
-        if (pauseKeyPresses == trainingPrompts.Length) trainingVideo.enabled = false;
-        else
-        {
-            trainingVp.clip = trainingClips[(int)pauseKeyPresses];
-            trainingPrompt.sprite = trainingPrompts[(int)pauseKeyPresses];
-        }
+        if (pauseKeyPresses >= trainingPrompts.Length) { ExitTraining(); return; }
+        if (pauseKeyPresses == trainingPrompts.Length - 1) trainingVideo.enabled = false;
+        /*if((int)pauseKeyPresses <= trainingClips.Length)*/ trainingVp.clip = trainingClips[(int)pauseKeyPresses];
+        trainingPrompt.sprite = trainingPrompts[(int)pauseKeyPresses];
     }
 
     // if player is dead, move to loss screen
