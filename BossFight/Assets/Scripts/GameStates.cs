@@ -4,32 +4,45 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class GameStates : MonoBehaviour
 {
     [SerializeField] Health enemyHealth;
     [SerializeField] Health playerHealth;
     [SerializeField] GameObject pauseMenu;
-    [SerializeField] GameObject testInfo;
+    [SerializeField] GameObject trainingInfo;
     [SerializeField] EnemyStateMachine enemyFSM;
     [SerializeField] Animator transitionAnim;
-    private float pauseKeyPresses;
-    private bool canLose = true, canWin = true;
-    public bool isPaused = false;
+    [SerializeField] VideoPlayer trainingVp;
+    [SerializeField] SpriteRenderer trainingPrompt;
+    [SerializeField] VideoClip[] trainingClips;
+    [SerializeField] Sprite[] trainingPrompts;
+    [SerializeField] RawImage trainingVideo;
     public float transitionLength = 1f;
+    private float pauseKeyPresses;
+    public bool isPaused = false;
+    private bool canLose = true, canWin = true, inTraining = true;
 
     private void Start()
     {
         Restart();
     }
 
-    public void Restart() // call this when game is restarted
+    public void Restart() // call when game is restarted
     {
-        testInfo.SetActive(true);
+        inTraining = true;
+        trainingInfo.SetActive(true);
+        trainingVp.clip = trainingClips[0];
+        trainingPrompt.sprite = trainingPrompts[0];
         enemyFSM.canChangeState = false;
         enemyHealth.canBeDamaged = false;
         canLose = false;
         canWin = false;
+        pauseKeyPresses = 0;
+        trainingVideo.enabled = true;
+        //should contain starting positions for player and enemy
     }
 
     private void LateUpdate()
@@ -53,47 +66,36 @@ public class GameStates : MonoBehaviour
         }
     }
 
-    // if player presses PAUSE KEY the first time, allow PLAY - if player presses PAUSE KEY after the first time, pause game
     public void PauseAndPlay() 
     {
-        if (pauseKeyPresses == 0) { return; }
+        if (inTraining) { TrainingSequence(); return; } // skips the rest of this method when in training
 
-        else if (pauseKeyPresses == 1)
+        if (pauseKeyPresses % 2 == 1) Pause();
+
+        else if (pauseKeyPresses % 2 == 2) Play();
+    }
+
+    private void TrainingSequence()
+    {
+        if (pauseKeyPresses >= trainingPrompts.Length + 1) ExitTraining();
+        if (pauseKeyPresses == trainingPrompts.Length) trainingVideo.enabled = false;
+        else
         {
-            ExitTraining();
-            return;
+            trainingVp.clip = trainingClips[(int)pauseKeyPresses];
+            trainingPrompt.sprite = trainingPrompts[(int)pauseKeyPresses];
         }
-
-        else if (pauseKeyPresses % 2 == 0) // even number
-        {
-            pauseKeyPresses = 2;
-            Pause();
-            return;
-        }
-
-        else if (pauseKeyPresses % 2 == 1) // odd number
-        {
-            pauseKeyPresses = 3;
-            Play();
-            return;
-        }
-
-        // FIRST PRESS - enemy can act and take damage
-        // SUBSEQUENT PRESSES - PAUSE/PLAY game (can figure this out with a press-counter that checked if EVEN or ODD)
     }
 
     // if player is dead, move to loss screen
     public void Lose() 
     {
-        Debug.Log("lose");
         Gamepad.current.SetMotorSpeeds(0f, 0f);
-        StartCoroutine(LoadThisScene("Lose"));
+        StartCoroutine(LoadThisScene("Lose")); // should just restart the level
     }
 
     // if enemy is dead, move to win screen
     public void Win()
     {
-        Debug.Log("win");
         Gamepad.current.SetMotorSpeeds(0f, 0f);
         StartCoroutine(LoadThisScene("Win"));
     }
@@ -115,11 +117,13 @@ public class GameStates : MonoBehaviour
 
     public void ExitTraining()
     {
-        testInfo.SetActive(false);
+        inTraining = false;
+        trainingInfo.SetActive(false);
         enemyFSM.canChangeState = true;
         enemyHealth.canBeDamaged = true;
         canLose = true;
         canWin = true;
+        pauseKeyPresses = 0;
     }
 
     IEnumerator LoadThisScene(string sceneName)
