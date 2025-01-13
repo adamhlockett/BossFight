@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour
     private Enemy enemy;
     public GameObject slamPrefab;
     [SerializeField] private GameObject telegraphIndicator;
-    private int detonateCount;
+    public int detonateCount;
     [SerializeField] DynamicAdjuster d;
     private float detonationSizeMultiplier = 0.5f;
 
@@ -50,11 +50,11 @@ public class Projectile : MonoBehaviour
 
     public void Detonate()
     {
-        if(detonateCount < 1)
-        {
+        //if(detonateCount < 1)
+        //{
             StartCoroutine(WaitToDetonate());
             detonateCount++;
-        }
+        //}
         //do
         //{
         //    Instantiate(telegraphIndicator, this.transform.position, Quaternion.identity);
@@ -65,7 +65,8 @@ public class Projectile : MonoBehaviour
 
     IEnumerator WaitToDetonate()
     {
-        Instantiate(telegraphIndicator, this.transform.position, Quaternion.identity);
+        if(detonateCount < 1) Instantiate(telegraphIndicator, this.transform.position, Quaternion.identity);
+        telegraphIndicator.transform.parent = transform;
         yield return new WaitForSeconds(d.dA.telegraphDetonateFor);
         slamPrefab.GetComponent<Slam>().size = d.dA.slamRadius * detonationSizeMultiplier;
         Instantiate(slamPrefab, this.transform.position, Quaternion.identity);

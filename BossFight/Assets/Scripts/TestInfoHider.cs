@@ -32,11 +32,11 @@ public class TestInfoHider : MonoBehaviour
         }
     }
 
-    public IEnumerator SwapMove()
+    public IEnumerator SwapMove(bool p_movingOut)
     {
         isWaiting = true;
         yield return new WaitForSeconds(0.5f);
-        movingOut = !movingOut;
+        movingOut = !p_movingOut;
         isWaiting = false;
     }
 

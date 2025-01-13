@@ -239,12 +239,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 667168358938441296, guid: 80141afc677381b4489665e64e89889f, type: 3}
   gameStates: {fileID: 138595962}
   d: {fileID: 81036573}
-  damage: 10
-  speed: 7
-  canFireEvery: 1
-  attackFor: 5
   fireAmount: 0
-  projectileSlamSize: 0.5
 --- !u!1 &52381645
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,7 +451,7 @@ Transform:
   m_GameObject: {fileID: 81036572}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6242636, y: 0.28986084, z: 4.027608}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -643,7 +638,7 @@ MonoBehaviour:
   playerStartPos: {fileID: 30743664}
   enemy: {fileID: 330107827}
   enemyStartPos: {fileID: 1091846256}
-  dA: {fileID: 81036573}
+  d: {fileID: 0}
   transitionLength: 0
   isPaused: 0
   inTraining: 1
@@ -2042,11 +2037,6 @@ MonoBehaviour:
   isComplete: 0
   slamPrefab: {fileID: 667168358938441296, guid: 9c45c61603af76649bbc603922067fdb, type: 3}
   d: {fileID: 81036573}
-  defaultSlamPrefabSize: 1
-  slamPrefabSize: 1
-  damage: 15
-  speed: 5
-  canDamageEvery: 2
 --- !u!1 &1091846256
 GameObject:
   m_ObjectHideFlags: 0

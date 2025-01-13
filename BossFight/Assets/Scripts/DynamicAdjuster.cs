@@ -22,7 +22,7 @@ public class DynamicAdjuster : MonoBehaviour
         lastDifficulty = difficulty;
     }
 
-    private void SetInitialValues()
+    private void SetInitialValues() //-------------------------------------------------------change defaults here
     {
         _dA.defaultDetonateAfterTurns = 3;
         _dA.defaultTelegraphFor = 1;
@@ -40,18 +40,20 @@ public class DynamicAdjuster : MonoBehaviour
 
     public void ApplyInitialValues()
     {
+        difficulty = 1;
+        lastDifficulty = difficulty;
         dA.detonateAfterTurns = _dA.defaultDetonateAfterTurns;
         dA.telegraphFor = _dA.defaultTelegraphFor;
         dA.telegraphDetonateFor = _dA.defaultTelegraphDetonateFor;
         dA.idleFor = _dA.defaultIdleFor;
         dA.slamRadius = _dA.defaultSlamRadius;
-        dA.slamDamage = _dA.defaultSlamDamage;           
-        dA.chargeSpeed = _dA.defaultChargeSpeed;          
-        dA.damageRate = _dA.defaultDamageRate;           
+        dA.slamDamage = _dA.defaultSlamDamage;
+        dA.chargeSpeed = _dA.defaultChargeSpeed;
+        dA.damageRate = _dA.defaultDamageRate;
         dA.projectileDamage = _dA.defaultProjectileDamage;
-        dA.projectileSpeed = _dA.defaultProjectileSpeed;      
-        dA.fireRate = _dA.defaultFireRate;             
-        dA.fireFor = _dA.defaultFireFor;              
+        dA.projectileSpeed = _dA.defaultProjectileSpeed;
+        dA.fireRate = _dA.defaultFireRate;
+        dA.fireFor = _dA.defaultFireFor;
     }
 
     private void Update()
@@ -60,7 +62,7 @@ public class DynamicAdjuster : MonoBehaviour
         {
             difficulty += 0.1f;
             Debug.Log("difficulty" + difficulty);
-            if(difficulty > 2) difficulty = 0;
+            if(difficulty > 2) difficulty = 0.1f;
         }
 
         if (difficulty != lastDifficulty)
@@ -72,17 +74,17 @@ public class DynamicAdjuster : MonoBehaviour
 
     public void Adjust()
     {
-        dA.detonateAfterTurns = _dA.defaultDetonateAfterTurns * difficulty;
-        dA.telegraphFor = _dA.defaultTelegraphFor * difficulty;
-        dA.telegraphDetonateFor = _dA.defaultTelegraphDetonateFor * difficulty;
-        dA.idleFor = _dA.defaultIdleFor * difficulty;
+        dA.detonateAfterTurns = _dA.defaultDetonateAfterTurns * (2 - difficulty); // - detonate sooner
+        dA.telegraphFor = _dA.defaultTelegraphFor * (2 - difficulty); // - telegraph for less time
+        dA.telegraphDetonateFor = _dA.defaultTelegraphDetonateFor * difficulty;             //SHOULD BE -, BUT proves too difficult
+        dA.idleFor = _dA.defaultIdleFor * (2 - difficulty); // - idle for less time
         dA.slamRadius = _dA.defaultSlamRadius * difficulty;
         dA.slamDamage = _dA.defaultSlamDamage * difficulty;
         dA.chargeSpeed = _dA.defaultChargeSpeed * difficulty;
-        dA.damageRate = _dA.defaultDamageRate * difficulty;
+        dA.damageRate = _dA.defaultDamageRate * (2 - difficulty); // - damage more often
         dA.projectileDamage = _dA.defaultProjectileDamage * difficulty;
         dA.projectileSpeed = _dA.defaultProjectileSpeed * difficulty;
-        dA.fireRate = _dA.defaultFireRate * difficulty;
-        dA.fireFor = _dA.defaultFireFor * difficulty;
+        dA.fireRate = _dA.defaultFireRate * (2 - difficulty); // - fire more often
+        dA.fireFor = _dA.defaultFireFor * (2 - difficulty); // - fire for longer
     }
 }                                          
