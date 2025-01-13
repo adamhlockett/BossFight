@@ -10,6 +10,7 @@ TagManager:
   - Player Hitbox
   - Projectile
   - Cursor
+  - Slam
   layers:
   - Default
   - TransparentFX

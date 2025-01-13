@@ -27,9 +27,14 @@ public class EnemyStateMachine : MonoBehaviour
     {
         anim = transform.root.GetComponent<Animator>();
         enemy = transform.root.GetComponent<Enemy>();
-        //currentState = states[0];
+        Restart();
+    }
+
+    public void Restart()
+    {
         currentState = enemyStates[0];
         currentState.OnEnter(anim, enemy);
+        currentStateNum = 0;
     }
 
     private void Update()

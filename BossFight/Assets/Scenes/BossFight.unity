@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &30743664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 30743665}
+  m_Layer: 0
+  m_Name: Player Start Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &30743665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30743664}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.99, y: 1.45, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 589537501}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &44441750
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +202,7 @@ MonoBehaviour:
   telegraphIndicator: {fileID: 2742002571913456469, guid: 8e780adcbf69351449e76cd2d52e97cd, type: 3}
   isComplete: 0
   projectilePrefab: {fileID: 667168358938441296, guid: 80141afc677381b4489665e64e89889f, type: 3}
+  gameStates: {fileID: 138595962}
   damage: 10
   speed: 7
   canFireEvery: 1
@@ -527,8 +559,13 @@ MonoBehaviour:
   - {fileID: 419590352, guid: 4cfc3ddf51ca5314ba1e78d87063505c, type: 3}
   - {fileID: 599438505, guid: 4cfc3ddf51ca5314ba1e78d87063505c, type: 3}
   trainingVideo: {fileID: 1792572542}
+  player: {fileID: 1527314105}
+  playerStartPos: {fileID: 30743664}
+  enemy: {fileID: 330107827}
+  enemyStartPos: {fileID: 1091846256}
   transitionLength: 0
   isPaused: 0
+  inTraining: 1
 --- !u!1 &181995058
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,6 +1020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 300
+  maxhp: 300
   canBeDamaged: 1
   overlayBarRenderer: {fileID: 1623332287}
   overlayBarStartWidth: 0.08
@@ -1433,6 +1471,8 @@ Transform:
   - {fileID: 1097558524}
   - {fileID: 181995060}
   - {fileID: 442064537}
+  - {fileID: 30743665}
+  - {fileID: 1091846257}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &651781251
@@ -1826,6 +1866,37 @@ MonoBehaviour:
   damage: 15
   speed: 5
   canDamageEvery: 2
+--- !u!1 &1091846256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1091846257}
+  m_Layer: 0
+  m_Name: Enemy Start Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1091846257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091846256}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.55, y: 1.29, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 589537501}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1097558522
 GameObject:
   m_ObjectHideFlags: 0
@@ -60720,7 +60791,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f1db1a29fb0754cb0fbd300f0501f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 320
+  hp: 15
+  maxhp: 15
   canBeDamaged: 1
   overlayBarRenderer: {fileID: 1149227295}
   overlayBarStartWidth: 0.49
@@ -61193,6 +61265,7 @@ MonoBehaviour:
   idleFor: 3
   telegraphWarning: 0.5
   detonateTelegraphWarning: 0
+  gameStates: {fileID: 138595962}
 --- !u!1 &1921595727
 GameObject:
   m_ObjectHideFlags: 0

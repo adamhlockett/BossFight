@@ -11,6 +11,7 @@ public class Enemy_Idle : EnemyState
     public float idleFor = 5f;
     public float telegraphWarning = 0.5f;
     public float detonateTelegraphWarning = 1f;
+    [SerializeField] GameStates gameStates;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
@@ -48,7 +49,7 @@ public class Enemy_Idle : EnemyState
     IEnumerator IdleFor(float p_idleFor)
     {
         yield return new WaitForSeconds(p_idleFor - telegraphWarning);
-        Instantiate(telegraphIndicator, GameObject.Find("TelegraphIndicator").transform.position, Quaternion.identity);
+        if(!gameStates.inTraining) Instantiate(telegraphIndicator, GameObject.Find("TelegraphIndicator").transform.position, Quaternion.identity);
         yield return new WaitForSeconds(telegraphWarning);
         isComplete = true;
     }

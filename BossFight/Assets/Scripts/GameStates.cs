@@ -20,10 +20,16 @@ public class GameStates : MonoBehaviour
     [SerializeField] VideoClip[] trainingClips;
     [SerializeField] Sprite[] trainingPrompts;
     [SerializeField] RawImage trainingVideo;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject playerStartPos;
+    [SerializeField] GameObject enemy;
+    [SerializeField] GameObject enemyStartPos;
+    GameObject[] projectiles;
+    GameObject[] slams;
     public float transitionLength = 1f;
     private float pauseKeyPresses;
-    public bool isPaused = false;
-    private bool canLose = true, canWin = true, inTraining = true;
+    public bool isPaused = false, inTraining = true;
+    private bool canLose = true, canWin = true;
 
     private void Start()
     {
@@ -42,7 +48,16 @@ public class GameStates : MonoBehaviour
         canWin = false;
         pauseKeyPresses = 0;
         trainingVideo.enabled = true;
-        //should contain starting positions for player and enemy
+        player.transform.position = playerStartPos.transform.position;
+        enemy.transform.position = enemyStartPos.transform.position;
+        playerHealth.SetHealth(playerHealth.maxhp);
+        enemyHealth.SetHealth(enemyHealth.maxhp);
+        playerHealth.UpdateLowHealthIndicator();
+        projectiles = GameObject.FindGameObjectsWithTag("Projectile");
+        foreach (GameObject p in projectiles) Destroy(p);
+        slams = GameObject.FindGameObjectsWithTag("Slam");
+        foreach (GameObject s in slams) Destroy(s);
+        enemyFSM.Restart();
     }
 
     private void LateUpdate()
@@ -87,7 +102,7 @@ public class GameStates : MonoBehaviour
     public void Lose() 
     {
         Gamepad.current.SetMotorSpeeds(0f, 0f);
-        StartCoroutine(LoadThisScene("Lose")); // should just restart the level
+        Restart(); // should just restart the level
     }
 
     // if enemy is dead, move to win screen
@@ -121,6 +136,10 @@ public class GameStates : MonoBehaviour
         canLose = true;
         canWin = true;
         pauseKeyPresses = 0;
+        enemyFSM.Restart();
+        player.transform.position = playerStartPos.transform.position;
+        playerHealth.SetHealth(playerHealth.maxhp);
+        playerHealth.UpdateLowHealthIndicator();
     }
 
     IEnumerator LoadThisScene(string sceneName)

@@ -6,6 +6,7 @@ public class Enemy_Attack : EnemyState
 {
     public bool isComplete;
     [SerializeField] GameObject projectilePrefab;
+    [SerializeField] GameStates gameStates;
     Enemy_Charge chargeState;
 
     [Header("Dynamic Adjustments")]
@@ -44,7 +45,7 @@ public class Enemy_Attack : EnemyState
 
     private void ManageLogic()
     {
-        
+
     }
 
     public override void StartAnim(Animator p_anim, Enemy p_enemy)
@@ -64,6 +65,7 @@ public class Enemy_Attack : EnemyState
 
     private void Fire()
     {
+        if (gameStates.inTraining) return;
         Vector3 spawnPos = GameObject.Find("EndOfStaff").transform.position;
         Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
     }
