@@ -72,7 +72,7 @@ public class GameStates : MonoBehaviour
 
         if (pauseKeyPresses % 2 == 1) Pause();
 
-        else if (pauseKeyPresses % 2 == 2) Play();
+        else if (pauseKeyPresses % 2 == 0) Play();
     }
 
     private void TrainingSequence()

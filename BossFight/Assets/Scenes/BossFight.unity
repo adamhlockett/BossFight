@@ -446,6 +446,7 @@ RectTransform:
   m_Children:
   - {fileID: 1372493453}
   - {fileID: 52470949}
+  - {fileID: 1500709097}
   m_Father: {fileID: 838172158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1447,7 +1448,7 @@ GameObject:
   - component: {fileID: 651781253}
   - component: {fileID: 651781252}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Video Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1529,7 +1530,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1792572541}
-  m_Father: {fileID: 1500709097}
+  m_Father: {fileID: 838172158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1731,11 +1732,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 89476337}
+  - {fileID: 651781255}
   - {fileID: 1567680210}
   - {fileID: 389542506}
   - {fileID: 52381646}
   - {fileID: 1879093031}
-  - {fileID: 1500709097}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &857311616
@@ -60375,7 +60376,7 @@ GameObject:
   - component: {fileID: 1500709100}
   - component: {fileID: 1500709099}
   m_Layer: 0
-  m_Name: Test Info
+  m_Name: Tutorial Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60390,13 +60391,12 @@ Transform:
   m_GameObject: {fileID: 1500709096}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.172, y: 2.12, z: -0.1349}
-  m_LocalScale: {x: 2.6763, y: 2.6763, z: 0.8921}
+  m_LocalPosition: {x: -249.4, y: -88.1, z: -3717.8013}
+  m_LocalScale: {x: 110.55507, y: 110.55507, z: 36.85169}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 651781255}
   - {fileID: 284592669}
-  m_Father: {fileID: 838172158}
+  m_Father: {fileID: 89476337}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1500709098
 SpriteRenderer:
@@ -60418,7 +60418,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5e55d71fe78df8f46beaaf6a6a78f60a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -60999,8 +60999,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -168.87646, y: -1.9186707}
-  m_SizeDelta: {x: -1006.846, y: -565.19}
+  m_AnchoredPosition: {x: -437, y: -109}
+  m_SizeDelta: {x: -625.72, y: -349.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1792572542
 MonoBehaviour:
