@@ -34,7 +34,7 @@ public class GameStates : MonoBehaviour
     public float transitionLength = 1f;
     private float pauseKeyPresses;
     public bool isPaused = false, inTraining = true;
-    private bool canLose = true, canWin = true;
+    private bool canLose = true, canWin = true, hasDoneTutorial = false;
 
     private void Start()
     {
@@ -65,6 +65,7 @@ public class GameStates : MonoBehaviour
         enemyFSM.Restart();
         d.ApplyInitialValues();
         tutorialText.color = new Color(255, 255, 255, 255);
+        if (hasDoneTutorial) ExitTraining();
     }
 
     private void LateUpdate()
@@ -152,6 +153,7 @@ public class GameStates : MonoBehaviour
         inTraining = false;
         tutorialText.color = new Color(255, 255, 255, 0);
         trainingInfo.SetActive(false);
+        trainingVideo.enabled = false;
         enemyFSM.canChangeState = true;
         enemyHealth.canBeDamaged = true;
         canLose = true;
@@ -161,6 +163,7 @@ public class GameStates : MonoBehaviour
         player.transform.position = playerStartPos.transform.position;
         playerHealth.SetHealth(playerHealth.maxhp);
         playerHealth.UpdateLowHealthIndicator();
+        hasDoneTutorial = true;
     }
 
     IEnumerator LoadThisScene(string sceneName)

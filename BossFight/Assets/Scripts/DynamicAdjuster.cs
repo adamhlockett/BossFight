@@ -75,8 +75,6 @@ public class DynamicAdjuster : MonoBehaviour
             Adjust();
             lastDifficulty = difficulty;
         }
-
-        Debug.Log(method.methodName);
     }
 
     public void Adjust()
