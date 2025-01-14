@@ -5,11 +5,6 @@ using UnityEngine;
 //[System.Serializable]
 public struct DynamicAdjustments
 {
-    [Header("Player")]
-    float playerDamage;                           // from Player
-
-    [Header("Enemy")]
-
     public float detonateAfterTurns;                     //from Enemy
 
     public float telegraphFor;                           //from Enemy_Idle
@@ -32,16 +27,16 @@ public struct DefaultDynamicAdjustments
     public float defaultDetonateAfterTurns;                     //from Enemy
 
     public float defaultTelegraphFor;                           //from Enemy_Idle
-    public float defaultTelegraphDetonateFor;                   //from Enemy_Idle, used in Projectile
+    public float defaultTelegraphDetonateFor;                   //from Projectile
     public float defaultIdleFor;                                //from Enemy_Idle
 
-    public float defaultSlamRadius;                             //from Enemy_Charge
-    public float defaultSlamDamage;                             //from Enemy_Charge
-    public float defaultChargeSpeed;                            //from Enemy_Charge
+    public float defaultSlamRadius;                             //from Slam
+    public float defaultSlamDamage;                             //from Slam
+    public float defaultChargeSpeed;                            //from Slam
     public float defaultDamageRate;                             //from Enemy_Charge
 
-    public float defaultProjectileDamage;                       //from Enemy_Attack
-    public float defaultProjectileSpeed;                        //from Enemy_Attack
-    public float defaultFireRate;                               //from Enemy_Attack
+    public float defaultProjectileDamage;                       //from Projectile
+    public float defaultProjectileSpeed;                        //from Projectile
+    public float defaultFireRate;                               //from Projectile
     public float defaultFireFor;                                //from Enemy_Attack
 }

@@ -25,7 +25,6 @@ public class Enemy : MonoBehaviour
         tempAngle = GetPlayerAngleFromEnemy();
 
         projectiles = GameObject.FindGameObjectsWithTag("Projectile");
-        Debug.Log(attackRef.fireAmount * d.dA.detonateAfterTurns);
         if(projectiles.Length >= attackRef.fireAmount * d.dA.detonateAfterTurns)
         {
             projectiles = GameObject.FindGameObjectsWithTag("Projectile");

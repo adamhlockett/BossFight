@@ -2,26 +2,36 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MCNode
-{
-    public MCState state;
-    public MCNode parent;
-    public List<MCNode> children;
-    public int wins, visits;
+//public class MCNode
+//{
+//    public MCState state;
+//    public MCNode parent;
+//    public List<MCNode> children;
+//    public int wins, visits;
+//
+//    public MCNode(MCState s_state, MCNode p_parent)
+//    {
+//        state = s_state;
+//        parent = p_parent;
+//        children = new List<MCNode>();
+//        wins = 0;
+//        visits = 0;
+//    }
+//}
 
-    public MCNode(MCState s_state, MCNode p_parent)
-    {
-        state = s_state;
-        parent = p_parent;
-        children = new List<MCNode>();
-        wins = 0;
-        visits = 0;
-    }
-}
-
-public class MCTS : MonoBehaviour
+public class MCTS : DynamicAdjustmentMethod
 {
     public int maxIterations = 5; // does this act as a depth limit????
+
+    private void Start()
+    {
+        methodName = "Monte Carlo";
+    }
+
+    public override void Adjust()
+    {
+        
+    }
 
     public MCState FindBestMove(MCState currentState) // called to start the process
     {

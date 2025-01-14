@@ -6,6 +6,8 @@ public class DynamicAdjuster : MonoBehaviour
 {
     public DynamicAdjustments dA;
     private DefaultDynamicAdjustments _dA;
+    private DynamicAdjustmentMethod method;
+    [SerializeField] List<DynamicAdjustmentMethod> methodList;
 
     private float difficulty = 1;
     private float lastDifficulty;
@@ -20,10 +22,14 @@ public class DynamicAdjuster : MonoBehaviour
         ApplyInitialValues();
 
         lastDifficulty = difficulty;
+
+        method = methodList[PlayModeSingleton.instance.playMode];
     }
 
     private void SetInitialValues() //-------------------------------------------------------change defaults here
     {
+        difficulty = 1;
+        lastDifficulty = difficulty;
         _dA.defaultDetonateAfterTurns = 3;
         _dA.defaultTelegraphFor = 1;
         _dA.defaultTelegraphDetonateFor = 1.5f;
@@ -61,7 +67,6 @@ public class DynamicAdjuster : MonoBehaviour
         if (Input.GetButtonDown("Debug"))
         {
             difficulty += 0.1f;
-            Debug.Log("difficulty" + difficulty);
             if(difficulty > 2) difficulty = 0.1f;
         }
 
@@ -70,6 +75,8 @@ public class DynamicAdjuster : MonoBehaviour
             Adjust();
             lastDifficulty = difficulty;
         }
+
+        Debug.Log(method.methodName);
     }
 
     public void Adjust()
