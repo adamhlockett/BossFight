@@ -29,6 +29,7 @@ public class GameStates : MonoBehaviour
     [SerializeField] GameObject enemy;
     [SerializeField] GameObject enemyStartPos;
     [SerializeField] DynamicAdjuster d;
+    [SerializeField] TestInfoHider testInfoHider;
     GameObject[] projectiles;
     GameObject[] slams;
     public float transitionLength = 1f;
@@ -84,8 +85,19 @@ public class GameStates : MonoBehaviour
     {
         if (Input.GetButtonDown("Pause"))
         {
-            pauseKeyPresses++;
-            PauseAndPlay();
+            if (inTraining)
+            {
+                if (!testInfoHider.hide)
+                {
+                    pauseKeyPresses++;
+                    PauseAndPlay();
+                }
+            }
+            else
+            {
+                pauseKeyPresses++;
+                PauseAndPlay();
+            }
         }
         if (isPaused)
         {

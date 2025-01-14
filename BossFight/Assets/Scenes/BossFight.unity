@@ -680,6 +680,7 @@ MonoBehaviour:
   enemy: {fileID: 330107827}
   enemyStartPos: {fileID: 1091846256}
   d: {fileID: 81036573}
+  testInfoHider: {fileID: 1500709100}
   transitionLength: 0
   isPaused: 0
   inTraining: 1
@@ -60844,7 +60845,7 @@ MonoBehaviour:
   videoMoveTo: {fileID: 635969579}
   videoMoveFrom: {fileID: 10920016}
   videoGo: {fileID: 1792572540}
-  movingOut: 0
+  hide: 0
   isWaiting: 0
   speed: 5
 --- !u!1 &1527314105
