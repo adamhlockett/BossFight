@@ -28,6 +28,11 @@ public class MCTS : DynamicAdjustmentMethod
         methodName = "Monte Carlo";
     }
 
+    public override void CheckForAdjustments()
+    {
+        
+    }
+
     public override void Adjust()
     {
         

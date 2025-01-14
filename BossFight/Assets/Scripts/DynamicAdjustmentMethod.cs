@@ -12,5 +12,7 @@ public abstract class DynamicAdjustmentMethod : MonoBehaviour
         adj = GameObject.Find("Dynamic Adjuster").GetComponent<DynamicAdjuster>();
     }
 
+    public abstract void CheckForAdjustments();
+
     public abstract void Adjust();
 }

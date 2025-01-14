@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class ControlMethod : DynamicAdjustmentMethod
 {
-    private void Start()
-    {
-        methodName = "Control";
-    }
+    private void Start() { methodName = "Control"; }
 
-    public override void Adjust()
-    {
-        //needs no behaviour
-    }
+    public override void CheckForAdjustments() { }
+
+    public override void Adjust() { }
 }
