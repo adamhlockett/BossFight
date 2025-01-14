@@ -26,12 +26,14 @@ public class Health : MonoBehaviour
         materialChangeWaitFor = playerHitStopDuration;
     }
 
-    private void UpdateHealthBar() //only needs to happen when taking damage
+    private void UpdateHealthBar(bool isPlayer) //only needs to happen when taking damage
     {
         healthPercentage = (hp / maxhp) * 100f; //calculate percentage of health
         inverseHealthPercentage = 100f - healthPercentage; //get this as a REVERSE percentage
         overlayBarPercentage = (overlayBarRange * (inverseHealthPercentage / 100f)) + overlayBarStartWidth; //get as a percentage of the range and add start width
         overlayBarRenderer.size = new Vector2(overlayBarPercentage, overlayBarStartHeight);
+        if (isPlayer) { PlayDataSingleton.instance.playerHealth = (int)hp; PlayDataSingleton.instance.playerMaxHealth = (int)maxhp; }
+        else { PlayDataSingleton.instance.enemyHealth = (int)hp; PlayDataSingleton.instance.enemyMaxHealth = (int)maxhp; }
     }
 
     /* setters */
@@ -40,7 +42,7 @@ public class Health : MonoBehaviour
         if(canBeDamaged)
         {
             hp -= damage;
-            UpdateHealthBar();
+            UpdateHealthBar(isPlayer);
         }  
         if (isPlayer)
         {
@@ -62,9 +64,9 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void HealFor(float healing) { hp += healing; UpdateHealthBar(); }
+    //public void HealFor(float healing) { hp += healing; UpdateHealthBar(); }
 
-    public void SetHealth(float health) { hp = health; UpdateHealthBar(); }
+    public void SetHealth(float health, bool isPlayer) { hp = health; UpdateHealthBar(isPlayer); }
 
     public bool IsDead() { return hp <= 0; }
 

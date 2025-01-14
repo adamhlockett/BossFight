@@ -23,7 +23,7 @@ public class DynamicAdjuster : MonoBehaviour
 
         lastDifficulty = difficulty;
 
-        method = methodList[PlayModeSingleton.instance.playMode];
+        method = methodList[PlayDataSingleton.instance.playMode];
     }
 
     private void SetInitialValues() //-------------------------------------------------------change defaults here

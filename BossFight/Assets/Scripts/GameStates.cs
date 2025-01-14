@@ -56,8 +56,8 @@ public class GameStates : MonoBehaviour
         trainingVideo.enabled = true;
         player.transform.position = playerStartPos.transform.position;
         enemy.transform.position = enemyStartPos.transform.position;
-        playerHealth.SetHealth(playerHealth.maxhp);
-        enemyHealth.SetHealth(enemyHealth.maxhp);
+        playerHealth.SetHealth(playerHealth.maxhp, true);
+        enemyHealth.SetHealth(enemyHealth.maxhp, false);
         playerHealth.UpdateLowHealthIndicator();
         projectiles = GameObject.FindGameObjectsWithTag("Projectile");
         foreach (GameObject p in projectiles) Destroy(p);
@@ -104,6 +104,7 @@ public class GameStates : MonoBehaviour
             if (Input.GetButtonDown("Retry"))
             {
                 Play();
+                PlayDataSingleton.instance.retries++;
                 Lose();
             }
             if (Input.GetButtonDown("Menu"))
@@ -134,6 +135,7 @@ public class GameStates : MonoBehaviour
     // if player is dead, move to loss screen
     public void Lose() 
     {
+        PlayDataSingleton.instance.losses++;
         Gamepad.current.SetMotorSpeeds(0f, 0f);
         Restart(); // should just restart the level
     }
@@ -173,7 +175,7 @@ public class GameStates : MonoBehaviour
         pauseKeyPresses = 0;
         enemyFSM.Restart();
         player.transform.position = playerStartPos.transform.position;
-        playerHealth.SetHealth(playerHealth.maxhp);
+        playerHealth.SetHealth(playerHealth.maxhp, true);
         playerHealth.UpdateLowHealthIndicator();
         hasDoneTutorial = true;
     }

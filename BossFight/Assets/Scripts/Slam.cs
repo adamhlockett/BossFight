@@ -24,6 +24,7 @@ public class Slam : MonoBehaviour
         size = d.dA.slamRadius;
         tr.localScale *= size;
         slamDamage = d.dA.slamDamage;
+        PlayDataSingleton.instance.enemyAttacks++;
     }
 
     // Update is called once per frame
@@ -35,6 +36,7 @@ public class Slam : MonoBehaviour
         if (this.GetComponent<CheckContainsPlayer>().containsPlayer && canDamage)
         {
             playerHealth.DamageFor(slamDamage, true);
+            PlayDataSingleton.instance.enemyHits++;
             canDamage = false;
             StartCoroutine(DamageCooldown());
         }

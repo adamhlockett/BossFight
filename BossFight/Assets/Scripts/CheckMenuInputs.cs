@@ -16,17 +16,17 @@ public class CheckMenuInputs : MonoBehaviour
         {
             if (canPlay) SceneManager.LoadScene("BossFight");
 
-            if (canMode) PlayModeSingleton.instance.playMode++;
+            if (canMode) PlayDataSingleton.instance.playMode++;
 
             if (canExit) Quit();
         }
 
-        if (PlayModeSingleton.instance.playMode > 2) PlayModeSingleton.instance.playMode = 0;
+        if (PlayDataSingleton.instance.playMode > 2) PlayDataSingleton.instance.playMode = 0;
 
-        if (PlayModeSingleton.instance.playMode != lastPlayMode) // do once
+        if (PlayDataSingleton.instance.playMode != lastPlayMode) // do once
         {
-            cursor.material = cursorMaterials[PlayModeSingleton.instance.playMode];
-            lastPlayMode = PlayModeSingleton.instance.playMode;
+            cursor.material = cursorMaterials[PlayDataSingleton.instance.playMode];
+            lastPlayMode = PlayDataSingleton.instance.playMode;
         }
     }
 

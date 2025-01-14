@@ -32,6 +32,7 @@ public class Projectile : MonoBehaviour
         canDamage = true;
         attackDamage = d.dA.projectileDamage;
         speed = d.dA.projectileSpeed;
+        PlayDataSingleton.instance.enemyAttacks++;
     }
 
     // Update is called once per frame
@@ -43,6 +44,7 @@ public class Projectile : MonoBehaviour
         if (this.GetComponent<CheckContainsPlayer>().containsPlayer && canDamage)
         {
             playerHealth.DamageFor(attackDamage, true);
+            PlayDataSingleton.instance.enemyHits++;
             canDamage = false;
             Destroy(gameObject); //needs to be called when projectile exits view also
         }
