@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using Color = UnityEngine.Color;
 
 public class GameStates : MonoBehaviour
 {
@@ -20,6 +23,7 @@ public class GameStates : MonoBehaviour
     [SerializeField] VideoClip[] trainingClips;
     [SerializeField] Sprite[] trainingPrompts;
     [SerializeField] RawImage trainingVideo;
+    [SerializeField] SpriteRenderer tutorialText;
     [SerializeField] GameObject player;
     [SerializeField] GameObject playerStartPos;
     [SerializeField] GameObject enemy;
@@ -60,6 +64,7 @@ public class GameStates : MonoBehaviour
         foreach (GameObject s in slams) Destroy(s);
         enemyFSM.Restart();
         d.ApplyInitialValues();
+        tutorialText.color = new Color(255, 255, 255, 255);
     }
 
     private void LateUpdate()
@@ -132,6 +137,7 @@ public class GameStates : MonoBehaviour
     public void ExitTraining()
     {
         inTraining = false;
+        tutorialText.color = new Color(255, 255, 255, 0);
         trainingInfo.SetActive(false);
         enemyFSM.canChangeState = true;
         enemyHealth.canBeDamaged = true;
