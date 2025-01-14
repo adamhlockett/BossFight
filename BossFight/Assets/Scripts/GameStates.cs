@@ -86,6 +86,19 @@ public class GameStates : MonoBehaviour
             pauseKeyPresses++;
             PauseAndPlay();
         }
+        if (isPaused)
+        {
+            if (Input.GetButtonDown("Retry"))
+            {
+                Play();
+                Lose();
+            }
+            if (Input.GetButtonDown("Menu"))
+            {
+                Play();
+                StartCoroutine(LoadThisScene("Menu"));
+            }
+        }
     }
 
     public void PauseAndPlay() 
