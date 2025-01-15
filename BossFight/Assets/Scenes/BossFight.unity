@@ -61060,7 +61060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 50
-  maxhp: 15
+  maxhp: 50
   canBeDamaged: 1
   overlayBarRenderer: {fileID: 1149227295}
   overlayBarStartWidth: 0.49
