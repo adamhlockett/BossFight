@@ -7,11 +7,11 @@ public class TestInfoChecker : MonoBehaviour
     [SerializeField] TestInfoHider tih;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == tih.player && !tih.isWaiting && tih != null) StartCoroutine(tih.SwapMove(false));
+        if (collision.gameObject == tih.player && !tih.isWaiting && tih.isActiveAndEnabled) StartCoroutine(tih.SwapMove(false));
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject == tih.player && !tih.isWaiting && tih != null) StartCoroutine(tih.SwapMove(true));
+        if (collision.gameObject == tih.player && !tih.isWaiting && tih.isActiveAndEnabled) StartCoroutine(tih.SwapMove(true));
     }
 }

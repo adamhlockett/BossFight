@@ -66,14 +66,14 @@ public class DynamicAdjuster : MonoBehaviour
     {
         if (difficulty != lastDifficulty)
         {
-            Adjust();
+            Adjustment();
             lastDifficulty = difficulty;
         }
 
         method.CheckForAdjustments();
     }
 
-    public void Adjust()
+    public void Adjustment()
     {
         dA.detonateAfterTurns = _dA.defaultDetonateAfterTurns * (2 - difficulty); // - detonate sooner
         dA.telegraphFor = _dA.defaultTelegraphFor * (2 - difficulty); // - telegraph for less time

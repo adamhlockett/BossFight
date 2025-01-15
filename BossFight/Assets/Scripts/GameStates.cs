@@ -140,7 +140,7 @@ public class GameStates : MonoBehaviour
         if(p.playTime < p.shortestPlayTime) p.shortestPlayTime = p.playTime;
         if (p.playTime > p.longestPlayTime) p.longestPlayTime = p.playTime;
         p.totalPlayTime += p.playTime;
-        p.losses++;
+        p.attempts++;
         Gamepad.current.SetMotorSpeeds(0f, 0f);
         Restart(); // should just restart the level
     }

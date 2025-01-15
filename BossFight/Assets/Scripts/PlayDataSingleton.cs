@@ -9,7 +9,7 @@ public class PlayDataSingleton : MonoBehaviour
     public int playMode;
 //probabilistic method data
     public float
-/*trajectories*/losses, retries, 
+/*trajectories*/attempts, retries, 
         playerHealth, playerMaxHealth, enemyHealth, enemyMaxHealth, healthGap, 
         playerAttacks, playerHits, playerAccuracy, 
         enemyAttacks, enemyHits, enemyAccuracy,
