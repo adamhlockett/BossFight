@@ -36,6 +36,7 @@ public class GameStates : MonoBehaviour
     private float pauseKeyPresses;
     public bool isPaused = false, inTraining = true;
     private bool canLose = true, canWin = true, hasDoneTutorial = false;
+    PlayDataSingleton p = PlayDataSingleton.instance;
 
     private void Start()
     {
@@ -67,10 +68,12 @@ public class GameStates : MonoBehaviour
         d.ApplyInitialValues();
         tutorialText.color = new Color(255, 255, 255, 255);
         if (hasDoneTutorial) ExitTraining();
+        p.playTime = 0;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
+        p.playTime += Time.deltaTime;
         CheckConditions();
         CheckInputs();
     }
@@ -104,7 +107,7 @@ public class GameStates : MonoBehaviour
             if (Input.GetButtonDown("Retry"))
             {
                 Play();
-                PlayDataSingleton.instance.retries++;
+                p.retries++;
                 Lose();
             }
             if (Input.GetButtonDown("Menu"))
@@ -132,15 +135,16 @@ public class GameStates : MonoBehaviour
         trainingPrompt.sprite = trainingPrompts[(int)pauseKeyPresses];
     }
 
-    // if player is dead, move to loss screen
     public void Lose() 
     {
-        PlayDataSingleton.instance.losses++;
+        if(p.playTime < p.shortestPlayTime) p.shortestPlayTime = p.playTime;
+        if (p.playTime > p.longestPlayTime) p.longestPlayTime = p.playTime;
+        p.totalPlayTime += p.playTime;
+        p.losses++;
         Gamepad.current.SetMotorSpeeds(0f, 0f);
         Restart(); // should just restart the level
     }
 
-    // if enemy is dead, move to win screen
     public void Win()
     {
         Gamepad.current.SetMotorSpeeds(0f, 0f);

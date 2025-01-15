@@ -64,12 +64,6 @@ public class DynamicAdjuster : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetButtonDown("Debug"))
-        //{
-        //    difficulty += 0.1f;
-        //    if(difficulty > 2) difficulty = 0.1f;
-        //}
-
         if (difficulty != lastDifficulty)
         {
             Adjust();

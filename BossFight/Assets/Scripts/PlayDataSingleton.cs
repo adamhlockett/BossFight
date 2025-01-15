@@ -9,8 +9,13 @@ public class PlayDataSingleton : MonoBehaviour
     public int playMode;
 //probabilistic method data
     public float
-/*trajectories*/losses, retries, playerHealth, playerMaxHealth, enemyHealth, enemyMaxHealth, healthGap, playerAttacks, playerHits, playerAccuracy, enemyAttacks, enemyHits, enemyAccuracy,
-/*probabilities*/pr_loss, pr_playerHit, pr_enemyHit, pr_retry;
+/*trajectories*/losses, retries, 
+        playerHealth, playerMaxHealth, enemyHealth, enemyMaxHealth, healthGap, 
+        playerAttacks, playerHits, playerAccuracy, 
+        enemyAttacks, enemyHits, enemyAccuracy,
+        playTime, avgPlayTime, totalPlayTime, shortestPlayTime, longestPlayTime,
+/*probabilities*/pr_loss, pr_playerHit, pr_enemyHit;
+    //public List<float> playTimes = new List<float>();
 
     private void Awake()
     {

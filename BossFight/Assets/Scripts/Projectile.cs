@@ -68,7 +68,7 @@ public class Projectile : MonoBehaviour
     IEnumerator WaitToDetonate()
     {
         if(detonateCount < 1) Instantiate(telegraphIndicator, this.transform.position, Quaternion.identity);
-        telegraphIndicator.transform.parent = transform;
+        //telegraphIndicator.transform.parent = transform;
         yield return new WaitForSeconds(d.dA.telegraphDetonateFor);
         slamPrefab.GetComponent<Slam>().size = d.dA.slamRadius * detonationSizeMultiplier;
         Instantiate(slamPrefab, this.transform.position, Quaternion.identity);
