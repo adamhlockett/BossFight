@@ -24,6 +24,8 @@ public class EnemyStateMachine : MonoBehaviour
     public bool canChangeState = false;
     [SerializeField] DynamicAdjuster d;
     [SerializeField] Enemy_Attack attackState;
+    [SerializeField] Enemy_Idle idleState;
+    [SerializeField] Enemy_Charge chargeState;
 
     private void Start()
     {
@@ -34,6 +36,9 @@ public class EnemyStateMachine : MonoBehaviour
 
     public void Restart()
     {
+        attackState.isComplete = false;
+        idleState.isComplete = false;
+        chargeState.isComplete = false;
         currentStateNum = 0;
         if (anim != null ) { currentState.OnEnter(anim, enemy); }
         foreach (EnemyState enemy in enemyStates)
