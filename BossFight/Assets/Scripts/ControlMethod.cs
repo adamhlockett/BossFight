@@ -8,5 +8,5 @@ public class ControlMethod : DynamicAdjustmentMethod
 
     public override void CheckForAdjustments() { }
 
-    public override void Adjust() { }
+    public override void AdjustDifficulty() { }
 }

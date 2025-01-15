@@ -11,10 +11,11 @@ public class PlayDataSingleton : MonoBehaviour
     public float
 /*trajectories*/attempts, retries, 
         playerHealth, playerMaxHealth, enemyHealth, enemyMaxHealth, healthGap, 
-        playerAttacks, playerHits, playerAccuracy, 
-        enemyAttacks, enemyHits, enemyAccuracy,
+        playerAttacks, playerHits, playerAccuracy, playerDamage, 
+        enemyAttacks, enemyHits, enemyAccuracy, enemyDamage,
         playTime, avgPlayTime, totalPlayTime, shortestPlayTime, longestPlayTime,
-/*probabilities*/pr_loss, pr_playerHit, pr_enemyHit;
+/*probabilities*/pr_loss, pr_playerHit, pr_enemyHit,
+        difficulty = 1;
     //public List<float> playTimes = new List<float>();
 
     private void Awake()

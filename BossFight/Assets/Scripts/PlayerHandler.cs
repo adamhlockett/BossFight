@@ -55,6 +55,8 @@ public class PlayerHandler : MonoBehaviour
 
         //Visual Feedback
         ManageVisualFeedback();
+
+        PlayDataSingleton.instance.playerDamage = atkDistanceMax * atkDamage;
     }
 
     private void FixedUpdate()

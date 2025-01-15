@@ -33,7 +33,7 @@ public class MCTS : DynamicAdjustmentMethod
         
     }
 
-    public override void Adjust()
+    public override void AdjustDifficulty()
     {
         
     }

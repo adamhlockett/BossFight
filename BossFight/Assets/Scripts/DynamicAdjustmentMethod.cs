@@ -14,5 +14,5 @@ public abstract class DynamicAdjustmentMethod : MonoBehaviour
 
     public abstract void CheckForAdjustments();
 
-    public abstract void Adjust();
+    public abstract void AdjustDifficulty();
 }

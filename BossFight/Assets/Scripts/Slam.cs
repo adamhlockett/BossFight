@@ -25,6 +25,7 @@ public class Slam : MonoBehaviour
         tr.localScale *= size;
         slamDamage = d.dA.slamDamage;
         PlayDataSingleton.instance.enemyAttacks++;
+        PlayDataSingleton.instance.enemyDamage = slamDamage;
     }
 
     // Update is called once per frame
