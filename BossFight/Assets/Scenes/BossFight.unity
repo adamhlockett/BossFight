@@ -1190,6 +1190,7 @@ MonoBehaviour:
   - {fileID: 44441752}
   canChangeState: 0
   d: {fileID: 81036573}
+  attackState: {fileID: 44441752}
 --- !u!1 &389542504
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,6 +23,7 @@ public class EnemyStateMachine : MonoBehaviour
     private int currentStateNum = 0;
     public bool canChangeState = false;
     [SerializeField] DynamicAdjuster d;
+    [SerializeField] Enemy_Attack attackState;
 
     private void Start()
     {
@@ -34,8 +35,12 @@ public class EnemyStateMachine : MonoBehaviour
     public void Restart()
     {
         currentStateNum = 0;
-        currentState = enemyStates[currentStateNum];
         if (anim != null ) { currentState.OnEnter(anim, enemy); }
+        foreach (EnemyState enemy in enemyStates)
+        {
+            if (enemy.stateName == "attack") attackState.StopFiring();
+        }
+        currentState = enemyStates[currentStateNum];
     }
 
     private void Update()

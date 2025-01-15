@@ -49,10 +49,15 @@ public class Enemy_Attack : EnemyState
         p_anim.Play(animName);
     }
 
+    public void StopFiring()
+    {
+        CancelInvoke("Fire");
+    }
+
     IEnumerator WaitToIdle()
     {
         yield return new WaitForSeconds(d.dA.fireFor);
-        CancelInvoke("Fire");
+        StopFiring();
         isComplete = true;
     }
 
