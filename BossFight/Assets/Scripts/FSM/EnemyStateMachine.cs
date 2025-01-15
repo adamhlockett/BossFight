@@ -38,7 +38,7 @@ public class EnemyStateMachine : MonoBehaviour
         if (anim != null ) { currentState.OnEnter(anim, enemy); }
         foreach (EnemyState enemy in enemyStates)
         {
-            if (enemy.stateName == "attack") attackState.StopFiring();
+            if (enemy.stateName == "attack") attackState.StopFiring(); 
         }
         currentState = enemyStates[currentStateNum];
     }
