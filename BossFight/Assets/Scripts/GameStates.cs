@@ -69,6 +69,7 @@ public class GameStates : MonoBehaviour
         tutorialText.color = new Color(255, 255, 255, 255);
         if (hasDoneTutorial) ExitTraining();
         p.playTime = 0;
+        p.difficulty = 1;
     }
 
     private void Update()

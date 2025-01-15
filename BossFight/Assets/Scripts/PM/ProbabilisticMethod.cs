@@ -28,16 +28,14 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
         if (checkEvery > 0) { return; }
         else checkEvery = checkEverySeconds;
 
-        
-
-        CalculateTrajectories();
-
-        CalculateLossChance();
-        
-
-
-
-        AdjustDifficulty();
+        if (p.enemyHealth == p.enemyMaxHealth && p.playerHealth == p.playerMaxHealth)
+        {
+            p.difficulty = 1;
+        }
+        else
+        {
+            CalculateTrajectories();
+        }
     }
 
     private void CalculateTrajectories()
@@ -49,18 +47,13 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
         p.enemyAccuracy = p.enemyHits / p.enemyAttacks;
 
         p.avgPlayTime = p.totalPlayTime / p.attempts;
+
+        CalculateLossChance();
     }
 
     private void CalculateLossChance()
     {
         CalculatePlayTime();
-
-        CalculateHealthGap();
-
-        CalculateAccuracies();
-
-        if (p.pr_loss < 0) p.pr_loss = 0;
-        else if (p.pr_loss > 1) p.pr_loss = 1; // apply bounds
     }
 
     private void CalculatePlayTime()
@@ -75,6 +68,9 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
         }
 
         else if (p.playTime > p.longestPlayTime) { p.pr_loss = 1; }
+        Debug.Log(p.pr_loss + " playtime loss calculation");
+
+        CalculateHealthGap();
     }
 
     private void CalculateHealthGap()
@@ -83,6 +79,9 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
         {
             p.pr_loss += p.healthGap;
         }
+        Debug.Log(p.pr_loss + " healthgap loss calculation");
+
+        CalculateAccuracies();
     }
 
     private void CalculateAccuracies()
@@ -96,13 +95,26 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
         {
             p.pr_loss -= p.playerAccuracy;
         }
+        Debug.Log(p.pr_loss + " accuracies loss calculation");
+
+        ApplyBoundsToLossChance();
+    }
+
+    private void ApplyBoundsToLossChance()
+    {
+        if (p.pr_loss < 0) p.pr_loss = 0;
+        else if (p.pr_loss > 1) p.pr_loss = 1; // apply bounds
+
+        AdjustDifficulty();
     }
 
     public override void AdjustDifficulty()
     {
+        //if (p.pr_loss < 0) p.pr_loss = 0;
+        //else if (p.pr_loss > 1) p.pr_loss = 1; // apply bounds
         float difficulty = 2 - (p.pr_loss * 2); // difficulty is from 0-2 easy to hard, loss chance is 0-1 win to loss
         if (difficulty < 0.6) difficulty = 0.6f;
-        else if (difficulty > 1.6) difficulty = 1.6f; // apply bounds
+        else if (difficulty > 1.4) difficulty = 1.4f; // apply bounds
         p.difficulty = difficulty;
 
         Debug.Log(p.difficulty + " difficulty");

@@ -15,7 +15,7 @@ public class PlayDataSingleton : MonoBehaviour
         enemyAttacks, enemyHits, enemyAccuracy, enemyDamage,
         playTime, avgPlayTime, totalPlayTime, shortestPlayTime, longestPlayTime,
 /*probabilities*/pr_loss, pr_playerHit, pr_enemyHit,
-        difficulty = 1;
+        difficulty;
     //public List<float> playTimes = new List<float>();
 
     private void Awake()

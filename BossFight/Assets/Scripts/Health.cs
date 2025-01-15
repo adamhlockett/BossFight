@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private float hp; //set in editor inspector
+    public float hp; //set in inspector
     private float overlayBarRange, healthPercentage, inverseHealthPercentage, overlayBarPercentage;
-    public float maxhp;
+    [HideInInspector] public float maxhp;
     public bool canBeDamaged = true;
     [SerializeField] SpriteRenderer overlayBarRenderer;
     public float overlayBarStartWidth, overlayBarEndWidth, overlayBarStartHeight;

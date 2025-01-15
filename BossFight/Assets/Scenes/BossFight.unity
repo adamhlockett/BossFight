@@ -61059,7 +61059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f1db1a29fb0754cb0fbd300f0501f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 15
+  hp: 50
   maxhp: 15
   canBeDamaged: 1
   overlayBarRenderer: {fileID: 1149227295}

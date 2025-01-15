@@ -32,9 +32,9 @@ public class EnemyStateMachine : MonoBehaviour
 
     public void Restart()
     {
-        currentState = enemyStates[0];
-        currentState.OnEnter(anim, enemy);
         currentStateNum = 0;
+        currentState = enemyStates[currentStateNum];
+        if (anim != null ) { currentState.OnEnter(anim, enemy); }
     }
 
     private void Update()
