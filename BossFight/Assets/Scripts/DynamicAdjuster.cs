@@ -70,7 +70,10 @@ public class DynamicAdjuster : MonoBehaviour
             Adjustment();
             lastDifficulty = p.difficulty;
         }
+    }
 
+    public void CheckForAdjustments()
+    {
         method.CheckForAdjustments();
     }
 

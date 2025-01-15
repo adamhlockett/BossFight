@@ -10,7 +10,7 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
     //probably need a reset method to be used in GameStates.cs
 
     PlayDataSingleton p = PlayDataSingleton.instance;
-    float checkEvery, checkEverySeconds = 5f;
+    //float checkEvery, checkEverySeconds = 5f;
 
 
     private void Start()
@@ -19,14 +19,14 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
 
         p.shortestPlayTime = 5f;
         p.longestPlayTime = 15f;
-        checkEvery = checkEverySeconds;
+        //checkEvery = checkEverySeconds;
     }
 
     public override void CheckForAdjustments()
     {
-        checkEvery -= Time.deltaTime;
-        if (checkEvery > 0) { return; }
-        else checkEvery = checkEverySeconds;
+        //checkEvery -= Time.deltaTime;
+        //if (checkEvery > 0) { return; }
+        //else checkEvery = checkEverySeconds;
 
         if (p.enemyHealth == p.enemyMaxHealth && p.playerHealth == p.playerMaxHealth)
         {

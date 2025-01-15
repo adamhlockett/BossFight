@@ -22,6 +22,7 @@ public class EnemyStateMachine : MonoBehaviour
     //public Dictionary<int, Dictionary<string, State>> stateDict;
     private int currentStateNum = 0;
     public bool canChangeState = false;
+    [SerializeField] DynamicAdjuster d;
 
     private void Start()
     {
@@ -56,7 +57,8 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void SwitchState()
     {
-        if (!canChangeState) return;
+        if (!canChangeState) { currentState = enemyStates[currentStateNum]; return; }
+        d.CheckForAdjustments();
         currentStateNum++;
         if (currentStateNum >= enemyStates.Count) currentStateNum = 0;
         currentState = enemyStates[currentStateNum];
