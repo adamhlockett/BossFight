@@ -55,6 +55,8 @@ public class PlayerHandler : MonoBehaviour
 
         //Visual Feedback
         ManageVisualFeedback();
+
+        PlayDataSingleton.instance.playerDamage = atkDistanceMax * atkDamage;
     }
 
     private void FixedUpdate()
@@ -147,9 +149,12 @@ public class PlayerHandler : MonoBehaviour
             attackZone.gameObject.GetComponent<CheckContainsEnemy>().enemyHealth.DamageFor(damage, false);
 
             HitShake();
+
+            PlayDataSingleton.instance.playerHits++;
         }
 
         anim.SetTrigger("HasAttacked");
+        PlayDataSingleton.instance.playerAttacks++;
         canDash = true;
 
         yield return new WaitForSeconds(atkCooldown);

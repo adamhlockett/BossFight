@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using Color = UnityEngine.Color;
 
 public class GameStates : MonoBehaviour
 {
@@ -20,16 +23,20 @@ public class GameStates : MonoBehaviour
     [SerializeField] VideoClip[] trainingClips;
     [SerializeField] Sprite[] trainingPrompts;
     [SerializeField] RawImage trainingVideo;
+    [SerializeField] SpriteRenderer tutorialText;
     [SerializeField] GameObject player;
     [SerializeField] GameObject playerStartPos;
     [SerializeField] GameObject enemy;
     [SerializeField] GameObject enemyStartPos;
+    [SerializeField] DynamicAdjuster d;
+    [SerializeField] TestInfoHider testInfoHider;
     GameObject[] projectiles;
     GameObject[] slams;
     public float transitionLength = 1f;
     private float pauseKeyPresses;
     public bool isPaused = false, inTraining = true;
-    private bool canLose = true, canWin = true;
+    private bool canLose = true, canWin = true, hasDoneTutorial = false;
+    PlayDataSingleton p = PlayDataSingleton.instance;
 
     private void Start()
     {
@@ -50,18 +57,24 @@ public class GameStates : MonoBehaviour
         trainingVideo.enabled = true;
         player.transform.position = playerStartPos.transform.position;
         enemy.transform.position = enemyStartPos.transform.position;
-        playerHealth.SetHealth(playerHealth.maxhp);
-        enemyHealth.SetHealth(enemyHealth.maxhp);
+        playerHealth.SetHealth(playerHealth.maxhp, true);
+        enemyHealth.SetHealth(enemyHealth.maxhp, false);
         playerHealth.UpdateLowHealthIndicator();
         projectiles = GameObject.FindGameObjectsWithTag("Projectile");
         foreach (GameObject p in projectiles) Destroy(p);
         slams = GameObject.FindGameObjectsWithTag("Slam");
         foreach (GameObject s in slams) Destroy(s);
         enemyFSM.Restart();
+        d.ApplyInitialValues();
+        tutorialText.color = new Color(255, 255, 255, 255);
+        if (hasDoneTutorial) ExitTraining();
+        p.playTime = 0;
+        p.difficulty = 1;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
+        p.playTime += Time.deltaTime;
         CheckConditions();
         CheckInputs();
     }
@@ -76,8 +89,33 @@ public class GameStates : MonoBehaviour
     {
         if (Input.GetButtonDown("Pause"))
         {
-            pauseKeyPresses++;
-            PauseAndPlay();
+            if (inTraining)
+            {
+                if (!testInfoHider.hide)
+                {
+                    pauseKeyPresses++;
+                    PauseAndPlay();
+                }
+            }
+            else
+            {
+                pauseKeyPresses++;
+                PauseAndPlay();
+            }
+        }
+        if (isPaused)
+        {
+            if (Input.GetButtonDown("Retry"))
+            {
+                Play();
+                p.retries++;
+                Lose();
+            }
+            if (Input.GetButtonDown("Menu"))
+            {
+                Play();
+                StartCoroutine(LoadThisScene("Menu"));
+            }
         }
     }
 
@@ -98,14 +136,16 @@ public class GameStates : MonoBehaviour
         trainingPrompt.sprite = trainingPrompts[(int)pauseKeyPresses];
     }
 
-    // if player is dead, move to loss screen
     public void Lose() 
     {
+        if(p.playTime < p.shortestPlayTime) p.shortestPlayTime = p.playTime;
+        if (p.playTime > p.longestPlayTime) p.longestPlayTime = p.playTime;
+        p.totalPlayTime += p.playTime;
+        p.attempts++;
         Gamepad.current.SetMotorSpeeds(0f, 0f);
         Restart(); // should just restart the level
     }
 
-    // if enemy is dead, move to win screen
     public void Win()
     {
         Gamepad.current.SetMotorSpeeds(0f, 0f);
@@ -130,7 +170,9 @@ public class GameStates : MonoBehaviour
     public void ExitTraining()
     {
         inTraining = false;
+        tutorialText.color = new Color(255, 255, 255, 0);
         trainingInfo.SetActive(false);
+        trainingVideo.enabled = false;
         enemyFSM.canChangeState = true;
         enemyHealth.canBeDamaged = true;
         canLose = true;
@@ -138,8 +180,9 @@ public class GameStates : MonoBehaviour
         pauseKeyPresses = 0;
         enemyFSM.Restart();
         player.transform.position = playerStartPos.transform.position;
-        playerHealth.SetHealth(playerHealth.maxhp);
+        playerHealth.SetHealth(playerHealth.maxhp, true);
         playerHealth.UpdateLowHealthIndicator();
+        hasDoneTutorial = true;
     }
 
     IEnumerator LoadThisScene(string sceneName)

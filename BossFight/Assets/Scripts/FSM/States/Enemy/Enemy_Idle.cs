@@ -7,17 +7,18 @@ public class Enemy_Idle : EnemyState
 {
     public bool isComplete;
 
-    [Header("Dynamic Adjustments")]
-    public float idleFor = 5f;
-    public float telegraphWarning = 0.5f;
-    public float detonateTelegraphWarning = 1f;
+    [SerializeField] DynamicAdjuster d;
+
+    //public float idleFor = 5f;
+    //public float telegraphWarning = 0.5f;
+    //public float detonateTelegraphWarning = 1f;
     [SerializeField] GameStates gameStates;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
         stateName = "idle";
         StartAnim(p_anim, p_enemy);
-        StartCoroutine(IdleFor(idleFor));
+        StartCoroutine(IdleFor(d.dA.idleFor));
         isComplete = false;
     }
 
@@ -48,9 +49,9 @@ public class Enemy_Idle : EnemyState
 
     IEnumerator IdleFor(float p_idleFor)
     {
-        yield return new WaitForSeconds(p_idleFor - telegraphWarning);
+        yield return new WaitForSeconds(p_idleFor - d.dA.telegraphFor);
         if(!gameStates.inTraining) Instantiate(telegraphIndicator, GameObject.Find("TelegraphIndicator").transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(telegraphWarning);
+        yield return new WaitForSeconds(d.dA.telegraphFor);
         isComplete = true;
     }
 

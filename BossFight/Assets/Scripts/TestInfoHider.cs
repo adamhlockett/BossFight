@@ -13,12 +13,12 @@ public class TestInfoHider : MonoBehaviour
     [SerializeField] GameObject videoMoveTo;
     [SerializeField] GameObject videoMoveFrom;
     [SerializeField] GameObject videoGo;
-    public bool movingOut = false, isWaiting = false;
+    public bool hide = false, isWaiting = false;
     public float speed = 5f;
 
     private void Update()
     {
-        if (movingOut)
+        if (hide)
         {
             var step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, moveTo.transform.position, step);
@@ -32,11 +32,11 @@ public class TestInfoHider : MonoBehaviour
         }
     }
 
-    public IEnumerator SwapMove()
+    public IEnumerator SwapMove(bool p_movingOut)
     {
         isWaiting = true;
         yield return new WaitForSeconds(0.5f);
-        movingOut = !movingOut;
+        hide = !p_movingOut;
         isWaiting = false;
     }
 

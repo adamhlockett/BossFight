@@ -3,18 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-enum PlayModes
-{
-    Control = 0,
-    Probabilistic = 1,
-    MCTS = 2
-}
-
-
 public class CheckMenuInputs : MonoBehaviour
 {
     public bool canPlay = false, canMode = false, canExit = false;
-    public int playMode = 0;
     private int lastPlayMode = 0;
     [SerializeField] Material[] cursorMaterials;
     [SerializeField] SpriteRenderer cursor;
@@ -25,17 +16,17 @@ public class CheckMenuInputs : MonoBehaviour
         {
             if (canPlay) SceneManager.LoadScene("BossFight");
 
-            if (canMode) playMode++;
+            if (canMode) PlayDataSingleton.instance.playMode++;
 
             if (canExit) Quit();
         }
 
-        if (playMode > 2) playMode = 0;
+        if (PlayDataSingleton.instance.playMode > 2) PlayDataSingleton.instance.playMode = 0;
 
-        if (playMode != lastPlayMode) // do once
+        if (PlayDataSingleton.instance.playMode != lastPlayMode) // do once
         {
-            cursor.material = cursorMaterials[playMode];
-            lastPlayMode = playMode;
+            cursor.material = cursorMaterials[PlayDataSingleton.instance.playMode];
+            lastPlayMode = PlayDataSingleton.instance.playMode;
         }
     }
 

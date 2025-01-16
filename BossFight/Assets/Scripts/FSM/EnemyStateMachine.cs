@@ -22,6 +22,10 @@ public class EnemyStateMachine : MonoBehaviour
     //public Dictionary<int, Dictionary<string, State>> stateDict;
     private int currentStateNum = 0;
     public bool canChangeState = false;
+    [SerializeField] DynamicAdjuster d;
+    [SerializeField] Enemy_Attack attackState;
+    [SerializeField] Enemy_Idle idleState;
+    [SerializeField] Enemy_Charge chargeState;
 
     private void Start()
     {
@@ -32,9 +36,16 @@ public class EnemyStateMachine : MonoBehaviour
 
     public void Restart()
     {
-        currentState = enemyStates[0];
-        currentState.OnEnter(anim, enemy);
+        attackState.isComplete = false;
+        idleState.isComplete = false;
+        chargeState.isComplete = false;
         currentStateNum = 0;
+        if (anim != null ) { currentState.OnEnter(anim, enemy); }
+        foreach (EnemyState enemy in enemyStates)
+        {
+            if (enemy.stateName == "attack") attackState.StopFiring(); 
+        }
+        currentState = enemyStates[currentStateNum];
     }
 
     private void Update()
@@ -56,7 +67,8 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void SwitchState()
     {
-        if (!canChangeState) return;
+        if (!canChangeState) { currentState = enemyStates[currentStateNum]; return; }
+        d.CheckForAdjustments();
         currentStateNum++;
         if (currentStateNum >= enemyStates.Count) currentStateNum = 0;
         currentState = enemyStates[currentStateNum];
