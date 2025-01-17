@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerHandler : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private Vector2 input, lastMoveDirection, moves;
+    private Vector2 lastMoveDirection, moves;
     Animator anim;
     [SerializeField] float startSpeed; //set in engine inspector
     private float speed;
@@ -40,6 +40,7 @@ public class PlayerHandler : MonoBehaviour
         startShakeBy = shakeBy;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        PlayDataSingleton.instance.playerDamage = atkDistanceMax * atkDamage;
     }
 
     void Update()
@@ -55,13 +56,11 @@ public class PlayerHandler : MonoBehaviour
 
         //Visual Feedback
         ManageVisualFeedback();
-
-        PlayDataSingleton.instance.playerDamage = atkDistanceMax * atkDamage;
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = input * speed; //move player
+        rb.velocity = moves * speed; //move player
     }
 
     void ManageInputs()
@@ -72,13 +71,11 @@ public class PlayerHandler : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
         moves = new Vector2(moveX, moveY);
 
-        float angle = Mathf.Atan2(moveX, moveY) * Mathf.Rad2Deg;                       //rotate attack zone with joystick input
-        attackZone.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));             //rotate attack zone with joystick input
+        float angle = Mathf.Atan2(moves.x, moves.y) * Mathf.Rad2Deg;                                                  //rotate attack zone with joystick input
+        if(!(moves.x == 0 && moves.y == 0)) attackZone.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));        //rotate attack zone with joystick input
 
-        if ((moveX == 0 && moveY == 0) && (input.x != 0 || input.y != 0)) lastMoveDirection = input;
+        if (moves.x != 0 || moves.y != 0) lastMoveDirection = new Vector2(moves.x, moves.y);
 
-        input.x = Input.GetAxisRaw("Horizontal");
-        input.y = Input.GetAxisRaw("Vertical");
 
         if(Input.GetButtonDown("Dash") && canDash)
         {
@@ -88,8 +85,8 @@ public class PlayerHandler : MonoBehaviour
 
     void ManageAnims()
     {
-        anim.SetFloat("MoveX", input.x);
-        anim.SetFloat("MoveY", input.y);
+        anim.SetFloat("MoveX", moves.x);
+        anim.SetFloat("MoveY", moves.y);
         anim.SetFloat("MoveMagnitude", moves.magnitude);
         anim.SetFloat("LastMoveX", lastMoveDirection.x);
         anim.SetFloat("LastMoveY", lastMoveDirection.y);
