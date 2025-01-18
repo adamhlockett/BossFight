@@ -10,6 +10,8 @@ public class CheckMenuInputs : MonoBehaviour
     [SerializeField] Material[] cursorMaterials;
     [SerializeField] SpriteRenderer cursor;
 
+    private void Start() { Cursor.visible = false; }
+
     void Update()
     {
         if (Input.GetButtonDown("Attack"))
