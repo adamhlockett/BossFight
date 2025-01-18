@@ -11,7 +11,7 @@ public class Health : MonoBehaviour
     public bool canBeDamaged = true;
     [SerializeField] SpriteRenderer overlayBarRenderer;
     public float overlayBarStartWidth, overlayBarEndWidth, overlayBarStartHeight;
-    [SerializeField] PlayerHandler playerHandler;
+    [SerializeField] Player playerHandler;
     public float playerHitStopDuration = 0.2f, enemyHitStopDuration = 0.1f, playerRumbleDuration = 0.1f, enemyRumbleDuration = 0.05f, materialChangeWaitFor;
     [SerializeField] SpriteRenderer lowHealthIndicator;
     [SerializeField] Material playerMat;

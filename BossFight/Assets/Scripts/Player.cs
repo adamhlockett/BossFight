@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerHandler : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Vector2 lastMoveDirection, moves;
