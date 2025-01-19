@@ -58,16 +58,17 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
 
     private void CalculatePlayTime()
     {
-        if (p.playTime < p.shortestPlayTime) { p.pr_loss = 0; }
+        if (p.playTime < p.shortestPlayTime) { p.pr_loss = 0; Debug.Log("apply min playtime loss chance"); }
 
         else if (p.playTime >= p.shortestPlayTime && p.playTime <= p.longestPlayTime)
         {
             float playTimeRange = p.longestPlayTime - p.shortestPlayTime;
             float playTimeGap = p.playTime - p.shortestPlayTime;
             p.pr_loss = playTimeGap / playTimeRange;
+            Debug.Log("apply playtime loss chance calculation");
         }
 
-        else if (p.playTime > p.longestPlayTime) { p.pr_loss = 1; }
+        else if (p.playTime > p.longestPlayTime) { p.pr_loss = 1; Debug.Log("apply max playtime loss chance"); }
         Debug.Log(p.pr_loss + " playtime loss calculation");
 
         CalculateHealthGap();
@@ -75,11 +76,13 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
 
     private void CalculateHealthGap()
     {
-        if (((p.pr_loss += p.healthGap) > 0) && ((p.pr_loss += p.healthGap) < 1))
-        {
-            p.pr_loss += p.healthGap;
-        }
-        Debug.Log(p.pr_loss + " healthgap loss calculation");
+        Debug.Log(p.pr_loss + "before health gap loss calculation");
+        p.pr_loss += p.healthGap;
+        Debug.Log(p.healthGap + " healthgap");
+        Debug.Log(p.pr_loss + " after healthgap loss calculation");
+
+        if (p.pr_loss < 0) p.pr_loss = 0;
+        else if (p.pr_loss > 1) p.pr_loss = 1;
 
         CalculateAccuracies();
     }
@@ -89,13 +92,18 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
         if (p.playerHealth <= p.enemyDamage)
         {
             p.pr_loss += p.enemyAccuracy;
+            Debug.Log("apply enemy accuracy");
         }
 
         if (p.enemyHealth <= p.playerDamage)
         {
             p.pr_loss -= p.playerAccuracy;
+            Debug.Log("apply player accuracy");
         }
         Debug.Log(p.pr_loss + " accuracies loss calculation");
+
+        if (p.pr_loss < 0) p.pr_loss = 0;
+        else if (p.pr_loss > 1) p.pr_loss = 1;
 
         ApplyBoundsToLossChance();
     }
