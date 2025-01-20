@@ -6,6 +6,7 @@ public abstract class DynamicAdjustmentMethod : MonoBehaviour
 {
     public string methodName;
     public DynamicAdjuster adj;
+    public Material enemyMat;
 
     public void Start()
     {

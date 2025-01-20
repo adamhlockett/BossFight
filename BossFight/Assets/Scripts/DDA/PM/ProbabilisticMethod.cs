@@ -125,11 +125,18 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
         //if (difficulty < 0.6) difficulty = 0.6f;
         //else if (difficulty > 1.4) difficulty = 1.4f; // apply bounds
 
-        float difficulty = 1.6f - p.pr_loss;
+        float difficulty = 1.8f - p.pr_loss;
 
         p.difficulty = difficulty;
 
         Debug.Log(p.difficulty + " difficulty");
+
+        ChangeStaffColour(p.pr_loss);
+    }
+
+    private void ChangeStaffColour(float d)
+    {
+        enemyMat.color = new Color(255 - (d * 255), d * 255, 0);// color from (0,255,0) to (255,0,0)
     }
 }
 

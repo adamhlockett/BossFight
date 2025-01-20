@@ -60626,6 +60626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   methodName: Probabilistic Method
   adj: {fileID: 81036573}
+  enemyMat: {fileID: 2100000, guid: 53b11eb1d20b1c24d9eb45f290c975d0, type: 2}
 --- !u!1 &1410595395
 GameObject:
   m_ObjectHideFlags: 0
@@ -60672,6 +60673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   methodName: Control
   adj: {fileID: 81036573}
+  enemyMat: {fileID: 2100000, guid: 53b11eb1d20b1c24d9eb45f290c975d0, type: 2}
 --- !u!1 &1500709096
 GameObject:
   m_ObjectHideFlags: 0
@@ -66791,6 +66793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   methodName: Monte Carlo Tree Search
   adj: {fileID: 81036573}
+  enemyMat: {fileID: 2100000, guid: 53b11eb1d20b1c24d9eb45f290c975d0, type: 2}
   maxIterations: 5
 --- !u!1 &2023901481
 GameObject:
