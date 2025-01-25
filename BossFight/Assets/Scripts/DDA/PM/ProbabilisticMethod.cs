@@ -12,13 +12,15 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
     PlayDataSingleton p = PlayDataSingleton.instance;
     //float checkEvery, checkEverySeconds = 5f;
 
+    float maxDifficulty = 1.8f, minDifficulty = 0.6f, playTimeWeighting = 0.5f;
+
 
     private void Start()
     {
         methodName = "Probabilistic";
 
-        p.shortestPlayTime = 5f;
-        p.longestPlayTime = 15f;
+        p.shortestPlayTime = 15f;
+        p.longestPlayTime = 25f;
         //checkEvery = checkEverySeconds;
     }
 
@@ -64,11 +66,11 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
         {
             float playTimeRange = p.longestPlayTime - p.shortestPlayTime;
             float playTimeGap = p.playTime - p.shortestPlayTime;
-            p.pr_loss = playTimeGap / playTimeRange;
+            p.pr_loss = (playTimeGap / playTimeRange) * playTimeWeighting;
             //Debug.Log("apply playtime loss chance calculation");
         }
 
-        else if (p.playTime > p.longestPlayTime) { p.pr_loss = 1; /*Debug.Log("apply max playtime loss chance");*/ }
+        else if (p.playTime > p.longestPlayTime) { p.pr_loss = playTimeWeighting; /*Debug.Log("apply max playtime loss chance");*/ }
         //Debug.Log(p.pr_loss + " playtime loss calculation");
 
         CalculateHealthGap();
@@ -125,7 +127,9 @@ public class ProbabilisticMethod : DynamicAdjustmentMethod
         //if (difficulty < 0.6) difficulty = 0.6f;
         //else if (difficulty > 1.4) difficulty = 1.4f; // apply bounds
 
-        float difficulty = 1.8f - p.pr_loss;
+        float difficulty = ((1 - p.pr_loss) * (maxDifficulty - minDifficulty)) + minDifficulty;
+
+        //if (difficulty <= 0) difficulty = 0.1f;
 
         p.difficulty = difficulty;
 

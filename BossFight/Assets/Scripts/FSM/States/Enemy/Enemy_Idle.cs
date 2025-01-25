@@ -18,8 +18,11 @@ public class Enemy_Idle : EnemyState
     {
         stateName = "idle";
         StartAnim(p_anim, p_enemy);
+        if (d.dA.idleFor < 2) d.dA.idleFor = 2f;
+        else if (d.dA.idleFor > 5) d.dA.idleFor = 5f;
         StartCoroutine(IdleFor(d.dA.idleFor));
         isComplete = false;
+        //Debug.Log(d.dA.idleFor);
     }
 
     public override void RunCurrentState(Animator anim, Enemy p_enemy)
@@ -43,7 +46,7 @@ public class Enemy_Idle : EnemyState
 
     public override void StartAnim(Animator p_anim, Enemy p_enemy)
     {
-        string animName = p_enemy.GetEnemyShouldFace() + "_fly";
+        string animName = p_enemy.GetEnemyShouldFace() + "_idle";
         p_anim.Play(animName);
     }
 

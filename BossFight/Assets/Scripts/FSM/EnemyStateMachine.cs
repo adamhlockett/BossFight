@@ -67,11 +67,17 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void SwitchState()
     {
-        if (!canChangeState) { currentState = enemyStates[currentStateNum]; return; }
+        if (!canChangeState) { currentState = enemyStates[currentStateNum]; return; } // remain in same state
         d.CheckForAdjustments();
         currentStateNum++;
         if (currentStateNum >= enemyStates.Count) currentStateNum = 0;
-        currentState = enemyStates[currentStateNum];
+
+        attackState.isComplete = false;
+        idleState.isComplete = false;
+        chargeState.isComplete = false;
+
+        currentState = enemyStates[currentStateNum]; // change state
         currentState.OnEnter(anim, enemy);
+        Debug.Log(currentState.stateName);
     }
 }
