@@ -646,6 +646,7 @@ MonoBehaviour:
   enemyStartPos: {fileID: 1091846256}
   d: {fileID: 81036573}
   testInfoHider: {fileID: 1500709100}
+  enemyMat: {fileID: 2100000, guid: 53b11eb1d20b1c24d9eb45f290c975d0, type: 2}
   transitionLength: 0
   isPaused: 0
   inTraining: 1

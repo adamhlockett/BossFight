@@ -30,6 +30,7 @@ public class GameStates : MonoBehaviour
     [SerializeField] GameObject enemyStartPos;
     [SerializeField] DynamicAdjuster d;
     [SerializeField] TestInfoHider testInfoHider;
+    [SerializeField] Material enemyMat;
     GameObject[] projectiles;
     GameObject[] slams;
     public float transitionLength = 1f;
@@ -70,6 +71,7 @@ public class GameStates : MonoBehaviour
         if (hasDoneTutorial) ExitTraining();
         p.playTime = 0;
         p.difficulty = 1;
+        enemyMat.color = new Color(255 - (p.pr_loss * 255), p.pr_loss * 255, 0);
     }
 
     private void Update()
