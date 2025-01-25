@@ -19,8 +19,8 @@ public class Enemy_Attack : EnemyState
         StartAnim(p_anim, p_enemy);
         StartCoroutine(WaitToIdle());
         isComplete = false;
-        //if(d.dA.fireRate <= 0) { d.dA.fireRate = 0.5f; } // apply highest difficulty bounds
-        //if (d.dA.fireFor <= 0) { d.dA.fireFor = 3f; }
+        //if(d.dA.fireRate < 1f) { d.dA.fireRate = 1f; } // apply highest difficulty bounds
+        //if (d.dA.fireFor < 5) { d.dA.fireFor = 5f; }
         InvokeRepeating("Fire", 0.1f, d.dA.fireRate);
         fireAmount = d.dA.fireFor / d.dA.fireRate;
         chargeState = GameObject.Find("Charge").GetComponent<Enemy_Charge>();

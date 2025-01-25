@@ -17,11 +17,11 @@ public class Enemy_Idle : EnemyState
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
         stateName = "idle";
+        isComplete = false;
         StartAnim(p_anim, p_enemy);
         if (d.dA.idleFor < 2) d.dA.idleFor = 2f;
         else if (d.dA.idleFor > 5) d.dA.idleFor = 5f;
         StartCoroutine(IdleFor(d.dA.idleFor));
-        isComplete = false;
         //Debug.Log(d.dA.idleFor);
     }
 
@@ -42,6 +42,7 @@ public class Enemy_Idle : EnemyState
     private void ManageLogic()
     {
         // does not have to do anything
+        if(isComplete) Debug.Log(isComplete);
     }
 
     public override void StartAnim(Animator p_anim, Enemy p_enemy)
@@ -52,6 +53,7 @@ public class Enemy_Idle : EnemyState
 
     IEnumerator IdleFor(float p_idleFor)
     {
+        if (isComplete) yield break;
         yield return new WaitForSeconds(p_idleFor - d.dA.telegraphFor);
         if(!gameStates.inTraining) Instantiate(telegraphIndicator, GameObject.Find("TelegraphIndicator").transform.position, Quaternion.identity);
         yield return new WaitForSeconds(d.dA.telegraphFor);

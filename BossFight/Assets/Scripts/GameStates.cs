@@ -31,6 +31,7 @@ public class GameStates : MonoBehaviour
     [SerializeField] DynamicAdjuster d;
     [SerializeField] TestInfoHider testInfoHider;
     [SerializeField] Material enemyMat;
+    [SerializeField] SpriteRenderer losePopup;
     GameObject[] projectiles;
     GameObject[] slams;
     public float transitionLength = 1f;
@@ -79,6 +80,8 @@ public class GameStates : MonoBehaviour
         p.playTime += Time.deltaTime;
         CheckConditions();
         CheckInputs();
+
+        //if(losePopup.color.a != 0) { losePopup.color = new Color(255, 255, 255, losePopup.color.a - 1f); }
     }
 
     private void CheckConditions()
@@ -140,12 +143,14 @@ public class GameStates : MonoBehaviour
 
     public void Lose() 
     {
-        if(p.playTime < p.shortestPlayTime) p.shortestPlayTime = p.playTime;
+        if (p.playTime < p.shortestPlayTime) p.shortestPlayTime = p.playTime;
         if (p.playTime > p.longestPlayTime) p.longestPlayTime = p.playTime;
         p.totalPlayTime += p.playTime;
         p.attempts++;
         Gamepad.current.SetMotorSpeeds(0f, 0f);
-        Restart(); // should just restart the level
+
+        //losePopup.color = new Color(255, 255, 255, 255);
+        Restart(); // restart the level
     }
 
     public void Win()
