@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] DynamicAdjuster d;
-    [SerializeField] Transform playerPos;
-    Transform enemyPos;
+    DynamicAdjuster d;
+    //GameObject player;
+    //Transform enemyPos;
     int tempAngle;
     public bool playerHasChangedSide = false;
     GameObject[] projectiles;
@@ -15,11 +15,15 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        enemyPos = transform;
+        //enemyPos = transform;
+        //playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        d = GameObject.Find("Dynamic Adjuster").GetComponent<DynamicAdjuster>();
     }
 
     private void Update()
     {
+        //if (enemyPos == null) enemyPos = transform;
+        //player = GameObject.FindGameObjectWithTag("Player");
         if (GetPlayerAngleFromEnemy() != tempAngle) playerHasChangedSide = true;
         else playerHasChangedSide = false;
         tempAngle = GetPlayerAngleFromEnemy();
@@ -35,7 +39,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public Vector2 GetPlayerPos() { return playerPos.position; }
+    public Vector2 GetPlayerPos() { return GameObject.FindGameObjectWithTag("Player").transform.position; }
 
     public string GetEnemyShouldFace()
     {
@@ -61,7 +65,7 @@ public class Enemy : MonoBehaviour
     }
     public int GetPlayerAngleFromEnemy()
     {
-        float angle = Mathf.Atan2(enemyPos.position.y - playerPos.position.y, enemyPos.position.x - playerPos.position.x) * 180 / Mathf.PI;
+        float angle = Mathf.Atan2(transform.position.y - GameObject.FindGameObjectWithTag("Player").transform.position.y, transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x) * 180 / Mathf.PI;
         int angleInt = ((int)(angle / 45));
         return angleInt;
     }

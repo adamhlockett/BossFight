@@ -21,13 +21,18 @@ public class Health : MonoBehaviour
     void Start()
     {
         maxhp = hp;
-        overlayBarRenderer.size = new Vector2(overlayBarStartWidth, overlayBarStartHeight);
+        if(overlayBarRenderer != null) overlayBarRenderer.size = new Vector2(overlayBarStartWidth, overlayBarStartHeight);
         overlayBarRange = overlayBarEndWidth - overlayBarStartWidth; //get range between start and end width
         materialChangeWaitFor = playerHitStopDuration;
     }
 
     private void UpdateHealthBar(bool isPlayer) //only needs to happen when taking damage
     {
+        if (!isPlayer)
+        {
+            overlayBarRenderer = GameObject.Find("Boss Overlay Bar").GetComponent<SpriteRenderer>();
+        }
+
         healthPercentage = (hp / maxhp) * 100f; //calculate percentage of health
         inverseHealthPercentage = 100f - healthPercentage; //get this as a REVERSE percentage
         overlayBarPercentage = (overlayBarRange * (inverseHealthPercentage / 100f)) + overlayBarStartWidth; //get as a percentage of the range and add start width

@@ -11,6 +11,9 @@ TagManager:
   - Projectile
   - Cursor
   - Slam
+  - Idle State
+  - Attack State
+  - Charge State
   layers:
   - Default
   - TransparentFX

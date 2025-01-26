@@ -7,7 +7,7 @@ public class Enemy_Idle : EnemyState
 {
     public bool isComplete;
 
-    [SerializeField] DynamicAdjuster d;
+     DynamicAdjuster d;
 
     //public float idleFor = 5f;
     //public float telegraphWarning = 0.5f;
@@ -16,6 +16,7 @@ public class Enemy_Idle : EnemyState
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
+        d = GameObject.Find("Dynamic Adjuster").GetComponent<DynamicAdjuster>();
         stateName = "idle";
         isComplete = false;
         StartAnim(p_anim, p_enemy);

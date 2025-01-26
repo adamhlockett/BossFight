@@ -12,10 +12,11 @@ public class Enemy_Charge : EnemyState
     private bool hasReachedPoint;
     [SerializeField] GameObject slamPrefab;
 
-    [SerializeField] DynamicAdjuster d;
+    DynamicAdjuster d;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
+        d = GameObject.Find("Dynamic Adjuster").GetComponent<DynamicAdjuster>();
         stateName = "charge";
         chargeTo = p_enemy.GetPlayerPos();
         animString = "_fly";
