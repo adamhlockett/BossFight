@@ -9,13 +9,12 @@ public class Enemy_Attack : EnemyState
     [SerializeField] GameStates gameStates;
     Enemy_Charge chargeState;
 
-    DynamicAdjuster d;
+    [SerializeField] DynamicAdjuster d;
 
     public float fireAmount;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
-        d = GameObject.Find("Dynamic Adjuster").GetComponent<DynamicAdjuster>();
         stateName = "attack";
         StartAnim(p_anim, p_enemy);
         StartCoroutine(WaitToIdle());

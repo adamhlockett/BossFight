@@ -32,7 +32,6 @@ public class GameStates : MonoBehaviour
     [SerializeField] TestInfoHider testInfoHider;
     [SerializeField] Material enemyMat;
     [SerializeField] SpriteRenderer losePopup;
-    [SerializeField] GameObject enemyPrefab;
     GameObject[] projectiles;
     GameObject[] slams;
     public float transitionLength = 1f;
@@ -48,12 +47,6 @@ public class GameStates : MonoBehaviour
 
     public void Restart() // call when game is restarted
     {
-        Destroy(GameObject.FindGameObjectWithTag("Enemy"));
-        enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
-        enemy.SetActive(true);
-        enemyHealth = enemyPrefab.GetComponent<Health>();
-        enemyFSM = enemyPrefab.GetComponent<EnemyStateMachine>();
-
         inTraining = true;
         trainingInfo.SetActive(true);
         trainingVp.clip = trainingClips[0];
