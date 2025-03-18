@@ -11,6 +11,7 @@ public class TestInfoHider : MonoBehaviour
     [SerializeField] GameObject moveTo;
     [SerializeField] GameObject moveFrom;
     [SerializeField] GameObject videoGo;
+    [SerializeField] GameObject tutorialOverlapPrompt;
     public bool hide = false, isWaiting = false;
     public float speed = 5f;
 
@@ -25,6 +26,7 @@ public class TestInfoHider : MonoBehaviour
         {
             var step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, moveTo.transform.position, step);
+            tutorialOverlapPrompt.SetActive(true);
             //videoGo.transform.position = Vector3.MoveTowards(videoGo.transform.position, videoMoveTo.transform.position, step * 3.85f);
             videoGo.transform.position = transform.position;
         }
@@ -32,6 +34,7 @@ public class TestInfoHider : MonoBehaviour
         {
             var step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, moveFrom.transform.position, step);
+            tutorialOverlapPrompt.SetActive(false);
             //videoGo.transform.position = Vector3.MoveTowards(videoGo.transform.position, videoMoveFrom.transform.position, step * 3.85f);
             videoGo.transform.position = transform.position;
         }

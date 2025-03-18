@@ -11,7 +11,7 @@ public class Slam : MonoBehaviour
     bool canDamage;
     Enemy_Charge chargeState;
     [SerializeField] DynamicAdjuster d;
-    public float size;
+    public float size, damageIntervalMax, damageInterval;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +26,7 @@ public class Slam : MonoBehaviour
         slamDamage = d.dA.slamDamage;
         PlayDataSingleton.instance.enemyAttacks++;
         PlayDataSingleton.instance.enemyDamage = slamDamage;
+        damageIntervalMax = 0.5f;
     }
 
     // Update is called once per frame
@@ -34,13 +35,17 @@ public class Slam : MonoBehaviour
         tr.localScale *= 1 + (scaleBy * Time.deltaTime);
 
         //DAMAGE PLAYER
-        if (this.GetComponent<CheckContainsPlayer>().containsPlayer && canDamage)
+        if(damageInterval < damageIntervalMax)
         {
-            playerHealth.DamageFor(slamDamage, true);
-            PlayDataSingleton.instance.enemyHits++;
-            canDamage = false;
-            StartCoroutine(DamageCooldown());
+            if (this.GetComponent<CheckContainsPlayer>().containsPlayer && canDamage)
+            {
+                playerHealth.DamageFor(slamDamage, true);
+                PlayDataSingleton.instance.enemyHits++;
+                canDamage = false;
+                StartCoroutine(DamageCooldown());
+            }
         }
+        damageInterval += Time.deltaTime;
     }
 
     private IEnumerator DamageCooldown()

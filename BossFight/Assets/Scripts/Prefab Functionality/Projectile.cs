@@ -32,6 +32,7 @@ public class Projectile : MonoBehaviour
         canDamage = true;
         attackDamage = d.dA.projectileDamage;
         speed = d.dA.projectileSpeed;
+        if (speed > 14f) speed = 14f;
         PlayDataSingleton.instance.enemyAttacks++;
     }
 
