@@ -16,7 +16,8 @@ public class PlayDataSingleton : MonoBehaviour
         playTime, avgPlayTime, totalPlayTime, shortestPlayTime, longestPlayTime,
 /*probabilities*/pr_loss, pr_playerHit, pr_enemyHit,
 //monte carlo tree search data
-
+        chargeAttacks, chargeHits, chargeAccuracy,
+        attackAttacks, attackHits, attackAccuracy,
 //difficulty
         difficulty;
 

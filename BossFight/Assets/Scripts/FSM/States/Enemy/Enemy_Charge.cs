@@ -11,8 +11,8 @@ public class Enemy_Charge : EnemyState
     private string animString;
     private bool hasReachedPoint;
     [SerializeField] GameObject slamPrefab;
-
     [SerializeField] DynamicAdjuster d;
+    PlayDataSingleton p = PlayDataSingleton.instance;
 
     public override void OnEnter(Animator p_anim, Enemy p_enemy)
     {
@@ -22,6 +22,7 @@ public class Enemy_Charge : EnemyState
         StartAnim(p_anim, p_enemy);
         hasReachedPoint = false;
         isComplete = false;
+        p.chargeAttacks++; // MCTS
     }
 
     public override void RunCurrentState(Animator p_anim, Enemy p_enemy)

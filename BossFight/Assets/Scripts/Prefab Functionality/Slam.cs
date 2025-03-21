@@ -41,6 +41,7 @@ public class Slam : MonoBehaviour
             {
                 playerHealth.DamageFor(slamDamage, true);
                 PlayDataSingleton.instance.enemyHits++;
+                PlayDataSingleton.instance.chargeHits++;
                 canDamage = false;
                 StartCoroutine(DamageCooldown());
             }

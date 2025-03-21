@@ -8,8 +8,8 @@ public class Enemy_Attack : EnemyState
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] GameStates gameStates;
     Enemy_Charge chargeState;
-
     [SerializeField] DynamicAdjuster d;
+    PlayDataSingleton p = PlayDataSingleton.instance;
 
     public float fireAmount;
 
@@ -24,6 +24,7 @@ public class Enemy_Attack : EnemyState
         InvokeRepeating("Fire", 0.1f, d.dA.fireRate);
         fireAmount = d.dA.fireFor / d.dA.fireRate;
         chargeState = GameObject.Find("Charge").GetComponent<Enemy_Charge>();
+        p.attackAttacks++;
     } 
 
     public override void RunCurrentState(Animator anim, Enemy p_enemy)

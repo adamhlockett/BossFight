@@ -50,10 +50,21 @@ public class MCState : MonoBehaviour
         return randomState;
     }
 
-    public bool GetWinner() // win is defined as enemy hitting player, loss is defined as enemy missing player, estimate chance of hit - how?
+    public bool GetWinner() // win is defined as enemy hitting player, loss is defined as enemy missing player, estimate chance of hit - how? //DONE?
     {
-        //get accuracies from singleton - may need to separate accuracies
-        
+        float accuracy = 0f;
+
+        if(this.stateNum < 4) accuracy = p.chargeHits / p.chargeAttacks; // is charge state
+        else accuracy = p.attackHits / p.attackAttacks; // is attack state
+
+        float prediction = Random.Range(0f, 10f);
+        prediction = prediction / 10f;
+
+        if(prediction <= accuracy) enemyLandsHit = true;
+        else enemyLandsHit = false;
+
+        //NEED TO MODIFY THESE VALUES BASED ON PERCEIVED DIFFICULTY
+
         return enemyLandsHit;
     }
 }

@@ -88,6 +88,7 @@ public class MCTS : DynamicAdjustmentMethod
             case 0: // charge easy
                 p.difficulty = 0;
                 //set next state as charge - FIND A WAY OF ADAPTING ENEMYFSM FOR THIS---------------------------------------------------------------------------------------------------
+                enemyFSM.MCTSNextAttack = "Charge";
                 ChangeStaffColour(p.difficulty);
                 break;
 
@@ -95,6 +96,7 @@ public class MCTS : DynamicAdjustmentMethod
             case 1: // charge med
                 p.difficulty = 1;
                 //set next state as charge----------------------------------------------------------
+                enemyFSM.MCTSNextAttack = "Charge";
                 ChangeStaffColour(p.difficulty);
                 break;
 
@@ -102,6 +104,7 @@ public class MCTS : DynamicAdjustmentMethod
             case 2: // charge hard
                 p.difficulty = 2;
                 //set next state as charge----------------------------------------------------------
+                enemyFSM.MCTSNextAttack = "Charge";
                 ChangeStaffColour(p.difficulty);
                 break;
 
@@ -109,6 +112,7 @@ public class MCTS : DynamicAdjustmentMethod
             case 3: // attack easy
                 p.difficulty = 0;
                 //set next state as attack----------------------------------------------------------
+                enemyFSM.MCTSNextAttack = "Attack";
                 ChangeStaffColour(p.difficulty);
                 break;
 
@@ -116,6 +120,7 @@ public class MCTS : DynamicAdjustmentMethod
             case 4: // attack med
                 p.difficulty = 1;
                 //set next state as attack----------------------------------------------------------
+                enemyFSM.MCTSNextAttack = "Attack";
                 ChangeStaffColour(p.difficulty);
                 break;
 
@@ -123,6 +128,7 @@ public class MCTS : DynamicAdjustmentMethod
             default: //5+ stateNum - 5 = attack hard
                 p.difficulty = 2;
                 //set next state as attack----------------------------------------------------------
+                enemyFSM.MCTSNextAttack = "Attack";
                 ChangeStaffColour(p.difficulty);
                 break;
         }

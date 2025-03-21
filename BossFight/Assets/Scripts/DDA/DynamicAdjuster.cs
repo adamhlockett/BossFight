@@ -6,7 +6,7 @@ public class DynamicAdjuster : MonoBehaviour
 {
     public DynamicAdjustments dA;
     private DefaultDynamicAdjustments _dA;
-    private DynamicAdjustmentMethod method;
+    public DynamicAdjustmentMethod method;
     [SerializeField] List<DynamicAdjustmentMethod> methodList;
     PlayDataSingleton p = PlayDataSingleton.instance;
 

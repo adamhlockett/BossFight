@@ -46,6 +46,7 @@ public class Projectile : MonoBehaviour
         {
             playerHealth.DamageFor(attackDamage, true);
             PlayDataSingleton.instance.enemyHits++;
+            PlayDataSingleton.instance.attackHits++;
             canDamage = false;
             Destroy(gameObject); //needs to be called when projectile exits view also
         }
