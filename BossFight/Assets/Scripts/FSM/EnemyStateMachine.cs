@@ -14,7 +14,7 @@ using UnityEngine;
 public class EnemyStateMachine : MonoBehaviour
 {
     [Header("Start State")]
-    private EnemyState currentState;
+    public EnemyState currentState;
     private Animator anim;
     [HideInInspector] public Enemy enemy;
     //[SerializeField] EnemyState[] states;

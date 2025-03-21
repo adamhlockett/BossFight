@@ -21,32 +21,116 @@ using UnityEngine;
 
 public class MCTS : DynamicAdjustmentMethod
 {
-    public int maxIterations = 5; // does this act as a depth limit????
+    public int depthLimit = 3;
+    PlayDataSingleton p = PlayDataSingleton.instance;
+    MCState bestState;
+    EnemyStateMachine enemyFSM;
 
     private void Start()
     {
         methodName = "Monte Carlo";
+        enemyFSM = GameObject.Find("Enemy").GetComponent<EnemyStateMachine>();
     }
 
     public override void CheckForAdjustments()
     {
-        
+        MCState currentState = new MCState();
+
+        //if (enemyFSM.currentState.stateName == "Charge")
+        //{
+        //    switch ((int)p.difficulty)
+        //    {
+        //        case 0:
+        //            currentState.stateNum = 0; // charge easy
+        //            break;
+        //
+        //        case 1:
+        //            currentState.stateNum = 1; // charge medium
+        //            break;
+        //
+        //        default: //2+ difficulty 
+        //            currentState.stateNum = 2; // charge hard
+        //            break;
+        //    }
+        //}
+        //else if (enemyFSM.currentState.stateName == "Attack")
+        //{
+        //    switch ((int)p.difficulty)
+        //    {
+        //        case 0:
+        //            currentState.stateNum = 3; // attack easy
+        //            break;
+        //
+        //        case 1:
+        //            currentState.stateNum = 4; // attack medium
+        //            break;
+        //
+        //        default: //2+ difficulty 
+        //            currentState.stateNum = 5; // attack hard
+        //            break;
+        //    }
+        //}
+        //else return; // return if in idle state
+
+        if (enemyFSM.currentState.stateName != "Idle") return;
+        currentState.stateNum = 0;
+
+        bestState = FindBestMove(currentState);
+
+        AdjustDifficulty();
     }
 
     public override void AdjustDifficulty()
     {
-        
+        //calculation uses bestState
+        switch (bestState.stateNum)
+        {
+            case 0: // charge easy
+                p.difficulty = 0;
+                //set next state as charge - FIND A WAY OF ADAPTING ENEMYFSM FOR THIS---------------------------------------------------------------------------------------------------
+                break;
+
+
+            case 1: // charge med
+                p.difficulty = 1;
+                //set next state as charge----------------------------------------------------------
+                break;
+
+
+            case 2: // charge hard
+                p.difficulty = 2;
+                //set next state as charge----------------------------------------------------------
+                break;
+
+
+            case 3: // attack easy
+                p.difficulty = 0;
+                //set next state as attack----------------------------------------------------------
+                break;
+
+
+            case 4: // attack med
+                p.difficulty = 1;
+                //set next state as attack----------------------------------------------------------
+                break;
+
+
+            default: //5+ stateNum - 5 = attack hard
+                p.difficulty = 2;
+                //set next state as attack----------------------------------------------------------
+                break;
+        }
     }
 
     public MCState FindBestMove(MCState currentState) // called to start the process
     {
         MCNode rootNode = new MCNode(currentState, null); // creates the initial node of the tree
 
-        for (int i = 0; i < maxIterations; i++)
+        for (int i = 0; i < depthLimit; i++)
         {
             MCNode selectedNode = Select(rootNode); // selects best possible node based on wins and visits
             MCNode expandedNode = Expand(selectedNode); // creates children based on the possible states that can be moved to from each state
-            int simulationResult = Simulate(expandedNode); // perform a random playout from an expanded node, use the result to estimate the value of the expanded node
+            bool simulationResult = Simulate(expandedNode); // perform a random playout from an expanded node, use the result to estimate the value of the expanded node
             Backpropagate(expandedNode, simulationResult); // update the visit and win count of each node along the chosen path back up to the root
         }
 
@@ -72,14 +156,12 @@ public class MCTS : DynamicAdjustmentMethod
                     bestChild = child;
                 }
             }
-
             node = bestChild;
         }
-
         return node;
     }
 
-    private MCNode Expand(MCNode node) 
+    private MCNode Expand(MCNode node)
     {
         List<MCState> possibleStates = node.state.GetPossibleNextStates();
 
@@ -92,11 +174,11 @@ public class MCTS : DynamicAdjustmentMethod
         return node.children[Random.Range(0, node.children.Count)]; // randomly choose one of the children nodes to return
     }
 
-    private int Simulate(MCNode node)
+    private bool Simulate(MCNode node)
     {
-        MCState currentState = node.state.Clone(); // presumably a copy of the current state ????????????????? does this need to be a copy?
+        MCState currentState = node.state.Clone(); // presumably a copy of the current state ????????????????? does this need to be a copy? -------------------------
 
-        while (!currentState.IsTerminal()) // means is end state - could be field instead, brings us to the end of the tree
+        while (!currentState.IsTerminal()) // means is end state - could be field instead, brings us to the end of the tree --------------------------------------------
         {
             currentState = currentState.GetRandomNextState();
         }
@@ -104,12 +186,12 @@ public class MCTS : DynamicAdjustmentMethod
         return currentState.GetWinner(); // playout
     }
 
-    private void Backpropagate(MCNode node, int winner)
+    private void Backpropagate(MCNode node, bool winner)
     {
         while (node != null) // while is NOT root node
         {
             node.visits++;
-            if(node.state.currentPlayer == winner) { node.wins++; } // currentPlayer ??? - applies to a turn based two player game
+            if(winner) { node.wins++; }
             node = node.parent; // moves back up the tree
         }
     }

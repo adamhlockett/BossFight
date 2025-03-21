@@ -2,13 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum StateNumbers
+{
+    Idle = 0,
+    Charge_Easy = 1,
+    Charge_Med = 2,
+    Charge_Hard = 3,
+    Attack_Easy = 4,
+    Attack_Med = 5,
+    Attack_Hard = 6
+}
+
 public class MCState : MonoBehaviour
 {
-    public int currentPlayer;
+    public int stateNum; // corresponds to StateNumbers enum
+    public bool enemyLandsHit;
+    private List<MCState> nextPossibleStates = new List<MCState>();
+    PlayDataSingleton p = PlayDataSingleton.instance;
 
     public List<MCState> GetPossibleNextStates()
     {
-        return null; // return all possible actions depending on state
+        for(int i = 1; i < 7; i++)
+        {
+            MCState state = new MCState();
+            state.stateNum = i;
+            nextPossibleStates.Add(state);
+        }
+        return nextPossibleStates;
     }
 
     public MCState Clone() 
@@ -16,18 +36,22 @@ public class MCState : MonoBehaviour
         return null; // return copy of state ??
     }
 
-    public bool IsTerminal()
+    public bool IsTerminal() // how is this determined?
     {
         return false; // return true if at end of tree
     }
 
-    public MCState GetRandomNextState()
+    public MCState GetRandomNextState() 
     {
-        return null; // get next state at random
+        int i = Random.Range(1, nextPossibleStates.Count);
+        MCState randomState = nextPossibleStates[i];
+        return randomState;
     }
 
-    public int GetWinner()
+    public bool GetWinner() // win is defined as enemy hitting player, loss is defined as enemy missing player, estimate chance of hit - how?
     {
-        return 0; // playout needs to happen here, returns int ???, in current version, IF WINS, currentPlayer must equal simulationResult to add a win to the node
+        //get accuracies from singleton
+        
+        return enemyLandsHit;
     }
 }

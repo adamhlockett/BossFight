@@ -26,7 +26,7 @@ public class Slam : MonoBehaviour
         slamDamage = d.dA.slamDamage;
         PlayDataSingleton.instance.enemyAttacks++;
         PlayDataSingleton.instance.enemyDamage = slamDamage;
-        damageIntervalMax = 0.5f;
+        damageIntervalMax = 0.2f; //set damage interval
     }
 
     // Update is called once per frame

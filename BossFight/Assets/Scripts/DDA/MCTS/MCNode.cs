@@ -9,7 +9,7 @@ public class MCNode
     public List<MCNode> children;
     public int wins, visits;
 
-    public MCNode(MCState s_state, MCNode p_parent)
+    public MCNode(MCState s_state, MCNode p_parent) // constructor
     {
         state = s_state;
         parent = p_parent;
