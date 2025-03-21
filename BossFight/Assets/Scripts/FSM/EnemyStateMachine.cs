@@ -78,6 +78,6 @@ public class EnemyStateMachine : MonoBehaviour
 
         currentState = enemyStates[currentStateNum]; // change state
         currentState.OnEnter(anim, enemy);
-        Debug.Log(currentState.stateName);
+        //Debug.Log(currentState.stateName);
     }
 }

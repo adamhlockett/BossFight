@@ -88,36 +88,42 @@ public class MCTS : DynamicAdjustmentMethod
             case 0: // charge easy
                 p.difficulty = 0;
                 //set next state as charge - FIND A WAY OF ADAPTING ENEMYFSM FOR THIS---------------------------------------------------------------------------------------------------
+                ChangeStaffColour(p.difficulty);
                 break;
 
 
             case 1: // charge med
                 p.difficulty = 1;
                 //set next state as charge----------------------------------------------------------
+                ChangeStaffColour(p.difficulty);
                 break;
 
 
             case 2: // charge hard
                 p.difficulty = 2;
                 //set next state as charge----------------------------------------------------------
+                ChangeStaffColour(p.difficulty);
                 break;
 
 
             case 3: // attack easy
                 p.difficulty = 0;
                 //set next state as attack----------------------------------------------------------
+                ChangeStaffColour(p.difficulty);
                 break;
 
 
             case 4: // attack med
                 p.difficulty = 1;
                 //set next state as attack----------------------------------------------------------
+                ChangeStaffColour(p.difficulty);
                 break;
 
 
             default: //5+ stateNum - 5 = attack hard
                 p.difficulty = 2;
                 //set next state as attack----------------------------------------------------------
+                ChangeStaffColour(p.difficulty);
                 break;
         }
     }
@@ -137,7 +143,7 @@ public class MCTS : DynamicAdjustmentMethod
         return GetBestChildNode(rootNode).state; // return the next action node with the highest value (best action)
     }
 
-    private MCNode Select(MCNode p_node)
+    private MCNode Select(MCNode p_node) //DONE
     {
         MCNode node = p_node; 
 
@@ -161,7 +167,7 @@ public class MCTS : DynamicAdjustmentMethod
         return node;
     }
 
-    private MCNode Expand(MCNode node)
+    private MCNode Expand(MCNode node) //DONE
     {
         List<MCState> possibleStates = node.state.GetPossibleNextStates();
 
@@ -186,7 +192,7 @@ public class MCTS : DynamicAdjustmentMethod
         return currentState.GetWinner(); // playout
     }
 
-    private void Backpropagate(MCNode node, bool winner)
+    private void Backpropagate(MCNode node, bool winner) //DONE
     {
         while (node != null) // while is NOT root node
         {
@@ -196,7 +202,7 @@ public class MCTS : DynamicAdjustmentMethod
         }
     }
 
-    private MCNode GetBestChildNode(MCNode rootNode)
+    private MCNode GetBestChildNode(MCNode rootNode) //DONE
     {
         int maxVisits = -1;
         MCNode bestChild = null;
@@ -211,5 +217,11 @@ public class MCTS : DynamicAdjustmentMethod
         }
 
         return bestChild;
+    }
+
+    private void ChangeStaffColour(float d)
+    {
+        enemyMat.color = new Color(255 - (d * 255), d * 255, 0);
+        //Scales a colour from green (0,255,0) to red (255,0,0) with the difficulty value.
     }
 }

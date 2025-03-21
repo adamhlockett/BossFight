@@ -22,7 +22,7 @@ public class MCState : MonoBehaviour
 
     public List<MCState> GetPossibleNextStates()
     {
-        for(int i = 1; i < 7; i++)
+        for(int i = 1; i < 7; i++) // all except idle state
         {
             MCState state = new MCState();
             state.stateNum = i;
@@ -31,12 +31,14 @@ public class MCState : MonoBehaviour
         return nextPossibleStates;
     }
 
-    public MCState Clone() 
+    public MCState Clone()  // return copy of state //DONE?
     {
-        return null; // return copy of state ??
+        MCState state = new MCState();
+        state = this;
+        return state;
     }
 
-    public bool IsTerminal() // how is this determined?
+    public bool IsTerminal() // do any states need to be terminal? depth limit limits the search //DONE?
     {
         return false; // return true if at end of tree
     }
@@ -50,7 +52,7 @@ public class MCState : MonoBehaviour
 
     public bool GetWinner() // win is defined as enemy hitting player, loss is defined as enemy missing player, estimate chance of hit - how?
     {
-        //get accuracies from singleton
+        //get accuracies from singleton - may need to separate accuracies
         
         return enemyLandsHit;
     }
