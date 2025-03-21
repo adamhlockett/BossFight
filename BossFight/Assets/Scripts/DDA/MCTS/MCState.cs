@@ -63,7 +63,7 @@ public class MCState : MonoBehaviour
         if(prediction <= accuracy) enemyLandsHit = true;
         else enemyLandsHit = false;
 
-        //NEED TO MODIFY THESE VALUES BASED ON PERCEIVED DIFFICULTY
+        //NEED TO MODIFY THESE VALUES BASED ON PERCEIVED DIFFICULTY --------------------------------------------------------------------------------------------
 
         return enemyLandsHit;
     }
