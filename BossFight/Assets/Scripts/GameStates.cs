@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -39,6 +40,8 @@ public class GameStates : MonoBehaviour
     public bool isPaused = false, inTraining = true;
     private bool canLose = true, canWin = true, hasDoneTutorial = false;
     PlayDataSingleton p = PlayDataSingleton.instance;
+    //StreamWriter pdata;
+    string playDataPath = "Assets/PlaytestData/WinData.txt";
 
     private void Start()
     {
@@ -155,6 +158,9 @@ public class GameStates : MonoBehaviour
 
     public void Win()
     {
+        canWin = false;
+        p.totalPlayTime += p.playTime;
+        SavePlaytestData();
         Gamepad.current.SetMotorSpeeds(0f, 0f);
         StartCoroutine(LoadThisScene("Win"));
     }
@@ -198,5 +204,11 @@ public class GameStates : MonoBehaviour
         transitionAnim.SetTrigger("Start");
         yield return new WaitForSeconds(transitionLength);
         SceneManager.LoadScene(sceneName);
+    }
+
+    private void SavePlaytestData()
+    {
+        string text = "\nMethod: " + d.method.methodName + "\n" + "Time to win: " + p.totalPlayTime + "\n" + "Attempts: " + (p.attempts + 1) + "\n" + "-----------------------";
+        File.AppendAllText(playDataPath, text);
     }
 }

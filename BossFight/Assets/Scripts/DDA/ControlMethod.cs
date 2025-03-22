@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ControlMethod : DynamicAdjustmentMethod
 {
-    private void Start() { methodName = "Control"; }
+    private void Start() { methodName = "Control"; enemyMat.color = new Color(125, 125, 0); }
 
     public override void CheckForAdjustments() { }
 

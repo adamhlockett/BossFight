@@ -39,7 +39,7 @@ public class MCTS : DynamicAdjustmentMethod
 
     public override void CheckForAdjustments()
     {
-        Debug.Log("MCTS Check");
+        //Debug.Log("MCTS Check");
         MCState currentState = new MCState();
 
         //if (enemyFSM.currentState.stateName == "Charge")
@@ -237,7 +237,7 @@ public class MCTS : DynamicAdjustmentMethod
 
     private void ChangeStaffColour(float d)
     {
-        enemyMat.color = new Color(255 - (d * 255), d * 255, 0);
+        enemyMat.color = new Color(d * 255, 255 - (d * 255), 0);
         //Scales a colour from green (0,255,0) to red (255,0,0) with the difficulty value.
     }
 }

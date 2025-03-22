@@ -76,7 +76,7 @@ public class DynamicAdjuster : MonoBehaviour
     public void CheckForAdjustments()
     {
         method.CheckForAdjustments();
-        Debug.Log(p.difficulty);
+        //Debug.Log(p.difficulty);
     }
 
     public void Adjustment()

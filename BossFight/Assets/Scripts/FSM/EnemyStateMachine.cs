@@ -102,7 +102,7 @@ public class EnemyStateMachine : MonoBehaviour
             currentState = enemyStates[0];
         }
 
-        Debug.Log(currentState.stateName);
+        //Debug.Log(currentState.stateName);
 
         currentState.OnEnter(anim, enemy);
     }
