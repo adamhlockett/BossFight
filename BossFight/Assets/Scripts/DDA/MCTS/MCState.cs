@@ -16,18 +16,42 @@ public enum StateNumbers
 public class MCState : MonoBehaviour
 {
     public int stateNum; // corresponds to StateNumbers enum
+    public int stateHierarchy = 0;
     public bool enemyLandsHit;
-    private List<MCState> nextPossibleStates = new List<MCState>();
+    public List<MCState> nextPossibleStates = new List<MCState>();
     PlayDataSingleton p = PlayDataSingleton.instance;
 
-    public List<MCState> GetPossibleNextStates()
+
+    //public MCState() 
+    //{
+    //    if(stateHierarchy < 3) // depth limit
+    //    {
+    //        for (int i = 1; i < 7; i++) // all except idle state
+    //        {
+    //            MCState state = new MCState();
+    //            state.stateNum = i;
+    //            state.stateHierarchy = this.stateHierarchy++;
+    //            nextPossibleStates.Add(state);
+    //        }
+    //    }
+    //}
+
+    public void AddPossibleNextStates()
     {
-        for(int i = 1; i < 7; i++) // all except idle state
+        nextPossibleStates.Clear();
+        for (int i = 1; i < 7; i++) // all except idle state
         {
             MCState state = new MCState();
             state.stateNum = i;
+            state.stateHierarchy = this.stateHierarchy++;
             nextPossibleStates.Add(state);
         }
+    }
+
+    public List<MCState> GetPossibleNextStates()
+    {
+        AddPossibleNextStates();
+
         return nextPossibleStates;
     }
 
@@ -45,7 +69,8 @@ public class MCState : MonoBehaviour
 
     public MCState GetRandomNextState() 
     {
-        int i = Random.Range(1, nextPossibleStates.Count);
+        AddPossibleNextStates();
+        int i = Random.Range(1, nextPossibleStates.Count - 1);
         MCState randomState = nextPossibleStates[i];
         return randomState;
     }

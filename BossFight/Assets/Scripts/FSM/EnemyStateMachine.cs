@@ -75,7 +75,14 @@ public class EnemyStateMachine : MonoBehaviour
     private void MCTSSwitchState()
     {
         if (!canChangeState) { currentState = enemyStates[0]; return; } // remain in same state
-        d.CheckForAdjustments();
+        if(currentState.stateName == "idle")
+        {
+            d.CheckForAdjustments();
+        }
+        else
+        {
+            MCTSNextAttack = "Idle";
+        }
 
         attackState.isComplete = false;
         idleState.isComplete = false;
@@ -94,6 +101,8 @@ public class EnemyStateMachine : MonoBehaviour
             MCTSNextAttack = "Idle";
             currentState = enemyStates[0];
         }
+
+        Debug.Log(currentState.stateName);
 
         currentState.OnEnter(anim, enemy);
     }

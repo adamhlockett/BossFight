@@ -42,7 +42,7 @@ public class Enemy_Idle : EnemyState
     private void ManageLogic()
     {
         // does not have to do anything
-        if(isComplete) Debug.Log(isComplete);
+        //if(isComplete) Debug.Log(isComplete);
     }
 
     public override void StartAnim(Animator p_anim, Enemy p_enemy)

@@ -32,8 +32,14 @@ public class MCTS : DynamicAdjustmentMethod
         enemyFSM = GameObject.Find("Enemy").GetComponent<EnemyStateMachine>();
     }
 
+    private void Update()
+    {
+        
+    }
+
     public override void CheckForAdjustments()
     {
+        Debug.Log("MCTS Check");
         MCState currentState = new MCState();
 
         //if (enemyFSM.currentState.stateName == "Charge")
@@ -72,10 +78,11 @@ public class MCTS : DynamicAdjustmentMethod
         //}
         //else return; // return if in idle state
 
-        if (enemyFSM.currentState.stateName != "Idle") return;
+        //if (enemyFSM.currentState.stateName != "Idle") return;
         currentState.stateNum = 0;
 
         bestState = FindBestMove(currentState);
+        //Debug.Log((StateNumbers)bestState.stateNum);
 
         AdjustDifficulty();
     }
@@ -86,7 +93,7 @@ public class MCTS : DynamicAdjustmentMethod
         switch (bestState.stateNum)
         {
             case 0: // charge easy
-                p.difficulty = 0;
+                p.difficulty = 0.5f;
                 //set next state as charge - FIND A WAY OF ADAPTING ENEMYFSM FOR THIS---------------------------------------------------------------------------------------------------
                 enemyFSM.MCTSNextAttack = "Charge";
                 ChangeStaffColour(p.difficulty);
@@ -102,7 +109,7 @@ public class MCTS : DynamicAdjustmentMethod
 
 
             case 2: // charge hard
-                p.difficulty = 2;
+                p.difficulty = 1.5f;
                 //set next state as charge----------------------------------------------------------
                 enemyFSM.MCTSNextAttack = "Charge";
                 ChangeStaffColour(p.difficulty);
@@ -110,7 +117,7 @@ public class MCTS : DynamicAdjustmentMethod
 
 
             case 3: // attack easy
-                p.difficulty = 0;
+                p.difficulty = 0.5f;
                 //set next state as attack----------------------------------------------------------
                 enemyFSM.MCTSNextAttack = "Attack";
                 ChangeStaffColour(p.difficulty);
@@ -126,7 +133,7 @@ public class MCTS : DynamicAdjustmentMethod
 
 
             default: //5+ stateNum - 5 = attack hard
-                p.difficulty = 2;
+                p.difficulty = 1.5f;
                 //set next state as attack----------------------------------------------------------
                 enemyFSM.MCTSNextAttack = "Attack";
                 ChangeStaffColour(p.difficulty);
@@ -176,24 +183,27 @@ public class MCTS : DynamicAdjustmentMethod
     private MCNode Expand(MCNode node) //DONE
     {
         List<MCState> possibleStates = node.state.GetPossibleNextStates();
+        //Debug.Log(possibleStates.Count);
 
         foreach (MCState state in possibleStates)
         {
+
             MCNode child = new MCNode(state, node);
             node.children.Add(child);
         }
 
-        return node.children[Random.Range(0, node.children.Count)]; // randomly choose one of the children nodes to return
+        int i = Random.Range(0, node.children.Count - 1);
+        return node.children[i]; // randomly choose one of the children nodes to return
     }
 
     private bool Simulate(MCNode node)
     {
         MCState currentState = node.state.Clone(); // presumably a copy of the current state ????????????????? does this need to be a copy? -------------------------
 
-        while (!currentState.IsTerminal()) // means is end state - could be field instead, brings us to the end of the tree --------------------------------------------
-        {
+        //while (!currentState.IsTerminal()) // means is end state - could be field instead, brings us to the end of the tree --------------------------------------------
+        //{
             currentState = currentState.GetRandomNextState();
-        }
+        //}
 
         return currentState.GetWinner(); // playout
     }
