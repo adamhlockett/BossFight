@@ -45,7 +45,11 @@ public class GameStates : MonoBehaviour
 
     private void Start()
     {
-        Restart();
+        p.chargeAttacks = 1;
+        p.chargeHits = 1;
+        p.attackAttacks = 1;
+        p.attackHits = 1;
+        Restart(); 
     }
 
     public void Restart() // call when game is restarted
@@ -122,6 +126,8 @@ public class GameStates : MonoBehaviour
             if (Input.GetButtonDown("Menu"))
             {
                 Play();
+                p.totalPlayTime += p.playTime;
+                SavePlaytestData();
                 StartCoroutine(LoadThisScene("Menu"));
             }
         }

@@ -83,7 +83,27 @@ public class MCState : MonoBehaviour
         else accuracy = p.attackHits / p.attackAttacks; // is attack state
 
         float prediction = Random.Range(0f, 10f);
-        prediction = prediction / 10f;
+        prediction /= 10f;
+
+        //if(p.difficulty >= 1.4f)
+        //{
+        //
+        //}
+        //else if(p.difficulty < 1.4f && p.difficulty >= 1f)
+        //{
+        //
+        //}
+        //else if (p.difficulty < 1f && p.difficulty >= 0.6f)
+        //{
+        //    
+        //}
+        //else // < 0.6f
+        //{
+        //
+        //}
+
+        prediction /= (p.difficulty * 0.5f);
+        if (prediction > 1f) prediction = 1f;
 
         if(prediction <= accuracy) enemyLandsHit = true;
         else enemyLandsHit = false;

@@ -27,4 +27,9 @@ public class PlayDataSingleton : MonoBehaviour
 
         else instance = this;
     }
+
+    private void Update()
+    {
+        Debug.Log(attackAttacks);
+    }
 }
